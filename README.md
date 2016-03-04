@@ -9,14 +9,18 @@
 ## Framework
   - [Flask](http://docs.jinkan.org/docs/flask/)
     
+## Get Started
+
+```shell
+pip install flask
+mkdir sse
+cd sse
+git clone https://github.com/tztztztztz/jishi.git
+```
+
 ## Usage
 
 ```shell
 python run.py
 ```
 
-## Get Started
-
-```shell
-pip install flask
-```
