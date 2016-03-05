@@ -2,7 +2,7 @@ import json
 import os
 
 
-class DbConfig():
+class DbConfig:
     def __init__(self):
         module_dir = os.path.dirname(__file__)
         config_file_path = os.path.join(module_dir,'config.json')

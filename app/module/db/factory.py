@@ -1,8 +1,8 @@
 from config import DbConfig
-import MySQLdb
+import connection
 
 
-class DbFactory():
+class DbFactory:
     def __init__(self):
         pass
 
@@ -13,18 +13,15 @@ class DbFactory():
 class MysqlFactory(DbFactory):
 
     def get_connection(self):
-        config = DbConfig().get_config('mysql')
-        return None
+        return connection.MysqlConnection
 
 
 class MongoFactory(DbFactory):
 
     def get_connection(self):
-        config = DbConfig().get_config('mongo')
-        return None
+        return connection.MongoConnection
 
 
 class RedisFactory(DbFactory):
     def get_connection(self):
-        config = DbConfig().get_config('redis')
-        return None
+        return connection.RedisConnection
