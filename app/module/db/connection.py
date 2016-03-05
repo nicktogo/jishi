@@ -8,7 +8,7 @@ class AbstractConnection:
     def __init__(self, sql):
         self.config = DbConfig().get_config(sql)
 
-    def get_instance(self):
+    def _get_instance(self):
         raise NotImplementedError
 
 
@@ -20,11 +20,14 @@ class MysqlConnection(AbstractConnection):
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'
-            self.conn_instance = self.get_instance()
+            self._conn_instance = self._get_instance()
 
-    def get_instance(self):
+    def _get_instance(self):
         return 'Mysql connection'
 
+    def find_user_by_id(self):
+        # using self._conn_instance
+        return None
 
 class MongoConnection(AbstractConnection):
     __share_state = {}
@@ -34,9 +37,9 @@ class MongoConnection(AbstractConnection):
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'
-            self.conn_instance = self.get_instance()
+            self._conn_instance = self._get_instance()
 
-    def get_instance(self):
+    def _get_instance(self):
         return 'Mongo connection'
 
 
@@ -48,16 +51,16 @@ class RedisConnection(AbstractConnection):
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'
-            self.conn_instance = self.get_instance()
+            self._conn_instance = self._get_instance()
 
-    def get_instance(self):
+    def _get_instance(self):
         return 'Redis connection'
 
 if __name__ == '__main__':
     conn = MysqlConnection()
     conn2 = MysqlConnection()
-    print conn.conn_instance # => 'Mysql connection'
-    print conn2.conn_instance # => 'Mysql connection'
-    conn.conn_instance = '123'
-    print conn.conn_instance # => 123
-    print conn2.conn_instance # => 123
+    print conn._conn_instance # => 'Mysql connection'
+    print conn2._conn_instance # => 'Mysql connection'
+    conn._conn_instance = '123'
+    print conn._conn_instance # => 123
+    print conn2._conn_instance # => 123

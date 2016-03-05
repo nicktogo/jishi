@@ -1,4 +1,3 @@
-from config import DbConfig
 import connection
 
 
@@ -13,15 +12,15 @@ class DbFactory:
 class MysqlFactory(DbFactory):
 
     def get_connection(self):
-        return connection.MysqlConnection
+        return connection.MysqlConnection()
 
 
 class MongoFactory(DbFactory):
 
     def get_connection(self):
-        return connection.MongoConnection
+        return connection.MongoConnection()
 
 
 class RedisFactory(DbFactory):
     def get_connection(self):
-        return connection.RedisConnection
+        return connection.RedisConnection()
