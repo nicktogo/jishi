@@ -11,8 +11,8 @@ def valid_login(username, password):
 
 
 def signup(username, password):
-    with MysqlFactory().get_connection() as conn:
-        return False
+    conn =  MysqlFactory().get_connection()
+    return False
 
 
 def user_not_exist(user):

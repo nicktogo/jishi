@@ -63,10 +63,3 @@ class RedisConnection(AbstractConnection):
 if __name__ == '__main__':
     test = MysqlConnection()
     print test.find_user_by_username('tzx')
-    conn = MysqlConnection()
-    conn2 = MysqlConnection()
-    print conn._conn_instance # => 'Mysql connection'
-    print conn2._conn_instance # => 'Mysql connection'
-    conn._conn_instance = '123'
-    print conn._conn_instance # => 123
-    print conn2._conn_instance # => 123
