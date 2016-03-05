@@ -10,11 +10,6 @@ def index():
     return redirect(url_for('login'))
 
 
-@app.route('/user/<username>')
-def display_username(username):
-    return 'User %s' % username
-
-
 @app.context_processor
 def test():
     def display():
@@ -37,7 +32,7 @@ def signup():
 @app.route('/auth/login', methods=['POST', 'GET'])
 def login():
     if 'username' in session:
-        render_template('homepage.html')
+        return render_template('homepage.html')
     if request.method == 'GET':
         return render_template('login.html')
     username = request.form['username']
@@ -45,17 +40,10 @@ def login():
     print username, password
     if auth.valid_login(username, password):
         session['username'] = username
-        return render_template('homepage.html', username=username)
+        return render_template('homepage.html')
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
-
-
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-    print request.args.get('name', 'none')
-    return render_template('hello.html', name=name)
 
 
 if __name__ == '__main__':
