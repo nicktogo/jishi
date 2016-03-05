@@ -29,6 +29,12 @@ def signup():
         return render_template('signup.html')
 
 
+@app.route('/auth/logout', methods=['GET'])
+def logout():
+    session.pop('username', None)
+    return render_template('login.html')
+
+
 @app.route('/auth/login', methods=['POST', 'GET'])
 def login():
     if 'username' in session:

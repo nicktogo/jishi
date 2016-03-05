@@ -1,5 +1,5 @@
 from config import DbConfig
-
+import MySQLdb
 
 # using borg design pattern, every instance share a connection
 
@@ -23,11 +23,15 @@ class MysqlConnection(AbstractConnection):
             self._conn_instance = self._get_instance()
 
     def _get_instance(self):
-        return 'Mysql connection'
+        conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='jishi', port=3306)
+        return conn
 
-    def find_user_by_id(self):
-        # using self._conn_instance
-        return None
+    def find_user_by_username(self, username):
+        cursor = self._conn_instance.cursor()
+        cursor.execute("select * from user where username = '%s'" % username)
+        results = cursor.fetchall()
+        return results
+
 
 class MongoConnection(AbstractConnection):
     __share_state = {}
@@ -57,6 +61,8 @@ class RedisConnection(AbstractConnection):
         return 'Redis connection'
 
 if __name__ == '__main__':
+    test = MysqlConnection()
+    print test.find_user_by_username('tzx')
     conn = MysqlConnection()
     conn2 = MysqlConnection()
     print conn._conn_instance # => 'Mysql connection'
