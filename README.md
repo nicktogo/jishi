@@ -28,7 +28,33 @@ git clone https://github.com/tztztztztz/jishi.git
   pip install flask
   pip install MySQL-python
   ```
-  
+## Configuration
+`sse/app/module/db/config.json`
+```json
+{
+  "mysql": {
+    "host":"localhost",
+    "port":"3306",
+    "database":"jishi",
+    "user":"root",
+    "password":""
+  },
+  "mongo": {
+    "host":"localhost",
+    "port":"3306",
+    "database":"test",
+    "user":"root",
+    "password":""
+  },
+  "redis": {
+    "host":"localhost",
+    "port":"3306",
+    "database":"test",
+    "user":"root",
+    "password":""
+  }
+}
+```
 ## Usage
 
 ```shell
