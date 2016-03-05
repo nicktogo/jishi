@@ -13,12 +13,22 @@
 ## Get Started
 
 ```shell
-pip install flask
 mkdir sse
 cd sse
 git clone https://github.com/tztztztztz/jishi.git
 ```
 
+## Dependences
+
+### windows
+  - windows [MySQLdb-python](http://www.codegood.com/archives/129)
+  
+### mac
+  ```shell
+  pip install flask
+  pip install MySQL-python
+  ```
+  
 ## Usage
 
 ```shell
