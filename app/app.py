@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from module import auth, project_manager
 
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
 @app.route('/')
@@ -44,7 +45,7 @@ def login():
     print username, password
     if auth.valid_login(username, password):
         session['username'] = username
-        return render_template('homepage.html')
+        return render_template('homepage.html', username=username)
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
