@@ -24,7 +24,7 @@ git clone https://github.com/tztztztztz/jishi.git
   - [MySQLdb-python install](http://www.codegood.com/archives/129)
   - [Flask install](http://docs.jinkan.org/docs/flask/installation.html)
   
-### mac
+### os x
   ```shell
   pip install flask
   pip install MySQL-python
