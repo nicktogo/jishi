@@ -60,4 +60,4 @@ git clone https://github.com/tztztztztz/jishi.git
 ```shell
 python run.py
 ```
-
+see your websit at 'http://localhost:5000' on your brower
