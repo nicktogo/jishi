@@ -8,6 +8,7 @@
 
 ## Framework
   - [Flask](http://docs.jinkan.org/docs/flask/)
+  - [Python](https://www.python.org/)
     
 ## Get Started
 
