@@ -1,4 +1,4 @@
-from db.factory import MysqlFactory, MongoFactory, RedisFactory
+from db.factory import MysqlFactory
 
 
 def valid_login(username, password):
