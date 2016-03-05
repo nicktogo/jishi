@@ -18,10 +18,11 @@ cd sse
 git clone https://github.com/tztztztztz/jishi.git
 ```
 
-## Dependences
+## Dependences Installation
 
 ### windows
-  - windows [MySQLdb-python](http://www.codegood.com/archives/129)
+  - [MySQLdb-python install](http://www.codegood.com/archives/129)
+  - [Flask install](http://docs.jinkan.org/docs/flask/installation.html)
   
 ### mac
   ```shell
