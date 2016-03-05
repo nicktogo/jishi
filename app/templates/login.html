@@ -1,4 +1,24 @@
 {% extends "layout.html" %}
 {% block body %}
-    <h1>login</h1>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_style.css') }}" >
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" action="{{ url_for('login') }}" method="post">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputEmail" class="form-control" placeholder="account" required autofocus name="username">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
 {% endblock %}

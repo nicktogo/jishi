@@ -41,6 +41,7 @@ def login():
         return render_template('login.html')
     username = request.form['username']
     password = request.form['password']
+    print username, password
     if auth.valid_login(username, password):
         session['username'] = username
         return render_template('homepage.html')
