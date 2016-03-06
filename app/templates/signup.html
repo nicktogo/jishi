@@ -1,21 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/signup_style.css') }}" >
-   <div class="container" >
-    <div class="col-md-6" >
-        <div id="logbox"  >
-            <form id="signup" method="post" action="{{ url_for('signup') }}" >
-                <h1>Create an Account</h1>
-				 <input name="username" type="text" placeholder="Email address" class="input pass"/>
-                <input name="password" type="password" placeholder="Choose a password" required="required" class="input pass"/>
-                <input name="password2" type="password" placeholder="Confirm password" required="required" class="input pass"/>
-                <input type="submit" value="Sign me up!" class="inputButton"/>
 
-            </form>
-        </div>
-    </div>
-    <!--col-md-6-->
-
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="{{url_for('static', filename='img/logo.png')}}" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" method="post" action="{{ url_for('signup') }}">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputEmail" class="form-control" placeholder="用户名" required autofocus name="username">
+                <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="password">
+                <input type="password" id="inputPassword2" class="form-control" placeholder="确认密码" required name="password2">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">注册</button>
+            </form><!-- /form -->
+            <a href="{{ url_for('login') }}" class="forgot-password">
+                返回登陆
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
 
 </div>
 {% endblock %}

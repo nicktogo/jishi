@@ -7,20 +7,20 @@
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" action="{{ url_for('login') }}" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="text" id="inputEmail" class="form-control" placeholder="account" required autofocus name="username">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
+                <input type="text" id="inputEmail" class="form-control" placeholder="用户名" required autofocus name="username">
+                <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="password">
                 <div id="remember" class="checkbox">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me"> 记住我
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登陆</button>
             </form><!-- /form -->
             <a href="#" class="forgot-password">
-                Forgot the password?
+                忘记密码?
             </a>
             <a href="{{ url_for('signup') }}" class="forgot-password" style="float:right">
-                sign up
+                注册
             </a>
         </div><!-- /card-container -->
     </div><!-- /container -->
