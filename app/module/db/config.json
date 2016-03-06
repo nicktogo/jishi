@@ -7,11 +7,9 @@
     "password":"password"
   },
   "mongo": {
-    "host":"localhost",
-    "port":"3306",
-    "database":"test",
-    "user":"root",
-    "password":""
+    "host":"120.55.160.237",
+    "port":"27017",
+    "database":"jishi"
   },
   "redis": {
     "host":"localhost",

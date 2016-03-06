@@ -1,5 +1,6 @@
 from config import DbConfig
 import MySQLdb
+from pymongo import MongoClient
 
 # using borg design pattern, every instance share a connection
 
@@ -59,7 +60,9 @@ class MongoConnection(AbstractConnection):
             self._conn_instance = self._get_instance()
 
     def _get_instance(self):
-        return 'Mongo connection'
+        client = MongoClient("120.55.160.237:27017")
+        conn = client.jishi
+        return conn
 
 
 class RedisConnection(AbstractConnection):
