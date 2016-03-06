@@ -3,6 +3,7 @@ import MySQLdb
 
 # using borg design pattern, every instance share a connection
 
+
 class AbstractConnection:
 
     def __init__(self, sql):
@@ -31,6 +32,13 @@ class MysqlConnection(AbstractConnection):
         cursor.execute("select * from user where username = '%s'" % username)
         results = cursor.fetchall()
         return results
+
+    #Belle
+    def insert_user(self,username,password):
+        cursor=self._conn_instance.cursor()
+        result=cursor.execute("insert into user(username,password)values('%s','%s')"% (username,password))
+        self._conn_instance.commit()
+        return result
 
 
 class MongoConnection(AbstractConnection):

@@ -17,11 +17,14 @@ def test():
     return dict(display=display)
 
 
-@app.route('/auth/signup', methods=['POST'])
+@app.route('/auth/signup', methods=['POST', 'GET'])
 def signup():
+    if request.method == 'GET':
+        return render_template('signup.html')
     username = request.form['username']
     password = request.form['password']
-    if auth.signup(username,password):
+    print username, password
+    if auth.signup(username, password):
         session['username'] = username
         return render_template('homepage.html')
     else:
