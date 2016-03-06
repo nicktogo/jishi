@@ -18,13 +18,18 @@ class MysqlConnection(AbstractConnection):
 
     def __init__(self):
         AbstractConnection.__init__(self,'mysql')
+        self.__share_state['config'] = self.config
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'
             self._conn_instance = self._get_instance()
 
     def _get_instance(self):
-        conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='jishi', port=3306)
+        conn = MySQLdb.connect(host=self.config['host'],
+                               user=self.config['user'],
+                               passwd=self.config['password'],
+                               db=self.config['database'],
+                               port=int(self.config['port']))
         return conn
 
     def find_user_by_username(self, username):
@@ -45,7 +50,9 @@ class MongoConnection(AbstractConnection):
     __share_state = {}
 
     def __init__(self):
-        AbstractConnection.__init__(self,'mongo')
+        AbstractConnection.__init__(self, 'mongo')
+
+        self.__share_state['config'] = self.config
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'
@@ -59,7 +66,8 @@ class RedisConnection(AbstractConnection):
     __share_state = {}
 
     def __init__(self):
-        AbstractConnection.__init__(self,'redis')
+        AbstractConnection.__init__(self, 'redis')
+        self.__share_state['config'] = self.config
         self.__dict__ = self.__share_state
         if not hasattr(self, 'conn_instance'):
             print 'create...'

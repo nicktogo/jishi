@@ -1,13 +1,15 @@
 /*
  * Specific styles of signin component
  */
-/*
+
+/* background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
  * General styles
  */
-body, html {
+body {
     height: 100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+    background-image: url("../img/bg.jpg");
+    background-size:cover;
 }
 
 .card-container.card {
@@ -28,7 +30,7 @@ body, html {
  * Card component
  */
 .card {
-    background-color: #F7F7F7;
+    background-color: rgba(247,247,247,0.75);
     /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
