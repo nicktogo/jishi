@@ -42,6 +42,7 @@ git clone https://github.com/tztztztztz/jishi.git
   ```shell
   pip install flask
   pip install MySQL-python
+  pip install pymongo
   ```
 ## Configuration
 `sse/app/module/db/config.json`
