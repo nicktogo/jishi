@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from module import auth, project_manager
+from module import auth, project_manager, forms
+from flask.ext.bootstrap import Bootstrap
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
+
+bootstrap = Bootstrap(app)
 
 
 @app.route('/')
@@ -54,6 +58,13 @@ def login():
         error = 'invalid username/password'
         return render_template('login.html', error=error)
 
+
+@app.route('/project/create', methods=['GET', 'POST'])
+def create_project():
+    form = forms.ProjectForm()
+    if form.validate_on_submit():
+        return 'Project Created!'
+    return render_template('project.html', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
