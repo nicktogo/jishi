@@ -57,7 +57,7 @@ class MongoConnection(AbstractConnection):
 
         self.__share_state['config'] = self.config
         self.__dict__ = self.__share_state
-        if not hasattr(self, 'conn_instance'):
+        if not hasattr(self, '_conn_instance'):
             print 'create...'
             self._conn_instance = self._get_instance()
 
