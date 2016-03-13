@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from module import auth, project_manager, forms
 from flask.ext.bootstrap import Bootstrap
+from module.db.factory import MongoFactory
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -63,7 +64,9 @@ def login():
 def create_project():
     form = forms.ProjectForm()
     if form.validate_on_submit():
-        return 'Project Created!'
+        conn = MongoFactory().get_connection()
+        conn.create_project()
+
     return render_template('project.html', form=form)
 
 if __name__ == '__main__':
