@@ -64,8 +64,8 @@ def login():
 def create_project():
     form = forms.ProjectForm()
     if form.validate_on_submit():
-        conn = MongoFactory().get_connection()
-        conn.create_project()
+        pm = project_manager.ProjectManager()
+        pm.create_project()
 
     return render_template('project.html', form=form)
 

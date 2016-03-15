@@ -7,8 +7,8 @@ class ProjectManager:
         self._mysql_conn = MysqlFactory().get_connection()
         self._mongo_conn = MongoFactory().get_connection()
 
-    def create_project(self, creator_id, project_id):
-        result = self._mongo_conn.createProject(creator_id, project_id)
+    def create_project(self):
+        result = self._mongo_conn.create_project()
         return result
 
     def apply_project(self, applier_id, project_id):
