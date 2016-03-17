@@ -1,10 +1,8 @@
-from db.factory import MongoFactory, MysqlFactory
-import format
+from app.module.db.factory import MongoFactory
 
 
 class ProjectManager:
     def __init__(self):
-        self._mysql_conn = MysqlFactory().get_connection()
         self._mongo_conn = MongoFactory().get_connection()
 
     def create_project(self):
