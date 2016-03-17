@@ -11,8 +11,8 @@ class ProjectManager:
         result = self._mongo_conn.create_project()
         return result
 
-    def apply_project(self, applier_id, project_id):
-        pass
+    def apply_project(self, applier_name, project_id):
+        return self._mongo_conn.apply_project(applier_name, project_id)
 
     def approve_applier(self, applier_id, project_id):
         pass

@@ -3,6 +3,7 @@ from config import DbConfig
 import MySQLdb
 from pymongo import MongoClient
 from flask import request
+from bson.objectid import ObjectId
 
 
 # using borg design pattern, every instance share a connection
@@ -74,6 +75,17 @@ class MongoConnection(AbstractConnection):
         projects = self._conn_instance.projects
         project_id = projects.insert_one(data).inserted_id
         return project_id
+
+    def apply_project(self, applier_name, project_id):
+        projects = self._conn_instance.projects
+        result = projects.update_one({
+            '_id': ObjectId(project_id)
+        }, {
+            '$push': {
+                'appliers': applier_name
+            }
+        })
+        return result
 
     def find_all_project(self):
         projects = self._conn_instance.projects
