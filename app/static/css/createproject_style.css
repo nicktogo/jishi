@@ -2,23 +2,23 @@ form label {
   font-size: 1.2em;
   font-weight: bold;
   display: block;
-  padding: 10px 0;
+  !important;padding: 10px 0;
 }
 
 form input#title {
-  width: 400px;
+  !important;width: 400px;
   background-color: #fafafa;
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
           border-radius: 3px;
   border: 1px solid #cccccc;
-  padding: 5px;
+  !important;padding: 5px;
   font-size: 1.1em;
 }
 
 form textarea#describe {
-  width: 500px;
-  height: 100px;
+  !important; width: 500px;
+  !important;height: 100px;
   background-color: #fafafa;
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
@@ -35,7 +35,7 @@ form input#submit {
      -moz-border-radius: 3px;
           border-radius: 3px;
   border:1px solid #d8d8d8;
-  padding: 10px;
+  !important;padding: 10px;
   font-weight:bold;
   text-align: center;
   color: #000000;
@@ -61,17 +61,17 @@ form input#submit:hover{
 }
 
 body {
-    padding-top: 60px;
+    !important;padding-top: 60px;
 }
 @media (max-width: 979px) {
     body {
-        padding-top: 0px;
+        !important;padding-top: 0px;
     }
 }
 
 .center {
     margin: auto;
-    width: 60%;
+    !important;width: 60%;
     border: 3px solid #73AD21;
-    padding: 10px;
+    !important;padding: 10px;
 }
