@@ -73,7 +73,7 @@ class MongoConnection(AbstractConnection):
         del data['csrf_token']
         projects = self._conn_instance.projects
         project_id = projects.insert_one(data).inserted_id
-        print project_id
+        return project_id
 
 
 class RedisConnection(AbstractConnection):
