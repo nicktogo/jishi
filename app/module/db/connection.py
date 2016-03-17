@@ -75,6 +75,10 @@ class MongoConnection(AbstractConnection):
         project_id = projects.insert_one(data).inserted_id
         return project_id
 
+    def find_all_project(self):
+        projects = self._conn_instance.projects
+        return projects.find()
+
 
 class RedisConnection(AbstractConnection):
     __share_state = {}

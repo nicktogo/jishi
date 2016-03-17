@@ -27,6 +27,4 @@ class ProjectManager:
         pass
 
     def find_all_project(self):
-        raw_projects = self._mongo_conn.find_all_project()
-        projects = format.todict(raw_projects)
-        return projects
+        return self._mongo_conn.find_all_project()
