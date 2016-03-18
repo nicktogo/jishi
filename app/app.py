@@ -69,8 +69,11 @@ def alldisplay():
 def create_project():
     form = forms.ProjectForm()
     if form.validate_on_submit():
+        data = dict((key, unicode.encode(request.form.getlist(key)[0], 'utf-8')) for key in request.form.keys())
+        # delete csrf token added by WTF
+        del data['csrf_token']
         pm = project_manager.ProjectManager()
-        pm.create_project()
+        pm.create_project(data)
 
     return render_template('project.html', form=form)
 

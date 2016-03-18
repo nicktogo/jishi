@@ -1,10 +1,9 @@
 # coding=utf-8
-from config import DbConfig
 import MySQLdb
 from pymongo import MongoClient
 from flask import request
 from datetime import datetime
-
+from config import DbConfig
 
 # using borg design pattern, every instance share a connection
 
@@ -144,19 +143,8 @@ class MongoConnection(AbstractConnection):
         conn = client.jishi
         return conn
 
-    def create_project(self):
-        data = dict((key, unicode.encode(request.form.getlist(key)[0], 'utf-8')) for key in request.form.keys())
-
-        # delete csrf token added by WTF
-        del data['csrf_token']
-        projects = self._conn_instance.projects
-        project_id = projects.insert_one(data).inserted_id
-        return project_id
-
-    def find_all_project(self):
-        projects = self._conn_instance.projects
-        return projects.find()
-
+    def get_collection(self, collection_name):
+        return self._conn_instance[collection_name]
 
 
 class RedisConnection(AbstractConnection):
