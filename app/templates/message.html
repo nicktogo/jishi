@@ -1,0 +1,28 @@
+{% extends "navbar.html" %}
+{% block body %}
+
+    <tr>
+        <th>项目名称</th>
+        <th>项目所有人</th>
+        <th>消息类型</th>
+        <th>时间</th>
+        <th>已读/未读</th>
+        <br/>
+    </tr>
+{% for message in messages %}
+    <tr>
+        <td>{{message[2]}}</td>
+        <td>{{message[6]}}</td>
+        <td><span class="mes_type">{{message[3]}}</span></td>
+        <td>{{message[4]}}</td>
+        <td>{{message[5]}}</td>
+        <br/>
+    </tr>
+{% endfor %}
+    <script>
+        $(function(){
+        var mes_type = ['申请中','已通过','已退出','被踢出']
+        $('span.mes_type').text(mes_type[parseInt($('span.mes_type').text())]);
+        });
+    </script>
+{% endblock %}

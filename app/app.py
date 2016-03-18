@@ -1,5 +1,6 @@
+# coding=UTF-8
 from flask import Flask, render_template, request, session, redirect, url_for
-from module import auth, project_manager, forms
+from module import auth, project_manager, forms, message
 from flask.ext.bootstrap import Bootstrap
 from module.db.factory import MongoFactory
 
@@ -68,6 +69,15 @@ def create_project():
         pm.create_project()
 
     return render_template('project.html', form=form)
+
+
+@app.route('/message', methods=['GET', 'POST'])
+def my_message():
+    messages = message.show_all_message(session['username'])
+    print session['username']
+    for result in messages:
+        print result[2]
+    return render_template('message.html', messages=messages)
 
 if __name__ == '__main__':
     app.run(debug=True)
