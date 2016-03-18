@@ -60,6 +60,10 @@ def login():
         error = 'invalid username/password'
         return render_template('login.html', error=error)
 
+@app.route('/project/all', methods=['GET'])
+def alldisplay():
+    return render_template('allprojectsdisplay.html')
+
 
 @app.route('/project/create', methods=['GET', 'POST'])
 def create_project():
