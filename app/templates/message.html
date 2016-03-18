@@ -15,7 +15,7 @@
         <td>{{message[6]}}</td>
         <td><span class="mes_type">{{message[3]}}</span></td>
         <td>{{message[4]}}</td>
-        <td>{{message[5]}}</td>
+        <td><span class="read_state">{{message[5]}}</span></td>
         <br/>
     </tr>
 {% endfor %}
@@ -23,6 +23,10 @@
         $(function(){
         var mes_type = ['申请中','已通过','已退出','被踢出']
         $('span.mes_type').text(mes_type[parseInt($('span.mes_type').text())]);
+        });
+        $(function(){
+        var read_state = ['未读','已读']
+        $('span.read_state').text(read_state[parseInt($('span.read_state').text())]);
         });
     </script>
 {% endblock %}
