@@ -5,7 +5,6 @@ from app.module.db.factory import MongoFactory
 
 class ProjectManager:
     def __init__(self):
-        self._mongo_conn = MongoFactory().get_connection()
         self._projects = MongoFactory().get_connection().get_collection(collection_name='projects')
 
     def create_project(self, data):

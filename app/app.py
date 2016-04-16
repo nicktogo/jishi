@@ -4,7 +4,7 @@ from module import auth, project_manager, forms, message
 from flask.ext.bootstrap import Bootstrap
 from module.db.factory import MongoFactory
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 

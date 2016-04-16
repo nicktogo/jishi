@@ -13,30 +13,30 @@ class TestPM(unittest.TestCase):
         print self._pm.create_project(new_project)
 
     def test_apply(self):
-        result = self._pm.apply_project(applier_name='nick', project_id='56e9ff5a0640fd0a318047c0')
+        result = self._pm.apply_project(applier_name='nick', project_id='571206f80640fd097cd04268')
         self.assertEqual(result.modified_count, 1)
-        project = self._pm.find_project_by_id(project_id='56e9ff5a0640fd0a318047c0')
+        project = self._pm.find_project_by_id(project_id='571206f80640fd097cd04268')
         self.assertIn('nick', project['appliers'])
 
     def test_approve(self):
-        result = self._pm.approve_applier(applier_name='nick', project_id='56e9ff5a0640fd0a318047c0')
+        result = self._pm.approve_applier(applier_name='nick', project_id='571206f80640fd097cd04268')
         self.assertEqual(result.modified_count, 1)
-        project = self._pm.find_project_by_id(project_id='56e9ff5a0640fd0a318047c0')
+        project = self._pm.find_project_by_id(project_id='571206f80640fd097cd04268')
         self.assertIn('nick', project['appliers'])
 
     def test_start(self):
-        self._pm.start_project(project_id='56e9ff5a0640fd0a318047c0')
-        project = self._pm.find_project_by_id(project_id='56e9ff5a0640fd0a318047c0')
+        self._pm.start_project(project_id='571206f80640fd097cd04268')
+        project = self._pm.find_project_by_id(project_id='571206f80640fd097cd04268')
         self.assertEqual(project['status'], project_manager.statuses.STARTED)
 
     def test_finish(self):
-        self._pm.finish_project(project_id='56e9ff5a0640fd0a318047c0')
-        project = self._pm.find_project_by_id(project_id='56e9ff5a0640fd0a318047c0')
+        self._pm.finish_project(project_id='571206f80640fd097cd04268')
+        project = self._pm.find_project_by_id(project_id='571206f80640fd097cd04268')
         self.assertEqual(project['status'], project_manager.statuses.FINISHED)
 
     def test_cancel(self):
-        self._pm.cancel_project(project_id='56e9ff5a0640fd0a318047c0')
-        project = self._pm.find_project_by_id(project_id='56e9ff5a0640fd0a318047c0')
+        self._pm.cancel_project(project_id='571206f80640fd097cd04268')
+        project = self._pm.find_project_by_id(project_id='571206f80640fd097cd04268')
         self.assertEqual(project['status'], project_manager.statuses.CANCELED)
 
     def test_find_all(self):

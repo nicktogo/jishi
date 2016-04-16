@@ -44,7 +44,8 @@ class MysqlConnection(AbstractConnection):
         cursor = self._conn_instance.cursor()
         mes_num = self.find_mes_id(username, projectid, m_type)[0]
         if mes_num == 0:
-            result = cursor.execute("insert into wantjoin(username, projectid, m_type)values('%s','%s','%s')"% (username, projectid, m_type))
+            result = cursor.execute("insert into wantjoin(username, projectid, m_type)values('%s','%s','%s')" % (
+            username, projectid, m_type))
             self._conn_instance.commit()
             return result
         else:
@@ -52,7 +53,8 @@ class MysqlConnection(AbstractConnection):
 
     def find_mes_id(self, username, projectid, m_type):
         cursor = self._conn_instance.cursor()
-        result = cursor.execute("select mes_id from wantjoin where username  = '%s'and projectid = '%s'" % (username, projectid))
+        result = cursor.execute(
+            "select mes_id from wantjoin where username  = '%s'and projectid = '%s'" % (username, projectid))
         if result == 0:
             results = (result, -1)
         else:
@@ -80,7 +82,7 @@ class MysqlConnection(AbstractConnection):
         self._conn_instance.commit()
         return result
 
-    def remove_wantjoin(self,username, projectid):
+    def remove_wantjoin(self, username, projectid):
         cursor = self._conn_instance.cursor()
         mes_num = self.find_mes_id(username, projectid, 0)[0]
         if mes_num == 1:
@@ -91,10 +93,8 @@ class MysqlConnection(AbstractConnection):
         else:
             print('you do not have any wantjoin')
 
-
-
-    #Belle
-    def insert_user(self,username,password):
+    # Belle
+    def insert_user(self, username, password):
         cursor = self._conn_instance.cursor()
         result = cursor.execute("insert into user(username,password)values('%s','%s')" % (username, password))
         self._conn_instance.commit()
@@ -102,11 +102,13 @@ class MysqlConnection(AbstractConnection):
 
     def insert_message(self, username, projectid, message_type, project_owner):
         cursor = self._conn_instance.cursor()
-        result = cursor.execute("insert into message(username, projectid, message_type, project_owner)values('%s','%s','%s','%s')"% (username, projectid, message_type, project_owner))
+        result = cursor.execute(
+            "insert into message(username, projectid, message_type, project_owner)values('%s','%s','%s','%s')" % (
+            username, projectid, message_type, project_owner))
         self._conn_instance.commit()
         return result
 
-    def get_all_message(self,username):
+    def get_all_message(self, username):
         cursor = self._conn_instance.cursor()
         cursor.execute("select * from message where username  = '%s'or project_owner = '%s'" % (username, username))
         result = cursor.fetchall()
@@ -138,8 +140,10 @@ class MongoConnection(AbstractConnection):
             self._conn_instance = self._get_instance()
 
     def _get_instance(self):
-        client = MongoClient('120.55.160.237', 27017)
+        client = MongoClient(host=self.config['host'], port=self.config['port'])
         conn = client.jishi
+        conn.authenticate(self.config['user'],
+                          password=self.config['password'])
         return conn
 
     def insert_user(self,username, password):
@@ -186,5 +190,3 @@ class RedisConnection(AbstractConnection):
 if __name__ == '__main__':
     test = MysqlConnection()
     print test.get_all_message('zhangjiaqi121@126.com')
-
-
