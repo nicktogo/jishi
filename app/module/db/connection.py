@@ -1,10 +1,9 @@
 # coding=utf-8
 import MySQLdb
 from pymongo import MongoClient
-from flask import request
+from bson import ObjectId
 from datetime import datetime
 from config import DbConfig
-
 # using borg design pattern, every instance share a connection
 
 
@@ -143,8 +142,30 @@ class MongoConnection(AbstractConnection):
         conn = client.jishi
         return conn
 
+    def insert_user(self,username, password):
+        self._conn_instance.users.insert_one({'username': username, 'password': password})
+        return True
+
+    def find_user_by_username(self, username):
+        return list(self._conn_instance.users.find({'username': username}))
+
+    def insert_messsage(self, message):
+        message['created_time'] = datetime.now()
+        self._conn_instance.messages.insert_one(message)
+        return True
+
+    def remove_message(self,message_id):
+        self._conn_instance.messages.delete_many({'_id': ObjectId(message_id)})
+        return True
+
+    def update_message(self,message):
+        self._conn_instance.messages.update_one(message)
+        return True
+
     def get_collection(self, collection_name):
         return self._conn_instance[collection_name]
+
+
 
 
 class RedisConnection(AbstractConnection):
