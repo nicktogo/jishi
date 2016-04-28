@@ -1,0 +1,128 @@
+table#miyazaki { 
+	  margin: 0 auto;
+	  border-collapse: collapse;
+	  font-weight: 100; 
+	  /*background: #47c9af; color: #fff;*/
+	  text-rendering: optimizeLegibility;
+	  border-radius: 5px; 
+	  margin-left: 0px;
+	  margin-top: 20px;
+	  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;    
+	}
+	table#miyazaki caption { 
+	  font-size: 2rem; color: #444;
+	  margin: 1rem;
+	  background-size: contain;
+	  background-repeat: no-repeat;
+	  background-position: center left, center right; 
+	}
+	table#miyazaki thead th { font-weight: 800; }
+	table#miyazaki thead th, table#miyazaki tbody td { 
+	  padding: .8rem; font-size: 1.1rem;
+	  text-align: center;
+	  padding-top:10px;
+	  padding-right: 20px;
+	  padding-left: 20px;
+	  padding-top: 10px;
+	}
+	table#miyazaki tbody td { 
+	  padding: .8rem; font-size: 1.0rem;
+	  color: #444; background: #fff; 
+	}
+	/*table#miyazaki tbody tr:not(:last-child) { 
+	  border-top: 1px solid #eee;
+	  border-bottom: 1px solid #eee;  
+	}*/
+
+	@media screen and (max-width: 600px) {
+	  table#miyazaki caption {
+	  background-image: none; 
+
+	}
+	  table#miyazaki thead { display: none; }
+	  table#miyazaki tbody td { 
+	    display: block; padding: .6rem; 
+	  }
+	  table#miyazaki tbody tr td:first-child { 
+	    background: #666; color: #fff; 
+	  }
+		table#miyazaki tbody td:before { 
+	    content: attr(data-th); 
+	    font-weight: bold;
+	    display: inline-block;
+	    width: 6rem;  
+	  }
+	}
+#title{
+	  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;    
+	  font-size: 1.7rem;
+	  font-weight: 600;
+}
+#num{
+	  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;    
+	  font-size: 1.1rem;
+	  font-weight: 300;
+	  margin-left: 10px;
+}
+
+p#title-right{
+	text-align: left;
+}
+
+#table-nav{
+	position: fixed;
+	bottom: 100px;
+	right:370px;
+}
+
+#divFood{
+	position: fixed;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+	font-size: 1.1rem;
+	right:830px;
+}
+
+#divnav{
+	position: fixed;
+	right:550px;
+	bottom:90px;
+}
+
+#divgoto{
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+	font-size: 1.1rem;
+}
+
+.imgnav:hover{
+ width:60px;
+}
+
+.aclick{
+	border: none;
+}
+.imgnav{
+	/*box-shadow: 1px 1px 3px rgba(0,0,0,0.1);*/
+	border: none;
+	-webkit-background-size: 100%; -moz-background-size: 100%; -o-background-size: 100%; background-size: 100%;
+	background-clip: padding-box;
+	-webkit-transition: width 0.8s;
+	-moz-transition: width 0.8s;
+	-o-transition: width 0.8s;
+	-ms-transition:width 0.8s;
+	transition: width 0.8s;
+}
+
+
+#pageno{
+	border: none;
+	border-bottom: solid 2px #47c9af;
+	transition: borfer 0.3s;
+	text-align: center;
+}
+
+#pageno:focus,
+#pageno.focus{
+	border-bottom: solid 2px #96d145;
+}
+
+

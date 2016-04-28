@@ -10,10 +10,9 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 bootstrap = Bootstrap(app)
 
-
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('homepage'))
 
 
 @app.context_processor
@@ -21,6 +20,11 @@ def test():
     def display():
         return 'success'
     return dict(display=display)
+
+
+@app.route('/auth/homepage', methods=['POST', 'GET'])
+def homepage():
+    return render_template('homepage.html')
 
 
 @app.route('/auth/signup', methods=['POST', 'GET'])
@@ -63,7 +67,7 @@ def login():
 
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
-    return render_template('allprojectsdisplay.html')
+    return render_template('projectshow.html')
 
 
 @app.route('/project/create', methods=['GET', 'POST'])
@@ -86,6 +90,11 @@ def my_message():
     for result in messages:
         print result[2]
     return render_template('message.html', messages=messages)
+
+@app.route('/message/test', methods=['GET', 'POST'])
+def message_test():
+    return render_template('message.html');
+
 
 if __name__ == '__main__':
     app.run(debug=True)

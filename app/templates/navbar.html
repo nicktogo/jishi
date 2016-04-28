@@ -1,28 +1,15 @@
 {% extends "layout.html" %}
 {% block navbar %}
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-
-<!-- Brand -->
-<a class="navbar-brand" href="#">Logo</a>
-
-<!-- Links -->
-<ul class="nav navbar-nav">
-<li class="nav-item">
-<a class="nav-link" href="{{ url_for('alldisplay')}}">project</a>
-</li>
-	<li class="nav-item">
-<a class="nav-link" href="{{ url_for('my_message') }}">message</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="{{ url_for('logout') }}">logout</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="{{ url_for('create_project') }}">submit</a>
-</li>
-</ul>
-</nav>
-
-
-
-<div style="height:100px;background-color:white"></div>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
+    <div id='cssmenu'>
+        <ul>
+           <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
+           <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
+           <li><a href='#'>个人中心</a></li>
+           <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
+           <li><a href='#'>项目发布</a></li>
+           <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
+           <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
+        </ul>
+    </div>
 {% endblock %}

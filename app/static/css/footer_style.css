@@ -1,0 +1,12 @@
+.footer{
+	background-color:#2B3747; clear:both; text-align:center;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 50px;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;    
+}
+
+.distance{
+	margin-left: 40px;
+}
