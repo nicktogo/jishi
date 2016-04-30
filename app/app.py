@@ -7,8 +7,8 @@ from module.db.factory import MongoFactory
 app = Flask(__name__, static_url_path='')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-
 bootstrap = Bootstrap(app)
+
 
 @app.route('/')
 def index():
@@ -19,6 +19,7 @@ def index():
 def test():
     def display():
         return 'success'
+
     return dict(display=display)
 
 
@@ -91,9 +92,10 @@ def my_message():
         print result[2]
     return render_template('message.html', messages=messages)
 
+
 @app.route('/message/test', methods=['GET', 'POST'])
 def message_test():
-    return render_template('message.html');
+    return render_template('message.html')
 
 
 if __name__ == '__main__':
