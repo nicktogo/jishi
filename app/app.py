@@ -68,7 +68,9 @@ def login():
 
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
-    return render_template('projectshow.html')
+    pm = project_manager.ProjectManager()
+    projects = pm.find_all_project()
+    return render_template('projectshow.html', projects=projects)
 
 
 @app.route('/project/create', methods=['GET', 'POST'])
