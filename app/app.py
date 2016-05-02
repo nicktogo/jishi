@@ -94,12 +94,10 @@ def create_project():
 
     return render_template('project.html', form=form)
 
+
 @app.route('/project/release', methods=['GET'])
 def release_project():
     return render_template('projectrelease.html')
-
-
-
 
 
 @app.route('/message', methods=['GET', 'POST'])
