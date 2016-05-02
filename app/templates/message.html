@@ -1,32 +1,206 @@
-{% extends "navbar.html" %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
 
-    <tr>
-        <th>项目名称</th>
-        <th>项目所有人</th>
-        <th>消息类型</th>
-        <th>时间</th>
-        <th>已读/未读</th>
-        <br/>
-    </tr>
-{% for message in messages %}
-    <tr>
-        <td>{{message[2]}}</td>
-        <td>{{message[6]}}</td>
-        <td><span class="mes_type">{{message[3]}}</span></td>
-        <td>{{message[4]}}</td>
-        <td><span class="read_state">{{message[5]}}</span></td>
-        <br/>
-    </tr>
-{% endfor %}
-    <script>
-        $(function(){
-        var mes_type = ['申请中','已通过','已退出','被踢出']
-        $('span.mes_type').text(mes_type[parseInt($('span.mes_type').text())]);
-        });
-        $(function(){
-        var read_state = ['未读','已读']
-        $('span.read_state').text(read_state[parseInt($('span.read_state').text())]);
-        });
-    </script>
-{% endblock %}
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/MsgLeftNav_normalize.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/MsgLeftNav_default.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/MsgLeftNav_style.css') }}">
+
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/table_normalize.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/table_default.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/table_styles.css') }}">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/footer_style.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
+
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+  <script src="{{ url_for('static',filename='js/MsgLeftNav_script.js') }}"></script>
+<script src="{{ url_for('static',filename='js/tabledy.js') }}"></script>
+
+    <script type="text/javascript">
+	window.onload = function(){
+page = new Page(10,'miyazaki','group_one'); };
+</script>
+
+
+    <style>
+        @import url("http://www.w3cplus.com/demo/css3/base.css");
+        /*任务一：引入本地字体文件*/
+        @font-face {
+    font-family: 'sansationregular';
+    src: url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot');
+    src: url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot?#iefix') format('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/embedded-opentype'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.woff') format('woff'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.ttf') format('truetype'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.svg#sansationregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    background-color:#E9ECEF;
+}
+  </style>
+
+</head>
+<body>
+<div id="content-navbar">
+<div id="navbar">
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
+           <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
+           <li><a href='#'>个人中心</a></li>
+           <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
+           <li><a href='{{ url_for('release_project') }}'>项目发布</a></li>
+           <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
+           <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
+</ul>
+</div>
+    </div>
+</div>
+<div class="htmleaf-content" id="contentLeft" >
+      <ul class="mainmenu">
+        <li><span class="mainmenu-text">全部消息</span></li>
+          <ul class="submenu">
+            <li><span>全部</span></li>
+            <li><span>未读</span></li>
+            <li><span>已读</span></li>
+          </ul>
+        <li><span class="mainmenu-text">项目类型</span></li>
+          <ul class="submenu">
+            <li><span>全部</span></li>
+            <li><span>我发布的</span></li>
+            <li><span>我加入的</span></li>
+          </ul>
+        <li><span class="mainmenu-text">消息类型</span></li>
+          <ul class="submenu">
+            <li><span>项目申请</span></li>
+            <li><span>同意申请</span></li>
+            <li><span>退出项目</span></li>
+            <li><span>被项目所有人踹出</span></li>
+          </ul>
+        <li id="mainmenu-bottom"><span></span></li>
+      </ul>
+
+    </div>
+
+    <div id="contentRight">
+           <p id="title-right"><span id="title">消息展示</span><span id="num">共3条</span></p>
+        <table id="miyazaki">
+      <thead>
+      <tr><th>项目名称<th>项目所有人<th>消息类型<th>时间
+      <tbody id="group_one">
+      <tr>
+      <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+      <td>数学建模
+      <td>张*
+      <td>同意申请
+      <td>2016-04-12
+      <tr>
+      <td>网站项目
+      <td>李**
+      <td>退出项目
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+       <td>高斯-赛德尔迭代法的程序应用
+      <td>徐**
+      <td>项目申请
+      <td>2016-04-10
+      <tr>
+
+    </table>
+        <div id="table-nav">
+            <span id="divFood"></span>
+            <span id="divnav">
+                <a class="aclick" href="#" onclick="page.firstPage();"><span class="glyphicon glyphicon-step-backward icon"></span></a>
+                <a href="#" onclick="page.prePage();"><span class="glyphicon glyphicon-backward icon"></span></a>
+                <a href="#" onclick="page.nextPage();"><span class="glyphicon glyphicon-forward icon"></span></a>
+                <a href="#" onclick="page.lastPage();"><span class="glyphicon glyphicon-step-forward icon"></span></a>
+            </span>
+            <span id="divgoto">第
+            <input id="pageno" value="1" style="width:20px"/>页
+            <a href="#" onclick="page.aimPage();"><span class="glyphicon glyphicon-share-alt icon"></span></a>
+            </span>
+        </div>
+    </div>
+ <div class="footer">
+    <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
+    <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
+ </div>
+
+</body>
+</html>

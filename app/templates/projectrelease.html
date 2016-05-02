@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bottom_style.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static',filename='css/projectrelease_style.css') }}" type="text/css" media="screen"/>
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/projectrelease_sliding.form.js') }}"></script>
+
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/footer_style.css') }}">
+
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+
+    <style>
+        @import url("http://www.w3cplus.com/demo/css3/base.css");
+        /*任务一：引入本地字体文件*/
+        @font-face {
+    font-family: 'sansationregular';
+    src: url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot');
+    src: url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot?#iefix') format('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/embedded-opentype'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.woff') format('woff'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.ttf') format('truetype'),
+         url('http://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.svg#sansationregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+        body{
+            background-color:#E9ECEF;
+        }
+  </style>
+
+</head>
+<body class="body-bg">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
+<div id="content-navbar">
+<div id="navbar">
+<div id='cssmenu'>
+<ul>
+    <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
+           <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
+           <li><a href='#'>个人中心</a></li>
+           <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
+           <li><a href='{{ url_for('release_project') }}'>项目发布</a></li>
+           <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
+           <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+  <div id="content">
+
+            <div id="wrapper">
+                <div id="navigation" style="display:none;">
+                    <ul>
+                        <li class="selected">
+                            <a href="#">基本信息</a>
+                        </li>
+                        <li>
+                            <a href="#">项目信息</a>
+                        </li>
+                        <li>
+                            <a href="#">联系信息</a>
+                        </li>
+            <li>
+                            <a href="#">用户协议</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="steps">
+                    <form id="formElem" name="formElem" action="" method="post">
+                        <fieldset class="step">
+                            <p>
+                                <label  class="label-style" for="projectnature">项目性质：</label>
+                                <select id="projectnature" name="projectnature">
+                                    <option>软件开发</option>
+                                    <option>数学建模</option>
+                                    <option>创新大赛</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label class="label-style" for="projecttype">项目类型：</label>
+                                <select id="projecttype" name="projecttype">
+                                    <option>Web网站</option>
+                                    <option>Andriod开发</option>
+                                    <option>IOS开发</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label class="label-style" for="plandoc">详细计划书：</label>
+                                 <select id="projectnature" name="projectnature">
+                                    <option>有</option>
+                                    <option>没有</option>
+                                </select>
+                               <!-- <div class="radio-style">
+                                    <label>
+                                  <input class="demo--radio" type="radio" name="demo-radio">
+                                  <span class="demo--radioInput"></span>
+                                  <label class="demo-label">有</label>
+                                        </label>
+                            <label>
+                                     <input class="demo--radio" type="radio" name="demo-radio">
+                                  <span class="demo--radioInput"></span>
+                                  <label class="demo-label">没有</label>
+                                </label>
+                                 </div>-->
+
+                          </p>
+                          <p>
+                          <label class="label-style" for="plan">详细计划：</label>
+                          <textarea class="textarea-style" rows="5" cols="50"></textarea>
+                          </p>
+                        </fieldset>
+
+
+
+                        <fieldset class="step">
+                            <p>
+                                <label class="label-style" for="projectname">项目名称：</label>
+                                <input id="projectname" name="projectname" type="text" AUTOCOMPLETE=OFF placeholder="20字以内"/>
+                            </p>
+                             <p>
+                            <label class="label-style" for="description">项目描述：</label>
+                            <textarea class="textarea-style" placeholder="至少50字" rows="3" cols="80"></textarea>
+                            </p>
+                            <p>
+                                <label class="label-style" for="time">项目周期：</label>
+                                <input id="time" name="time" type="text" AUTOCOMPLETE=OFF placeholder="天"/>
+                            </p>
+                            <p>
+                                <label class="label-style" for="reference">参考项目：</label>
+                                <input id="reference" name="reference" placeholder="链接或名字" type="tel" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label class="label-style" for="relatedfile">相关文件：</label>
+                                <input id="relatedfile" name="relatedfile" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                           <p>
+                                <label class="label-style" for="name">姓名：</label>
+                                <input id="name" name="name" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label class="label-style" for="phone">电话：</label>
+                                <input id="phone" name="phone" type="tel" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label class="label-style" for="school">学院：</label>
+                                <input id="school" name="school" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label class="label-style" for="mail">Email：</label>
+                                <input id="mail" name="mail" placeholder="e.g. 123@163.com" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset>
+            <fieldset class="step">
+              <h1 class="protocol">
+                Everything in the form was correctly filled 
+                if all the steps have a green checkmark icon.
+                A red checkmark icon indicates that some field 
+                is missing or filled out with invalid data. In this
+                last step the user can confirm the submission of
+                the form.
+              </h1>
+                            <p class="submit">
+                                <button id="registerButton" type="submit">同意并发布</button>
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+</body>
+<div class="footer">
+      <div class="line">
+      </div>
+      <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
+      <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
+    </div>
+</html>

@@ -1,0 +1,144 @@
+/*------------ Color Palette ------------*/
+/*
+LIGHT ORANGE: #e4644b
+DARK ORANGE: #d05942
+DARK BROWN: #484141
+Menu text: #f7f1e3
+Submenu text: #ae9f9f
+*/
+
+/*------------ General Settings ------------*/
+/*@import url(https://fonts.useso.com/css?family=Montserrat);*/
+
+body {
+	margin:0;
+	padding:0;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+	letter-spacing: 0.2px;
+	/*float:left;
+	margin-left: 100px;
+	margin-top: 100px;*/
+}
+
+#contentLeft ul {
+	list-style: none;
+	width: 180px;
+}
+
+#contentLeft li {
+	cursor: pointer;
+}
+
+/*------------ Main Menu ------------*/
+.container {
+	background-color: black;
+}
+
+/*------------ Main Menu ------------*/
+.mainmenu {
+	margin: 40px auto;
+	font-size: 16px;
+	position:relative;
+	text-align: left;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+}
+.mainmenu-text{
+	margin-left: 20px;
+}
+
+.mainmenu > li {
+	background-color: #47c9af;
+	border-top: 1px solid #47c9af;
+	height: 48px;
+	color: #f7f1e3;
+	box-sizing: border-box;
+}
+
+#mainmenu-bottom{
+	height: 10px;
+}
+
+.mainmenu > li:first-child {
+	border-radius: 7px 7px 0 0;
+	border-top: 0;
+}
+
+.mainmenu > li:last-child {
+	border-radius: 0 0 7px 7px;
+}
+
+.mainmenu > li span {
+	display:block;
+	line-height: 48px;
+}
+
+
+/*------------ Sub Menu ------------*/
+.submenu {
+	box-sizing: border-box;
+	color: #ae9f9f;
+	font-size: 13px;
+	content: " ";
+	/*opacity: 0.5;*/
+}
+
+.submenu li {
+	line-height: 20px;
+	height: 35px;
+	padding-top: 11px;
+	margin-left: 0px;
+	background-color: #fff;
+	/*border-left: solid 6px #47c9af;*/
+	transition: border-left 220ms ease-in;
+	border-right: solid 6px #47c9af;
+}
+
+.submenu .chosen,
+.submenu .chosen:hover {
+	border-left: solid 6px #96d145;
+}
+
+.submenu li:hover {
+	border-left: solid 6px #47c9af;
+}
+
+.submenu li span {
+	margin-left:30px;
+}
+
+.animate {
+	animation: flip 2000ms ease-in-out alternate;
+}
+
+@keyframes flip {
+	to {
+		transform: rotateY(360deg);
+	}
+}
+
+#contentRight{
+  /*position: fixed;
+  top: 200px;
+  left: 450px;*/
+  margin-left: 420px;
+  margin-top: 50px;
+}
+
+#contentLeft {
+  /*z-index: 10;
+  width: 250px;
+  height: 100%;
+  top: 100px;
+  left: 100px;*/
+	position: fixed;
+  float: left;
+  margin-left: 200px;
+}
+
+.rotate
+{
+transform:rotateY(360deg);
+-webkit-transform:rotateY(360deg); /* Safari and Chrome */
+-moz-transform:rotateY(360deg); /* Firefox */
+transition-duration:1s;
+}
