@@ -70,48 +70,46 @@ p#title-right{
 }
 
 #table-nav{
-	position: fixed;
-	bottom: 100px;
-	right:370px;
+	/*position: fixed;
+	bottom: 100px;*/
+	margin-top: 30px;
 }
 
 #divFood{
-	position: fixed;
+	/*position: fixed;*/
 	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
 	font-size: 1.1rem;
-	right:830px;
+	float: left;
+	margin-left: 15px;
 }
 
 #divnav{
-	position: fixed;
-	right:550px;
-	bottom:90px;
+	/*position: fixed;*/
+	float: left;
+	margin-left: 80px;
+	/*bottom:90px;*/
 }
 
 #divgoto{
 	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
 	font-size: 1.1rem;
+	float: left;
+    margin-left: 70px;
 }
 
-.imgnav:hover{
- width:60px;
+.icon:hover{
+ color:#96d145;
 }
 
 .aclick{
 	border: none;
 }
-.imgnav{
-	/*box-shadow: 1px 1px 3px rgba(0,0,0,0.1);*/
-	border: none;
-	-webkit-background-size: 100%; -moz-background-size: 100%; -o-background-size: 100%; background-size: 100%;
-	background-clip: padding-box;
-	-webkit-transition: width 0.8s;
-	-moz-transition: width 0.8s;
-	-o-transition: width 0.8s;
-	-ms-transition:width 0.8s;
-	transition: width 0.8s;
+.icon{
+	font-size: 20px;
+	color: #47c9af;
+	padding-right: 15px;
+	padding-left: 15px;
 }
-
 
 #pageno{
 	border: none;

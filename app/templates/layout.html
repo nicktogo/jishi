@@ -30,25 +30,28 @@
     font-weight: normal;
     font-style: normal;
 }
-        .body-style{
-	margin-left: 200px;
-	margin-right: 200px;
-}
+
+        body{
+            background-color:#E9ECEF;
+        }
 
   </style>
 
 </head>
 <body>
-<div class="body-style">
+<div>
     {% block navbar %}{% endblock %}
-    <div class="container">
     {% block body %}{% endblock %}
-        </div>
 </div>
 
 <!--<div class="footer">
     <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
     <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
 </div>-->
+ <div class="footer">
+    <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
+    <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
+ </div>
 </body>
+
 </html>

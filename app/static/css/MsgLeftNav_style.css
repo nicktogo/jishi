@@ -120,7 +120,7 @@ body {
   /*position: fixed;
   top: 200px;
   left: 450px;*/
-  margin-left: 220px;
+  margin-left: 420px;
   margin-top: 50px;
 }
 
@@ -130,8 +130,9 @@ body {
   height: 100%;
   top: 100px;
   left: 100px;*/
+	position: fixed;
   float: left;
-  margin-left: 0px;
+  margin-left: 200px;
 }
 
 .rotate

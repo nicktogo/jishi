@@ -13,6 +13,16 @@
 
     <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
 
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/MsgLeftNav_normalize.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/MsgLeftNav_default.css') }}">
   <link rel="stylesheet" href="{{ url_for('static',filename='css/MsgLeftNav_style.css') }}">
@@ -34,7 +44,7 @@
 
     <script type="text/javascript">
 	window.onload = function(){
-page = new Page(6,'miyazaki','group_one'); };
+page = new Page(10,'miyazaki','group_one'); };
 </script>
 
 
@@ -51,24 +61,28 @@ page = new Page(6,'miyazaki','group_one'); };
     font-weight: normal;
     font-style: normal;
 }
-
+body{
+    background-color:#E9ECEF;
+}
   </style>
 
 </head>
 <body>
-<div class="body-style">
+<div id="content-navbar">
+<div id="navbar">
 <div id='cssmenu'>
 <ul>
-   <li class='active'><a href='#'>济市</a></li>
-   <li><a href='#'>项目展示</a></li>
-   <li><a href='#'>个人中心</a></li>
-   <li><a href='#'>消息提醒</a></li>
-   <li><a href='#'>项目发布</a></li>
-   <li id='navlogin'><a href='#'>登录</a></li>
-   <li id='navregister'><a href='register.html'>注册</a></li>
+   <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
+           <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
+           <li><a href='#'>个人中心</a></li>
+           <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
+           <li><a href='{{ url_for('release_project') }}'>项目发布</a></li>
+           <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
+           <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
 </ul>
 </div>
-
+    </div>
+</div>
 <div class="htmleaf-content" id="contentLeft" >
       <ul class="mainmenu">
         <li><span class="mainmenu-text">全部消息</span></li>
@@ -172,22 +186,21 @@ page = new Page(6,'miyazaki','group_one'); };
         <div id="table-nav">
             <span id="divFood"></span>
             <span id="divnav">
-            <a class="aclick" href="#" onclick="page.firstPage();"><img class="imgnav" src="{{ url_for('static',filename='img/first.png') }}"></a>
-            <a href="#" onclick="page.prePage();"><img class="imgnav" src="{{ url_for('static',filename='img/pre.png') }}"></a>
-            <a href="#" onclick="page.nextPage();"><img class="imgnav" src="{{ url_for('static',filename='img/next.png') }}"></a>
-            <a href="#" onclick="page.lastPage();"><img class="imgnav" src="{{ url_for('static',filename='img/last.png') }}"></a>
+                <a class="aclick" href="#" onclick="page.firstPage();"><span class="glyphicon glyphicon-step-backward icon"></span></a>
+                <a href="#" onclick="page.prePage();"><span class="glyphicon glyphicon-backward icon"></span></a>
+                <a href="#" onclick="page.nextPage();"><span class="glyphicon glyphicon-forward icon"></span></a>
+                <a href="#" onclick="page.lastPage();"><span class="glyphicon glyphicon-step-forward icon"></span></a>
             </span>
             <span id="divgoto">第
             <input id="pageno" value="1" style="width:20px"/>页
-            <a href="#" onclick="page.aimPage();">跳转</a>
+            <a href="#" onclick="page.aimPage();"><span class="glyphicon glyphicon-share-alt icon"></span></a>
             </span>
         </div>
     </div>
-
-</div>
  <div class="footer">
     <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
     <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
  </div>
+
 </body>
 </html>

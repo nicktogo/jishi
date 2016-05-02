@@ -17,6 +17,7 @@ body {
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
+	padding-bottom: 350px;
 }
 #msform fieldset {
 	background: white;
@@ -127,3 +128,10 @@ body {
 	background: #47c9af;
 	color: white;
 }
+
+
+/*.content-signup{
+	margin-bottom: 50px;
+		padding-bottom: 250px;
+	margin-top: 80px;
+}*/
