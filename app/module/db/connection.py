@@ -4,6 +4,8 @@ from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime
 from config import DbConfig
+
+
 # using borg design pattern, every instance share a connection
 
 
@@ -45,7 +47,7 @@ class MysqlConnection(AbstractConnection):
         mes_num = self.find_mes_id(username, projectid, m_type)[0]
         if mes_num == 0:
             result = cursor.execute("insert into wantjoin(username, projectid, m_type)values('%s','%s','%s')" % (
-            username, projectid, m_type))
+                username, projectid, m_type))
             self._conn_instance.commit()
             return result
         else:
@@ -104,7 +106,7 @@ class MysqlConnection(AbstractConnection):
         cursor = self._conn_instance.cursor()
         result = cursor.execute(
             "insert into message(username, projectid, message_type, project_owner)values('%s','%s','%s','%s')" % (
-            username, projectid, message_type, project_owner))
+                username, projectid, message_type, project_owner))
         self._conn_instance.commit()
         return result
 
@@ -146,7 +148,7 @@ class MongoConnection(AbstractConnection):
                           password=self.config['password'])
         return conn
 
-    def insert_user(self,username, password):
+    def insert_user(self, username, password):
         self._conn_instance.users.insert_one({'username': username, 'password': password})
         return True
 
@@ -158,18 +160,16 @@ class MongoConnection(AbstractConnection):
         self._conn_instance.messages.insert_one(message)
         return True
 
-    def remove_message(self,message_id):
+    def remove_message(self, message_id):
         self._conn_instance.messages.delete_many({'_id': ObjectId(message_id)})
         return True
 
-    def update_message(self,message):
+    def update_message(self, message):
         self._conn_instance.messages.update_one(message)
         return True
 
     def get_collection(self, collection_name):
         return self._conn_instance[collection_name]
-
-
 
 
 class RedisConnection(AbstractConnection):
