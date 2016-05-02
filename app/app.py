@@ -84,20 +84,13 @@ def more_projects():
 
 @app.route('/project/create', methods=['GET', 'POST'])
 def create_project():
-    form = forms.ProjectForm()
-    if form.validate_on_submit():
-        data = dict((key, unicode.encode(request.form.getlist(key)[0], 'utf-8')) for key in request.form.keys())
-        # delete csrf token added by WTF
-        del data['csrf_token']
-        pm = project_manager.ProjectManager()
-        pm.create_project(data)
-
-    return render_template('project.html', form=form)
-
-
-@app.route('/project/release', methods=['GET'])
-def release_project():
-    return render_template('projectrelease.html')
+    if request.method == 'GET':
+        return render_template('projectrelease.html')
+    project = request.get_json()
+    print project
+    pm = project_manager.ProjectManager()
+    project_id = pm.create_project(project)
+    return json.dumps({'success': True, 'projectId': str(project_id)}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/message', methods=['GET', 'POST'])

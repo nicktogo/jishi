@@ -75,7 +75,7 @@
              </ul>
          </div>
          <div id="steps">
-             <form id="formElem" name="formElem" action="" method="post">
+             <form id="formElem" name="formElem" method="post">
                  <fieldset class="step">
                      <p>
                          <label  class="label-style" for="projectnature">项目性质：</label>
@@ -95,30 +95,16 @@
                      </p>
                      <p>
                          <label class="label-style" for="plandoc">详细计划书：</label>
-                         <select id="projectnature" name="projectnature">
+                         <select id="plandoc" name="plandoc">
                              <option>有</option>
                              <option>没有</option>
                          </select>
-                         <!-- <div class="radio-style">
-                                   <label>
-                                 <input class="demo--radio" type="radio" name="demo-radio">
-                                 <span class="demo--radioInput"></span>
-                                 <label class="demo-label">有</label>
-                                       </label>
-                           <label>
-                                    <input class="demo--radio" type="radio" name="demo-radio">
-                                  <span class="demo--radioInput"></span>
-                                  <label class="demo-label">没有</label>
-                                </label>
-                                 </div>-->
-
                      </p>
                      <p>
                          <label class="label-style" for="plan">详细计划：</label>
-                         <textarea class="textarea-style" rows="5" cols="50"></textarea>
+                         <textarea class="textarea-style" rows="5" cols="50" title="plan"></textarea>
                      </p>
                  </fieldset>
-
                  <fieldset class="step">
                      <p>
                          <label class="label-style" for="projectname">项目名称：</label>
@@ -126,7 +112,7 @@
                      </p>
                      <p>
                          <label class="label-style" for="description">项目描述：</label>
-                         <textarea class="textarea-style" placeholder="至少50字" rows="3" cols="80"></textarea>
+                         <textarea class="textarea-style" rows="2" cols="50" title="description"></textarea>
                      </p>
                      <p>
                          <label class="label-style" for="time">项目周期：</label>
@@ -158,6 +144,9 @@
                          <label class="label-style" for="mail">Email：</label>
                          <input id="mail" name="mail" placeholder="e.g. 123@163.com" type="text" AUTOCOMPLETE=OFF />
                      </p>
+                     <p class="submit">
+                         <button id="registerButton" type="submit">同意并发布</button>
+                     </p>
                  </fieldset>
                  <fieldset class="step">
                      <h1 class="protocol">
@@ -177,7 +166,44 @@
      </div>
 </div>
 
+<script>
+    $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
+    $(document).ready(function () {
+        $("#formElem").submit(function (event) {
+            var project = JSON.stringify($(this).serializeObject());
+            console.log((project));
+            event.preventDefault();
+            $.ajax({
+                url: "/project/create",
+                data: project,
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert(data['projectId'] + "创建成功!")
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            })
+        })
+    })
+</script>
 
 </body>
 <div class="footer">
