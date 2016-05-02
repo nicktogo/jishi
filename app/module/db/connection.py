@@ -153,7 +153,7 @@ class MongoConnection(AbstractConnection):
     def find_user_by_username(self, username):
         return list(self._conn_instance.users.find({'username': username}))
 
-    def insert_messsage(self, message):
+    def insert_message(self, message):
         message['created_time'] = datetime.now()
         self._conn_instance.messages.insert_one(message)
         return True
@@ -162,14 +162,32 @@ class MongoConnection(AbstractConnection):
         self._conn_instance.messages.delete_many({'_id': ObjectId(message_id)})
         return True
 
-    def update_message(self,message):
-        self._conn_instance.messages.update_one(message)
-        return True
+    def read_message(self,message_id):
+        return self._conn_instance.messages.update_one(
+            { '_id': 'message_id'},
+            { '$set': {  'message_state': 1}}
+        )
+
+    def get_all_message(self, username):
+        messagesend = self._conn_instance.messages.find({'username':username})
+        messagereceived = self._conn_instance.messages.find({'project_owner':username})
+        result = {
+            'messagesend': messagesend,
+            'messagereceived' : messagereceived
+        }
+        return result
 
     def get_collection(self, collection_name):
         return self._conn_instance[collection_name]
 
+    def findmessage(self):
+        results = self._conn_instance.messages.find()
+        return results
 
+    def findmessagebyid(self, message_id):
+        return self._conn_instance.messages.find_one({
+            '_id': ObjectId(message_id)
+        })
 
 
 class RedisConnection(AbstractConnection):
@@ -188,5 +206,5 @@ class RedisConnection(AbstractConnection):
 
 
 if __name__ == '__main__':
-    test = MysqlConnection()
-    print test.get_all_message('zhangjiaqi121@126.com')
+    test = MongoConnection()
+    test.read_message('57215e4023470e274030464d')
