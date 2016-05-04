@@ -69,14 +69,19 @@
 					<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/homepage_navbar_styles.css') }}" />
 						<div id="navbar">
 						<div id='cssmenu'>
-						<ul>
-						   <li class='active'><a href='#'>济市</a></li>
-						   <li><a href='#'>项目展示</a></li>
-						   <li><a href='#'>个人中心</a></li>
-						   <li><a href='#'>消息提醒</a></li>
-						   <li><a href='#'>项目发布</a></li>
-						   <li id='navlogin'><a href='#'>登录</a></li>
-						   <li id='navregister'><a href='register.html'>注册</a></li>
+						<ul style="float:left">
+						   <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
+                           <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
+                           <li><a href='{{ url_for('persondisplay') }}'>个人中心</a></li>
+                           <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
+                           <li><a href='{{ url_for('create_project') }}'>项目发布</a></li>
+                            {% if session.username %}
+                            <li style="float: right"><a >{{session.username}}</a></li>
+                            <li style="float: right"><a href='{{ url_for('logout') }}'>登出</a></li>
+                            {% else %}
+                            <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
+                            <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
+                            {% endif %}
 						</ul>
 						</div>
 						</div>
@@ -103,7 +108,8 @@
 			<!---- banner-info ---->
 			<div class="banner-info">
 				<div class="container">
-					<h1 class="wow fadeIn" data-wow-delay="0.5s"><span>济市</span><br /><label>梦开始的地方</label></h1>
+					<h1 style="padding-top: 10px;
+    margin-top: 100px"class="wow fadeIn" data-wow-delay="0.5s"><span>济市</span><br /><label>梦开始的地方</label></h1>
 				<div class="top-banner-grids wow bounceInUp" data-wow-delay="0.4s">
 					<div class="banner-grid text-center">
 						<span class="top-icon1"> </span>
