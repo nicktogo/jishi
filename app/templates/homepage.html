@@ -1,4 +1,444 @@
-{% extends "navbar.html" %}
-{% block body %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<title></title>
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/footer_style.css') }}">
 
-{% endblock %}
+		 <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{{ url_for('static',filename='js/jquery-2.1.1.min.js') }}"></script>
+		 <!-- Custom Theme files -->
+		<link href="{{ url_for('static',filename='css/homepage_style.css') }}" rel='stylesheet' type='text/css' />
+   		 <!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+		<link href="{{ url_for('static',filename='css/homepage_animate.css') }}" rel="stylesheet" type="text/css" media="all">
+		<script type="text/javascript" src="{{ url_for('static',filename='js/homepage_jquery.corner.js') }}"></script>
+		<script src="{{ url_for('static',filename='js/homepage_wow.min.js') }}"></script>
+		<script>
+		 new WOW().init();
+		</script>
+		<!---- animated-css ---->
+		<!---- start-smoth-scrolling---->
+		<script type="text/javascript" src="{{ url_for('static',filename='js/homepage_move-top.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static',filename='js/homepage_easing.js') }}"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+		 <!---- start-smoth-scrolling---->
+		<!----start-top-nav-script---->
+		<script>
+			$(function() {
+				var pull 		= $('#pull');
+					menu 		= $('nav ul');
+					menuHeight	= menu.height();
+				$(pull).on('click', function(e) {
+					e.preventDefault();
+					menu.slideToggle();
+				});
+				$(window).resize(function(){
+	        		var w = $(window).width();
+	        		if(w > 320 && menu.is(':hidden')) {
+	        			menu.removeAttr('style');
+	        		}
+	    		});
+			});
+		</script>
+		<!----//End-top-nav-script---->
+	</head>
+	<body>
+		<div class="bg">
+		<!----- start-header---->
+		<div class="container">
+			<div id="home" class="header wow bounceInDown" data-wow-delay="0.4s">
+					<div class="top-header">
+					<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/homepage_navbar_styles.css') }}" />
+						<div id="navbar">
+						<div id='cssmenu'>
+						<ul>
+						   <li class='active'><a href='#'>济市</a></li>
+						   <li><a href='#'>项目展示</a></li>
+						   <li><a href='#'>个人中心</a></li>
+						   <li><a href='#'>消息提醒</a></li>
+						   <li><a href='#'>项目发布</a></li>
+						   <li id='navlogin'><a href='#'>登录</a></li>
+						   <li id='navregister'><a href='register.html'>注册</a></li>
+						</ul>
+						</div>
+						</div>
+						<!--<div class="logo">
+							<a href="#">济市</a>
+						</div>
+						<!----start-top-nav---->
+						 <!--<nav class="top-nav">
+							<ul class="top-nav">
+								<li><a href="#about" class="scroll">项目展示</a></li>
+								<li><a href="#process" class="scroll">个人中心</a></li>
+								<li><a href="#port" class="scroll">消息提醒</a></li>
+								<li class="page-scroll"><a href="#contact" class="scroll">项目发布</a></li>
+								<li class="active-join" class="page-scroll"><a href="#team" class="scroll">登录</a></li>
+								<li><a href="#process" class="scroll">注册</a></li>
+							</ul>
+							<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+						</nav>-->
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<!----- //End-header---->
+			<!---- banner-info ---->
+			<div class="banner-info">
+				<div class="container">
+					<h1 class="wow fadeIn" data-wow-delay="0.5s"><span>济市</span><br /><label>梦开始的地方</label></h1>
+				<div class="top-banner-grids wow bounceInUp" data-wow-delay="0.4s">
+					<div class="banner-grid text-center">
+						<span class="top-icon1"> </span>
+						<h3>SITP</h3>
+					</div>
+					<div class="banner-grid banner-grid-active text-center">
+						<span class="top-icon2"> </span>
+						<h3>上创</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon3"> </span>
+						<h3>国创</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon4"> </span>
+						<h3>数学建模</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon5"> </span>
+						<h3>课程项目</h3>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+			<!-- banner-info -->
+			<!-- top-grids -->
+			<!--<div class="top-grids text-center">
+				<div class="container">
+					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
+						<div class="top-grid">
+							<span class="icon1"> </span>
+							<h3><a href="#">right strategy</a></h3>
+							<label> </label>
+							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
+						</div>
+					</div>
+					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
+						<div class="top-grid">
+							<span class="icon2"> </span>
+							<h3><a href="#">adaptive style</a></h3>
+							<label> </label>
+							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
+						</div>
+					</div>
+					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
+						<div class="top-grid">
+							<span class="icon3"> </span>
+							<h3><a href="#">money making</a></h3>
+							<label> </label>
+							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
+						</div>
+					</div>
+					<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
+						<div class="top-grid">
+							<span class="icon4"> </span>
+							<h3><a href="#">brand keaping</a></h3>
+							<label> </label>
+							<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,</p>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			-->
+			<!---- top-grids ---->
+			<!---- about ---->
+			<div id="about" class="about">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>关于济市</span></h3>
+					</div>
+				</div>
+					<!--- about-grids ---->
+					<div class="about-grids">
+						<div class="col-md-4 about-grid about-grid1 wow fadeInLeft" data-wow-delay="0.4s">
+							<div class="about-grid-info">
+								<h4><a href="#">为你的项目招兵买马</a></h4>
+								<p> 济市网是一个鼓励大学生创新创业，结合学校发展需要的创新创业项目互选互助信息平台（及创新创业项目申报及评审平台）。
+        通过多人协作来完成项目，不仅能够提高项目完成的质量，也能在项目进展中结识校园人脉，拓展项目的可能性。 </p>
+							</div>
+							<div class="about-grid-pic">
+							<img src="https://dn-coding-net-production-pp.qbox.me/f5ae455d-3a2c-401d-8a16-7c0e5b4355af.jpg" title="name" />
+							</div>
+						</div>
+						<div class="col-md-4 about-grid about-grid2 wow fadeInUp" data-wow-delay="0.4s">
+							<div class="about-grid-pic">
+							<img src="https://dn-coding-net-production-pp.qbox.me/e07e827f-3ec0-41b0-afeb-532c24f1a4a0.jpg" title="name" />
+							</div>
+							<div class="about-grid-info">
+								<h4><a href="#">遇见志同道合的那个TA</a></h4>
+								<p>项目参与人也能够有机会发挥自己的优势，帮助项目发起人一起完成本来可能仅仅只有一人完成的项目，双方都能够在这个过程中获得成长，也令项目更有机会被人们所熟知，不仅能够提高项目完成的质量，也能在项目进展中结识校园人脉，拓展项目的可能性。 
+ </p>
+							</div>
+						</div>
+						<div class="col-md-4 about-grid about-grid1 wow fadeInRight" data-wow-delay="0.4s">
+							<div class="about-grid-info">
+								<h4><a href="#">让你在这里大展身手</a></h4>
+								<p>通过多人协作来完成项目，不仅能够提高项目完成的质量，也能在项目进展中结识校园人脉，拓展项目的可能性。同时，项目参与人也能够有机会发挥自己的优势，帮助项目发起人一起完成本来可能仅仅只有一人完成的项目</p>
+							</div>
+							<div class="about-grid-pic">
+							<img src="https://dn-coding-net-production-pp.qbox.me/aba050ad-6bcf-4323-af47-d9cf1732c444.jpg" title="name" />
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<!--- /about-grids ---->
+				</div>
+			</div>
+
+			<div id="process" class="process">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>服务流程</span></h3>
+					</div>
+				</div>
+				<div class="container">
+					<div class="process-grids text-center wow bounce" data-wow-delay="0.4s">
+						<div class="col-md-3 process-grid process-grid1 wow bounceInUp" data-wow-delay="0.4s">
+							<span class="p-icon1"> </span>
+							<h4><a href="#">需求梳理 & 原型</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid2 wow bounceInDown" data-wow-delay="0.4s">
+							<span class="p-icon2"> </span>
+							<h4><a href="#">UI 设计</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid3 wow bounceInUp" data-wow-delay="0.4s">
+							<span class="p-icon3"> </span>
+							<h4><a href="#">程序开发</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid4 wow bounceInDown" data-wow-delay="0.4s">
+							<span class="p-icon4"> </span>
+							<h4><a href="#">产品测试</a></h4>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<!---- about ----> 
+			
+			<!--- process --->
+			
+			<!--- blog ---->
+			<!--- portfolio ---->
+			<div id="port" class="portfolio">
+				<div class="head-section">
+					<div class="container">
+						<h3>优秀项目</h3>
+					</div>
+				</div>
+					<div id="port" class="portfolio-box">
+					<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+					<script type="text/javascript">
+						$(function () {
+							var filterList = {
+								init: function () {
+								
+									// MixItUp plugin
+									// http://mixitup.io
+									$('#portfoliolist').mixitup({
+										targetSelector: '.portfolio',
+										filterSelector: '.filter',
+										effects: ['fade'],
+										easing: 'snap',
+										// call the hover effect
+										onMixEnd: filterList.hoverEffect()
+									});				
+								
+								},
+								hoverEffect: function () {
+									// Simple parallax effect
+									$('#portfoliolist .portfolio').hover(
+										function () {
+											$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+											$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+										},
+										function () {
+											$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+											$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+										}		
+									);				
+								
+								}
+					
+							};
+							// Run the show!
+							filterList.init();
+						});	
+					</script>
+					<div id="portfoliolist">
+					<div class="portfolio logo1 mix_all port-big-grid wow bounceIn" data-wow-delay="0.5s" data-cat="logo" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic1.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>微调在线画图功能</h4>
+						     			<p>现已实现了大部分功能，demo在这里www.365trtd.net.有些功能需要找人帮忙一起实现。要实现的功能：
+1）gojs代码的熟悉与重构优化
+2）gojs代码与angular的集成
+3）gojs代码与前端代码的集成
+4）后续画盘功能的优化与增强</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>				
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic2.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Web 和手机网站设计和开发</h4>
+						     			<p>前台功能：信息列表／详情展示，文章展示、微信授权登录评论，微信二维码关注公众号，第三方分享，填写表单、订阅资讯；
+后台功能：可编辑前台展示内容，对接Mike CRM，评论管理功能。</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>		
+					<div class="portfolio web mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="web" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic3.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>教育类产品原型设计</h4>
+						     			<p>1、有相关项目经验者优先；
+2、参与项目的开发成员需要提前熟掌握项目和代码管理工具coding的使用方法；
+3、需要细致和耐心，保证工作时间；</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>				
+					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic4.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>ibatis 框架简单开发</h4>
+						     			<p>原型图、设计图、各类文档和源代码需上传到coding上指定的私有项目中，更新频率至少为2天／次；按照需求方指定的服务器、域名等条件完成网站部署和调优。</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic5.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>H5互动小游戏</h4>
+						     			<p>1）有简单的样式，需要设计
+2）前端Html5，后端使用java或者php</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>			
+					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic6.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>篮球爱好者O2O产品</h4>
+						     			<p>开发一个篮球爱好者聚集的平台，可以约到附近合适的球友，订到附近合适的场地，也会有场助、裁判、摄影师、拉拉队为球局提供服务等。</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic7.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Web 邮箱系统开发</h4>
+						     			<p>优先架构方案：后端 pholcon+swoole 或者 django或者javaweb+netty
+，前端 boostrap angularjs等；
+基于开源iredmail（Linux+postfix+extmail+dovecot+roundcubemail）
+或其他开源服务器套件也可以；</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic8.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>域名平台 Web 网站开发</h4>
+						     			<p>前台功能：注册登录、个人中心、消息通知、域名购买、业务管理、购物车、工单及模板管理、其它介绍页面等；
+
+后台功能：域名管理、系统管理、业务配置、财务管理、工单管理、通知新闻公告管理、信息展示录入等。</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>			
+					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="{{ url_for('static',filename='img/images/portpic9.jpg') }}" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>留学网站 - 产品设计</h4>
+						     			<p>建立联系学生和学校招生官的视频聊天室。
+提问互动的数据管理。
+留学流程管理，学生可以管理留学办理的各个环节。</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="clearfix"> </div>	
+				</div>
+			</div>
+				</div>
+			</div>
+
+		</div>
+     <div class="footer">
+    <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
+    <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
+ </div>
+
+</body>
+</html>
