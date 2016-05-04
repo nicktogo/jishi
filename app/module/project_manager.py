@@ -1,6 +1,7 @@
 # coding=utf-8
 from bson.objectid import ObjectId
 from app.module.db.factory import MongoFactory
+import message
 
 
 class ProjectManager:
@@ -11,6 +12,8 @@ class ProjectManager:
         return self._projects.insert_one(data).inserted_id
 
     def apply_project(self, applier_name, project_id):
+        # TODO project_owner
+        message.apply(applier_name, project_id, "")
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
@@ -20,11 +23,35 @@ class ProjectManager:
         })
 
     def approve_applier(self, applier_name, project_id):
+        # TODO project_owner
+        message.accept(applier_name, project_id, "")
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$push': {
                 'members': applier_name
+            }
+        })
+
+    def quit(self, username, project_id):
+        # TODO project_owner
+        message.quit(username, project_id, "")
+        return self._projects.update_one({
+            '_id': ObjectId(project_id)
+        }, {
+            '$pull': {
+                'members': username
+            }
+        })
+
+    def kick_out(self, username, project_id):
+        # TODO project_owner
+        message.kick_out(username, project_id, "")
+        return self._projects.update_one({
+            '_id': ObjectId(project_id)
+        }, {
+            '$pull': {
+                'members': username
             }
         })
 
@@ -72,5 +99,6 @@ class ProjectManager:
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
     return type('Enum', (), enums)
+
 
 statuses = enum('CREATED', 'STARTED', 'FINISHED', 'CANCELED')
