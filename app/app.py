@@ -15,9 +15,9 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 bootstrap = Bootstrap(app)
 oauth = OAuth(app)
 
-APP_KEY = '148981535' # app key
-APP_SECRET = 'b12ec09cd669a458262881e580eba12e' # app secret
-CALLBACK_URL = 'http://tztztztztz.org:5000/code' # callback url
+APP_KEY = '148981535'  # app key
+APP_SECRET = 'b12ec09cd669a458262881e580eba12e'  # app secret
+CALLBACK_URL = 'http://tztztztztz.org:5000/code'  # callback url
 
 
 @app.route('/')
@@ -62,9 +62,8 @@ def homepage():
 def signup():
     if request.method == 'GET':
         return render_template('signup.html')
-    username = request.form['username']
-    password = request.form['password']
-    print username, password
+    username = request.form['email']
+    password = request.form['pass']
     if auth.signup(username, password):
         session['username'] = username
         return render_template('homepage.html')
@@ -76,6 +75,11 @@ def signup():
 @app.route('/auth/person', methods=['GET'])
 def persondisplay():
     return render_template('persondisplay.html')
+
+
+@app.route('/auth/personedit', methods=['GET'])
+def personedit():
+    return render_template('person.html')
 
 
 @app.route('/auth/logout', methods=['GET'])
@@ -115,9 +119,11 @@ def more_projects():
     return json.dumps(projects, default=json_util.default)
 
 
-@app.route('/project/single', methods=['GET'])
-def singledisplay():
-    return render_template('projectdisplay.html')
+@app.route('/project/<project_title>', methods=['GET'])
+def singledisplay(project_title):
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_title(project_title=project_title)
+    return render_template('projectdisplay.html', project=project)
 
 
 @app.route('/project/create', methods=['GET', 'POST'])

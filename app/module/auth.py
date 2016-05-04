@@ -1,22 +1,23 @@
 from db.factory import MysqlFactory
+from db.factory import MongoFactory
 
 
 def valid_login(username, password):
-    conn = MysqlFactory().get_connection()
-    user = conn.find_user_by_username(username)
+    conn = MongoFactory().get_connection().get_collection(collection_name='users')
+    user = list(conn.find({'email': username}))
     if user_not_exist(user):
         return False
     if equal_password(user, password):
         return True
 
 
-def signup(username, password):
-    conn = MysqlFactory().get_connection()
+def signup(email, password):
+    conn = MongoFactory().get_connection().get_collection(collection_name='users')
 
-    user = conn.find_user_by_username(username)
+    user = list(conn.find({'email': email}))
     if not user_not_exist(user):
         return False
-    result = conn.insert_user(username, password)
+    result = conn.insert_one({'email': email, 'password': password})
     if result:
         return True
     else:
@@ -31,8 +32,8 @@ def user_not_exist(user):
 
 
 def equal_password(user, password):
-    _, user_password = user[0]
-    if user_password == password:
+    user = user[0]
+    if user['password'] == password:
         return True
     else:
         return False
