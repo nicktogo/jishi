@@ -49,7 +49,7 @@ def get_code():
     print 'access_token is', access_token
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
-    return '123'
+    return redirect(url_for(index))
 
 
 @app.route('/auth/homepage', methods=['POST', 'GET'])
