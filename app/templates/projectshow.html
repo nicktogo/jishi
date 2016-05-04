@@ -2,7 +2,7 @@
 <html lang="zh" class="no-js" xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://fonts.googleapis.com/css?family=Caveat:400,700' rel='stylesheet' type='text/css'>
 
@@ -58,7 +58,7 @@
                 {% for project in projects %}
                     <li class="grid__item">
                         <a class="grid__link" href="#">
-                            <img class="grid__img" src="{{ url_for('static',filename='img/photos/1.jpg') }}" alt="Some image" />
+                            <img class="grid__img" src="{{ url_for('static',filename='img/photos/'+ran()+'.jpg') }}" alt="Some image" />
                             <h3 class="grid__item-title">{{ project['title'] }}</h3>
                         </a>
                     </li>

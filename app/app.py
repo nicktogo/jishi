@@ -5,6 +5,7 @@ from bson import json_util
 import json
 from weibo import APIClient
 from flask_oauthlib.client import OAuth
+import random
 
 from module import auth, project_manager, forms, message
 
@@ -26,10 +27,10 @@ def index():
 
 @app.context_processor
 def test():
-    def display():
-        return 'success'
+    def ran():
+        return str(random.randint(1,9))
 
-    return dict(display=display)
+    return dict(ran=ran)
 
 
 @app.route('/weibo')
