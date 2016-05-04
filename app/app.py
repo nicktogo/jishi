@@ -81,6 +81,10 @@ def persondisplay():
 def personedit():
 	return render_template('person.html')
 
+@app.route('/auth/personedit', methods=['GET'])
+def personedit():
+	return render_template('person.html')
+
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
