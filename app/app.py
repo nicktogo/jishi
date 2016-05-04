@@ -45,6 +45,11 @@ def signup():
         return render_template('signup.html')
 
 
+@app.route('/auth/person', methods=['GET'])
+def persondisplay():
+    return render_template('persondisplay.html')
+
+
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     session.pop('username', None)
@@ -80,6 +85,11 @@ def more_projects():
     pm = project_manager.ProjectManager()
     projects = list(pm.find_all_project())
     return json.dumps(projects, default=json_util.default)
+
+
+@app.route('/project/single', methods=['GET'])
+def singledisplay():
+    return render_template('projectdisplay.html')
 
 
 @app.route('/project/create', methods=['GET', 'POST'])
