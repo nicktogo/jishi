@@ -11,7 +11,7 @@
 
     <div>
 		<!-- multistep form -->
-		<form id="msform">
+		<form id="msform" action="{{ url_for('signup') }}" method="post">
 			<!-- progressbar -->
 			<ul id="progressbar">
 				<li class="active">账号设置</li>
@@ -47,12 +47,12 @@
 				<textarea name="interest" placeholder="您感兴趣的方面"></textarea>
 				<input type="button" name="previous" class="previous action-button" value="前一步" />
 				<input type="submit" name="submit" class="submit action-button" value="完成" />
+				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登陆</button>
 			</fieldset>
 
 		</form>
     </div>
 
-</div>
 
 	<script>
 	var current_fs, next_fs, previous_fs;

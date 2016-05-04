@@ -62,9 +62,8 @@ def homepage():
 def signup():
     if request.method == 'GET':
         return render_template('signup.html')
-    username = request.form['username']
-    password = request.form['password']
-    print username, password
+    username = request.form['email']
+    password = request.form['pass']
     if auth.signup(username, password):
         session['username'] = username
         return render_template('homepage.html')
