@@ -15,9 +15,9 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 bootstrap = Bootstrap(app)
 oauth = OAuth(app)
 
-APP_KEY = '148981535' # app key
-APP_SECRET = 'b12ec09cd669a458262881e580eba12e' # app secret
-CALLBACK_URL = 'http://tztztztztz.org:5000/code' # callback url
+APP_KEY = '148981535'  # app key
+APP_SECRET = 'b12ec09cd669a458262881e580eba12e'  # app secret
+CALLBACK_URL = 'http://tztztztztz.org:5000/code'  # callback url
 
 
 @app.route('/')
@@ -77,13 +77,10 @@ def signup():
 def persondisplay():
     return render_template('persondisplay.html')
 
-@app.route('/auth/personedit', methods=['GET'])
-def personedit():
-	return render_template('person.html')
 
 @app.route('/auth/personedit', methods=['GET'])
 def personedit():
-	return render_template('person.html')
+    return render_template('person.html')
 
 
 @app.route('/auth/logout', methods=['GET'])
