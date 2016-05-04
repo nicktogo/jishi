@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask.ext.bootstrap import Bootstrap
 from bson import json_util
 import json
+from weibo import APIClient
+from flask_oauthlib.client import OAuth
 
 from module import auth, project_manager, forms, message
 
@@ -10,6 +12,11 @@ app = Flask(__name__, static_url_path='')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 bootstrap = Bootstrap(app)
+oauth = OAuth(app)
+
+APP_KEY = '148981535' # app key
+APP_SECRET = 'b12ec09cd669a458262881e580eba12e' # app secret
+CALLBACK_URL = 'http://tztztztztz.org:5000/code' # callback url
 
 
 @app.route('/')
@@ -23,6 +30,26 @@ def test():
         return 'success'
 
     return dict(display=display)
+
+
+@app.route('/weibo')
+def login_weibo():
+    client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    url = client_.get_authorize_url()
+    print url
+    return redirect(url)
+
+
+@app.route('/code')
+def get_code():
+    code = request.args.get('code')
+    client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    r = client_.request_access_token(code)
+    access_token = r.access_token
+    print 'access_token is', access_token
+    expires_in = r.expires_in
+    client_.set_access_token(access_token, expires_in)
+    return '123'
 
 
 @app.route('/auth/homepage', methods=['POST', 'GET'])
