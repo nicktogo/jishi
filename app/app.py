@@ -16,7 +16,7 @@ oauth = OAuth(app)
 
 APP_KEY = '148981535' # app key
 APP_SECRET = 'b12ec09cd669a458262881e580eba12e' # app secret
-CALLBACK_URL = 'http://tztztztztz.org:8888/code' # callback url
+CALLBACK_URL = 'http://tztztztztz.org:5000/code' # callback url
 
 
 @app.route('/')
@@ -32,11 +32,11 @@ def test():
     return dict(display=display)
 
 
-@app.route('/weibo', methods=['GET'])
+@app.route('/weibo')
 def login_weibo():
-    callback = request.args.get('callback', None)
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     url = client_.get_authorize_url()
+    print url
     return redirect(url)
 
 
@@ -49,8 +49,7 @@ def get_code():
     print 'access_token is', access_token
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
-    session['client'] = client_
-    return 'success'
+    return '123'
 
 
 @app.route('/auth/homepage', methods=['POST', 'GET'])
