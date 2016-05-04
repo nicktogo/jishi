@@ -92,7 +92,7 @@ class ProjectManager:
 
     def find_project_by_title(self, project_title):
         return self._projects.find_one({
-            'title': project_title
+            'name': project_title
         })
 
 
