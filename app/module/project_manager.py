@@ -63,6 +63,11 @@ class ProjectManager:
             '_id': ObjectId(project_id)
         })
 
+    def find_project_by_title(self, project_title):
+        return self._projects.find_one({
+            'title': project_title
+        })
+
 
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)

@@ -119,9 +119,11 @@ def more_projects():
     return json.dumps(projects, default=json_util.default)
 
 
-@app.route('/project/single', methods=['GET'])
-def singledisplay():
-    return render_template('projectdisplay.html')
+@app.route('/project/<project_title>', methods=['GET'])
+def singledisplay(project_title):
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_title(project_title=project_title)
+    return render_template('projectdisplay.html', project=project)
 
 
 @app.route('/project/create', methods=['GET', 'POST'])
