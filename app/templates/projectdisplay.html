@@ -17,14 +17,14 @@
                     <div class="name">{{ project.name }}</div>
                     <div class="digest">
                         人数
-                        <span class="strong"> {{ project.number_of_member }} </span>
+                        <span class="strong"> {{ project.currentPeople }} / {{project.maxPeople}} </span>
                         项目时间
                         <span class="strong"> {{ project.time }} </span>
                     </div>
                     <div class="delimiter"></div>
                     <div class="intro">
                         <div class="title">项目描述</div>
-                        <p>{{ project.projectnature }}</p>
+                        <p>{{ project.des }}</p>
                     </div>
                     <div class="title">项目需求</div>
                     <div class="show clearfix">
@@ -36,6 +36,8 @@
                     </div>
                     <div class="ceo">
                     </div>
+                    <input id="project_id" type="hidden" value="{{project._id}}"/>
+                    <button id="applyBtn" class="btn btn-primary" onclick="apply(this)">申请加入该项目</button>
                     <div class="link">
                         <div class="title">项目链接</div>
                         <div class="subtitle">项目页面</div>
@@ -48,4 +50,27 @@
         </div>
     </div>
 </body>
+<script>
+    function apply(btn){
+        var project_id = $("#project_id").val();
+        var data = {'project_id':project_id}
+         $.ajax({
+                url: "/project/apply",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert(data['projectId'] + "创建成功!")
+                    $("#applyBtn").css({
+
+                    })
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            })
+
+    }
+</script>
 {% endblock %}

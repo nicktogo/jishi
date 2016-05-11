@@ -96,7 +96,6 @@ def login():
         return render_template('login.html')
     username = request.form['username']
     password = request.form['password']
-    print username, password
     if auth.valid_login(username, password):
         session['username'] = username
         return render_template('homepage.html')
@@ -119,11 +118,11 @@ def more_projects():
     return json.dumps(projects, default=json_util.default)
 
 
-@app.route('/project/<project_title>', methods=['GET'])
-def singledisplay(project_title):
+@app.route('/project/<project_id>', methods=['GET'])
+def singledisplay(project_id):
     pm = project_manager.ProjectManager()
-    project = pm.find_project_by_title(project_title=project_title)
-    return render_template('projectdisplay.html', project=project)
+    projects = pm.find_project_by_id(project_id)
+    return render_template('projectdisplay.html', project=projects)
 
 
 @app.route('/project/create', methods=['GET', 'POST'])
@@ -131,6 +130,8 @@ def create_project():
     if request.method == 'GET':
         return render_template('projectrelease.html')
     project = request.get_json()
+    project['currentPeople'] = 1
+    project['team'] = []
     print project
     pm = project_manager.ProjectManager()
     project_id = pm.create_project(project)
@@ -139,16 +140,34 @@ def create_project():
 
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
-    messages = message.show_all_message(session['username'])
+    msg = message.show_all_message(session['username'])
     print session['username']
-    for result in messages:
+    for result in msg:
         print result[2]
-    return render_template('message.html', messages=messages)
+    return render_template('message.html', messages=msg)
 
+
+@app.route('/project/apply', methods=['POST'])
+def apply_project():
+    username = session.get('username')
+    if username:
+        pm = project_manager.ProjectManager()
+        projectapplyed = pm.find_project_by_id(request.json['project_id'])
+        projectOwner = projectapplyed['name']
+        projectName = projectapplyed['projectname']
+        message.apply(username,request.json['project_id'],projectName,projectOwner)
+        print request.json
+        print pm.find_project_by_id(request.json['project_id'])
+        return '123'
+    return 'login'
 
 @app.route('/message/test', methods=['GET', 'POST'])
 def message_test():
-    return render_template('message.html')
+    username = session.get('username')
+    if username:
+        msgs = message.get_all_message(username)
+        return render_template("message.html",msgs = msgs)
+    return render_template("login.html")
 
 
 if __name__ == '__main__':

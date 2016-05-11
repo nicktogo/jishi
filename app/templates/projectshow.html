@@ -57,7 +57,7 @@
 			<ul class="grid">
                 {% for project in projects %}
                     <li class="grid__item">
-                        <a class="grid__link" href="{{ url_for('singledisplay', project_title=project['name']) }}">
+                        <a class="grid__link" href="{{ url_for('singledisplay', project_id=project['_id']) }}">
                             <img class="grid__img" src="{{ url_for('static',filename='img/photos/'+ran()+'.jpg') }}" alt="Some image" />
                             <h3 class="grid__item-title">{{ project['name'] }}</h3>
                         </a>

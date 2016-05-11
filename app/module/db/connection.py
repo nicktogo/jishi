@@ -172,13 +172,10 @@ class MongoConnection(AbstractConnection):
         )
 
     def get_all_message(self, username):
-        messagesend = self._conn_instance.messages.find({'username':username})
-        messagereceived = self._conn_instance.messages.find({'project_owner':username})
-        result = {
-            'messagesend': messagesend,
-            'messagereceived' : messagereceived
-        }
-        return result
+        messagesend = list(self._conn_instance.messages.find({'username':username}))
+        messagereceived = list(self._conn_instance.messages.find({'project_owner':username}))
+        messagereceived.extend(messagesend)
+        return messagereceived
 
     def update_message(self, message):
         self._conn_instance.messages.update_one(message)

@@ -4,24 +4,29 @@ from db.factory import MongoFactory
 
 def valid_login(username, password):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
-    user = list(conn.find({'email': username}))
+    user = list(conn.find({'username': username}))
     if user_not_exist(user):
         return False
     if equal_password(user, password):
         return True
 
 
-def signup(email, password):
+def signup(username, password):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
 
-    user = list(conn.find({'email': email}))
+    user = list(conn.find({'username': username}))
     if not user_not_exist(user):
         return False
-    result = conn.insert_one({'email': email, 'password': password})
+    result = conn.insert_one({'username': username, 'password': password})
     if result:
         return True
     else:
         return False
+
+
+def find_user_by_username(username):
+    conn = MongoFactory().get_connection().get_collection(collection_name='users')
+    return conn.find_one({'username': username})
 
 
 def user_not_exist(user):

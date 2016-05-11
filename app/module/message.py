@@ -3,11 +3,12 @@ from db.factory import MongoFactory
 from bson.objectid import ObjectId
 
 
-def apply(username, projectid, project_owner):
+def apply(username, projectid, projectname,project_owner):
     conn = MongoFactory().get_connection()
     m_type = 0
     message = {
         'username': username,
+        'projectname' : projectname,
         'project_id': projectid,
         'message_type': m_type,
         'message_state': 0,
@@ -76,6 +77,9 @@ def show_myproject_message(username):
     result = conn.get_myproject_message(username)
     return result
 
+def show_all_message():
+    conn = MongoFactory().get_connection()
+    return conn.findmessage()
 
 def show_joined_project_message(username):
     conn = MysqlFactory().get_connection()
