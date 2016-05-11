@@ -1,25 +1,38 @@
 {% extends "layout.html" %}
 {% block navbar %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
-    <div id="content-navbar">
-        <div id="navbar">
-            <img src="{{url_for('static', filename='img/logo.png')}}" style="width:40px;height: 40px;float: left;margin-left: 25px;margin-top: 4px"/>
-            <div id='cssmenu'>
-                <ul>
-                   <li class='active'><a href="{{ url_for('homepage') }}">济市</a></li>
-                   <li><a href="{{ url_for('alldisplay') }}">项目展示</a></li>
-                   <li><a href="{{ url_for('persondisplay') }}">个人中心</a></li>
-                   <li><a href="{{ url_for('message_test') }}">消息提醒</a></li>
-                   <li><a href="{{ url_for('create_project') }}">项目发布</a></li>
-                    {% if session.username %}
-                    <li style="float: right"><a >{{session.username}}</a></li>
-                    <li style="float: right"><a href='{{ url_for('logout') }}'>登出</a></li>
-                    {% else %}
-                    <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
-                    <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
-                    {% endif %}
-                </ul>
+    <nav class="navbar navbar-default navbar-fixed-top" style="background: transparent; border: none">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="{{url_for('static', filename='img/logo.png')}}"
+                         style="width: 40px;
+                         height: 40px;
+                         float: left;
+                         margin-left: 20px;
+                         margin-top: -5px;
+                         margin-right: 10px;"/>
+                </a>
             </div>
-        </div>
-    </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href='{{ url_for('alldisplay') }}'>项目广场</a></li>
+                    <li><a href='{{ url_for('create_project') }}'>项目发布</a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href='{{ url_for('login') }}'>注册</a></li>
+                    <li><a href='{{ url_for('signup') }}'>登录</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 {% endblock %}
