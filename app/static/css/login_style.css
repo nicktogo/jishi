@@ -10,6 +10,7 @@ body {
     background-repeat: no-repeat;
     /*background-image: url("../img/bg.jpg");*/
     background-size:cover;
+    font-size: 15.5px;
 }
 
 .card-container.card {
