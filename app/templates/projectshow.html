@@ -1,18 +1,15 @@
-<!doctype html>
-<html lang="zh" class="no-js" xmlns="http://www.w3.org/1999/html">
+{% extends "navbar.html" %}
+{% block projectshow %}
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://fonts.googleapis.com/css?family=Caveat:400,700' rel='stylesheet' type='text/css'>
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_normalize.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_square-loader.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_default.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_component.css')}}" />
-
      <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
-
     <!-- 当要展示更多的grid的时候，在projectshow_main.js中有loadNextItems这个函数来处理-->
 
 	<!--[if IE]>
@@ -24,20 +21,6 @@
 </head>
 
 <body>
-<div id="navbar">
-    <div id='cssmenu'>
-        <ul>
-           <li class='active'><a href='{{ url_for('homepage') }}'>济市</a></li>
-                   <li><a href='{{ url_for('alldisplay') }}'>项目展示</a></li>
-                   <li><a href='{{ url_for('persondisplay') }}'>个人中心</a></li>
-                   <li><a href='{{ url_for('message_test') }}'>消息提醒</a></li>
-                   <li><a href='{{ url_for('create_project') }}'>项目发布</a></li>
-                   <li id='navlogin'><a href='{{ url_for('login') }}'>登录</a></li>
-                   <li id='navregister'><a href='{{ url_for('signup') }}'>注册</a></li>
-        </ul>
-    </div>
-</div>
-<div class="container">
 	<div class="view">
 		<header class="header">
 		</header>
@@ -85,15 +68,11 @@
 				<path fill="#FFFFFF" d="M159.875,174.481L306.945,27.41c2.93-2.929,2.93-7.678,0-10.606L292.803,2.661c-1.406-1.407-3.314-2.197-5.303-2.197c-1.989,0-3.896,0.79-5.303,2.197L154.572,130.287L26.946,2.661c-1.406-1.407-3.314-2.197-5.303-2.197c-1.989,0-3.897,0.79-5.303,2.197L2.197,16.804C0.733,18.269,0,20.188,0,22.107s0.732,3.839,2.197,5.303l147.071,147.071C152.197,177.411,156.945,177.411,159.875,174.481L159.875,174.481z" ></path>
 			</svg>
 		</button>
-	</div><!-- /view -->
 </div>
-
-
     <script src="{{ url_for('static',filename='js/projectshow_classie.js')}}"></script>
 	<script src="{{ url_for('static',filename='js/projectshow_dynamics.min.js')}}"></script>
 	<script src="{{ url_for('static',filename='js/projectshow_imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{ url_for('static',filename='js/projectshow_main.js')}}"></script>
 	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-
 </body>
-</html>
+{% endblock %}
