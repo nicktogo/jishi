@@ -1,166 +1,162 @@
 {% extends "navbar.html" %}
-{% block page_specified %}
-    <link rel="stylesheet" type="text/css" media="screen"
-          href="{{ url_for('static',filename='css/projectrelease_style.css') }}"/>
-    <script src="{{ url_for('static',filename='js/projectrelease_sliding.form.js') }}"></script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $("body").addClass("body-bg");
-        console.log("hello")
-    })
-    </script>
-{% endblock %}
 {% block title %}
     发布项目
 {% endblock %}
 {% block body %}
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="{{ url_for('static',filename='css/projectrelease_style.css') }}"/>
+    <script src="{{ url_for('static',filename='js/projectrelease_sliding.form.js') }}"></script>
     <div id="content">
-    <div id="wrapper">
-        <div id="navigation" style="display:none;">
-            <ul>
-                <li class="selected">
-                    <a href="#">基本信息</a>
-                </li>
-                <li>
-                    <a href="#">项目信息</a>
-                </li>
-                <li>
-                    <a href="#">联系信息</a>
-                </li>
-                <li>
-                    <a href="#">用户协议</a>
-                </li>
-            </ul>
-        </div>
-        <div id="steps">
-            <form id="formElem" name="formElem" method="post">
-                <fieldset class="step">
-                    <p>
-                        <label class="label-style" for="projectnature">项目性质：</label>
-                        <select id="projectnature" name="projectnature">
-                            <option value="软件开发">软件开发</option>
-                            <option value="数学建模">数学建模</option>
-                            <option value="创新大赛">创新大赛</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label class="label-style" for="projecttype">项目类型：</label>
-                        <select id="projecttype" name="projecttype">
-                            <option value="Web网站">Web网站</option>
-                            <option value="Andriod开发">Andriod开发</option>
-                            <option value="IOS开发">IOS开发</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label class="label-style" for="plandoc">详细计划书：</label>
-                        <select id="plandoc" name="plandoc">
-                            <option value="1">有</option>
-                            <option value="0">没有</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label class="label-style">详细计划：</label>
-                        <textarea name="detailedPlan" class="textarea-style" rows="5" cols="50" title="plan"></textarea>
-                    </p>
-                </fieldset>
-                <fieldset class="step">
-                    <p>
-                        <label class="label-style">项目名称：</label>
-                        <input id="projectname" name="projectname" type="text" AUTOCOMPLETE=OFF placeholder="20字以内"/>
-                    </p>
-                    <input name="maxPeople" type="text"/>
-                    <p>
-                        <label class="label-style">项目描述：</label>
-                        <textarea class="textarea-style" rows="2" cols="50" title="description" name="des"></textarea>
-                    </p>
-                    <p>
-                        <label class="label-style" for="time">项目周期：</label>
-                        <input id="time" name="time" type="text" AUTOCOMPLETE=OFF placeholder="天"/>
-                    </p>
-                    <p>
-                        <label class="label-style" for="reference">参考项目：</label>
-                        <input id="reference" name="reference" placeholder="链接或名字" type="tel" AUTOCOMPLETE=OFF/>
-                    </p>
-                    <p>
-                        <label class="label-style" for="relatedfile">相关文件：</label>
-                        <input id="relatedfile" name="relatedfile" type="text" AUTOCOMPLETE=OFF/>
-                    </p>
-                </fieldset>
-                <fieldset class="step">
-                    <p>
-                        <label class="label-style" for="name">姓名：</label>
-                        <input id="name" name="name" type="text" AUTOCOMPLETE=OFF/>
-                    </p>
-                    <p>
-                        <label class="label-style" for="phone">电话：</label>
-                        <input id="phone" name="phone" type="tel" AUTOCOMPLETE=OFF/>
-                    </p>
-                    <p>
-                        <label class="label-style" for="school">学院：</label>
-                        <input id="school" name="school" AUTOCOMPLETE=OFF/>
-                    </p>
-                    <p>
-                        <label class="label-style" for="mail">Email：</label>
-                        <input id="mail" name="mail" placeholder="e.g. 123@163.com" type="text" AUTOCOMPLETE=OFF/>
-                    </p>
-                    <p class="submit">
-                        <button id="registerButton" type="submit">同意并发布</button>
-                    </p>
-                </fieldset>
-                <fieldset class="step">
-                    <h1 class="protocol">
-                        Everything in the form was correctly filled
-                        if all the steps have a green checkmark icon.
-                        A red checkmark icon indicates that some field
-                        is missing or filled out with invalid data. In this
-                        last step the user can confirm the submission of
-                        the form.
-                    </h1>
-                    <p class="submit">
-                        <button id="registerButton" type="submit">同意并发布</button>
-                    </p>
-                </fieldset>
-            </form>
+        <div id="wrapper">
+            <div id="navigation" style="display:none;">
+                <ul>
+                    <li class="selected">
+                        <a href="#">基本信息</a>
+                    </li>
+                    <li>
+                        <a href="#">项目信息</a>
+                    </li>
+                    <li>
+                        <a href="#">联系信息</a>
+                    </li>
+                    <li>
+                        <a href="#">用户协议</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="steps">
+                <form id="formElem" name="formElem" method="post">
+                    <fieldset class="step">
+                        <p>
+                            <label class="label-style" for="projectnature">项目性质：</label>
+                            <select id="projectnature" name="projectnature">
+                                <option value="软件开发">软件开发</option>
+                                <option value="数学建模">数学建模</option>
+                                <option value="创新大赛">创新大赛</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label class="label-style" for="projecttype">项目类型：</label>
+                            <select id="projecttype" name="projecttype">
+                                <option value="Web网站">Web网站</option>
+                                <option value="Andriod开发">Andriod开发</option>
+                                <option value="IOS开发">IOS开发</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label class="label-style" for="plandoc">详细计划书：</label>
+                            <select id="plandoc" name="plandoc">
+                                <option value="1">有</option>
+                                <option value="0">没有</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label class="label-style">详细计划：</label>
+                            <textarea name="detailedPlan" class="textarea-style" rows="5" cols="50"
+                                      title="plan"></textarea>
+                        </p>
+                    </fieldset>
+                    <fieldset class="step">
+                        <p>
+                            <label class="label-style">项目名称：</label>
+                            <input id="projectname" name="projectname" type="text" AUTOCOMPLETE=OFF
+                                   placeholder="20字以内"/>
+                        </p>
+                        <input name="maxPeople" type="text"/>
+                        <p>
+                            <label class="label-style">项目描述：</label>
+                            <textarea class="textarea-style" rows="2" cols="50" title="description"
+                                      name="des"></textarea>
+                        </p>
+                        <p>
+                            <label class="label-style" for="time">项目周期：</label>
+                            <input id="time" name="time" type="text" AUTOCOMPLETE=OFF placeholder="天"/>
+                        </p>
+                        <p>
+                            <label class="label-style" for="reference">参考项目：</label>
+                            <input id="reference" name="reference" placeholder="链接或名字" type="tel" AUTOCOMPLETE=OFF/>
+                        </p>
+                        <p>
+                            <label class="label-style" for="relatedfile">相关文件：</label>
+                            <input id="relatedfile" name="relatedfile" type="text" AUTOCOMPLETE=OFF/>
+                        </p>
+                    </fieldset>
+                    <fieldset class="step">
+                        <p>
+                            <label class="label-style" for="name">姓名：</label>
+                            <input id="name" name="name" type="text" AUTOCOMPLETE=OFF/>
+                        </p>
+                        <p>
+                            <label class="label-style" for="phone">电话：</label>
+                            <input id="phone" name="phone" type="tel" AUTOCOMPLETE=OFF/>
+                        </p>
+                        <p>
+                            <label class="label-style" for="school">学院：</label>
+                            <input id="school" name="school" AUTOCOMPLETE=OFF/>
+                        </p>
+                        <p>
+                            <label class="label-style" for="mail">Email：</label>
+                            <input id="mail" name="mail" placeholder="e.g. 123@163.com" type="text" AUTOCOMPLETE=OFF/>
+                        </p>
+                        <p class="submit">
+                            <button id="registerButton" type="submit">同意并发布</button>
+                        </p>
+                    </fieldset>
+                    <fieldset class="step">
+                        <h1 class="protocol">
+                            Everything in the form was correctly filled
+                            if all the steps have a green checkmark icon.
+                            A red checkmark icon indicates that some field
+                            is missing or filled out with invalid data. In this
+                            last step the user can confirm the submission of
+                            the form.
+                        </h1>
+                        <p class="submit">
+                            <button id="registerButton" type="submit">同意并发布</button>
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
-</div>
     <script>
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
                 }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
+            });
+            return o;
+        };
 
-    $(document).ready(function () {
-        $("#formElem").submit(function (event) {
-            var project = JSON.stringify($(this).serializeObject());
-            console.log((project));
-            event.preventDefault();
-            $.ajax({
-                url: "/project/create",
-                data: project,
-                contentType: 'application/json',
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    alert(data['projectId'] + "创建成功!")
-                },
-                error: function (data) {
-                    console.log(data)
-                }
-            })
+        $(document).ready(function () {
+            $("#formElem").submit(function (event) {
+                var project = JSON.stringify($(this).serializeObject());
+                console.log((project));
+                event.preventDefault();
+                $.ajax({
+                    url: "/project/create",
+                    data: project,
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data['projectId'] + "创建成功!")
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    }
+                })
+            });
+            $("body").addClass("body-bg");
         })
-    })
-</script>
+    </script>
 {% endblock %}
 
