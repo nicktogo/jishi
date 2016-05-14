@@ -18,12 +18,13 @@ def apply(username, projectid, projectname,project_owner):
     return result
 
 
-def accept(username, projectid, project_owner):
+def accept(username, projectid, projectname, project_owner):
     conn = MongoFactory().get_connection()
     m_type = 1
     message = {
         'username': username,
         'project_id': projectid,
+        'projectname' : projectname,
         'message_type': m_type,
         'message_state': 0,
         'project_owner': project_owner
@@ -77,9 +78,16 @@ def show_myproject_message(username):
     result = conn.get_myproject_message(username)
     return result
 
+
 def show_all_message():
     conn = MongoFactory().get_connection()
     return conn.findmessage()
+
+
+def find_mes_by_id(message_id):
+    conn = MongoFactory().get_connection()
+    return conn.findmessagebyid(message_id)
+
 
 def show_joined_project_message(username):
     conn = MysqlFactory().get_connection()

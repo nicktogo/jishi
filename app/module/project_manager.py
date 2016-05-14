@@ -13,7 +13,10 @@ class ProjectManager:
 
     def apply_project(self, applier_name, project_id):
         # TODO project_owner
-        message.apply(applier_name, project_id, "")
+        projectapplyed = self.find_project_by_id(project_id)
+        projectOwner = projectapplyed['name']
+        projectName = projectapplyed['projectname']
+        message.apply(applier_name, project_id, projectName , projectOwner)
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
@@ -24,14 +27,25 @@ class ProjectManager:
 
     def approve_applier(self, applier_name, project_id):
         # TODO project_owner
-        message.accept(applier_name, project_id, "")
-        return self._projects.update_one({
+        projectapplyed = self.find_project_by_id(project_id)
+        projectOwner = projectapplyed['name']
+        projectName = projectapplyed['projectname']
+        message.accept(applier_name, project_id, projectName,projectOwner)
+        result = self._projects.update_one({
+            '_id': ObjectId(project_id)
+        }, {
+            '$pull': {
+                'appliers': applier_name
+            }
+        })
+        result_ = self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$push': {
                 'members': applier_name
             }
         })
+        return result and result_
 
     def quit(self, username, project_id):
         # TODO project_owner

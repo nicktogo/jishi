@@ -81,9 +81,11 @@ def persondisplay():
 def personedit():
     return render_template('person.html')
 
+
 @app.route('/project/showprojectdetail', methods=['GET'])
 def showprojectdetail():
     return render_template('showprojectdetail.html')
+
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
@@ -155,21 +157,39 @@ def apply_project():
     username = session.get('username')
     if username:
         pm = project_manager.ProjectManager()
-        projectapplyed = pm.find_project_by_id(request.json['project_id'])
-        projectOwner = projectapplyed['name']
-        projectName = projectapplyed['projectname']
-        message.apply(username,request.json['project_id'],projectName,projectOwner)
+        pm.apply_project(username,request.json['project_id'])
+        # projectapplyed = pm.find_project_by_id(request.json['project_id'])
+        # projectOwner = projectapplyed['name']
+        # projectName = projectapplyed['projectname']
+        # message.apply(username,request.json['project_id'],projectName,projectOwner)
         print request.json
         print pm.find_project_by_id(request.json['project_id'])
         return '123'
     return 'login'
+
+
+@app.route('/project/permit', methods=['POST'])
+def permit_apply():
+    username = session.get('username')
+    if username:
+        pm = project_manager.ProjectManager()
+        mes = message.find_mes_by_id(request.json['message_id'])
+        project_id = mes['project_id']
+        pm.approve_applier(username,project_id)
+    return 'login'
+
 
 @app.route('/message/test', methods=['GET', 'POST'])
 def message_test():
     username = session.get('username')
     if username:
         msgs = message.get_all_message(username)
-        return render_template("message.html",msgs = msgs)
+        messtate = [u'申请'.encode("utf-8"), u'同意'.encode("utf-8"), u'退出'.encode("utf-8"), u'被踢出'.encode("utf-8")]
+        for msg in msgs:
+            index = msg['message_type']
+            print index
+            msg['message_finaltype'] = messtate[index]
+        return render_template("message.html", msgs=msgs)
     return render_template("login.html")
 
 
