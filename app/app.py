@@ -143,6 +143,12 @@ def create_project():
     return json.dumps({'success': True, 'projectId': str(project_id)}), 200, {'ContentType': 'application/json'}
 
 
+@app.route('/project/projectpublish', methods=['GET'])
+def projectpublish():
+    return render_template('projectpublish.html')
+
+
+
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
     msg = message.show_all_message(session['username'])
