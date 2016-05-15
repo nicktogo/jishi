@@ -1,4 +1,7 @@
 {% extends "navbar.html" %}
+{% block page_specified %}
+    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}"></script>
+{% endblock %}
 {% block body %}
 
     <link rel='stylesheet prefetch' href='{{ url_for('static',filename='css/register_reset.css') }}'>
