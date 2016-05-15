@@ -1,6 +1,5 @@
 {% extends "navbar.html" %}
 {% block page_specified %}
-    <script src="https://www.daocloud.io/index.bundle.js"></script>
     <script src="https://www.daocloud.io/14.14.bundle.js"></script>
 {% endblock %}
 {% block title %}
@@ -1011,9 +1010,13 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#all_project").removeClass("active");
+            $(".navbar").css({
+                "background": "transparent",
+                "box-shadow": ""
+            });
             $(".navbar a").css({
                 "color": "#e4e7ed"
-            })
+            });
             var scroll_start = 0;
             var start_change = $(".section-inner");
             var offset = start_change.offset();
