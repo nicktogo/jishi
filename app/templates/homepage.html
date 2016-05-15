@@ -258,7 +258,8 @@
                                 <div class="col-xs-12 col-sm-6 col-sm-pull-6 v-align">
                                     <div class="context text-left" style="opacity: 0;">
                                         <h3>数学建模</h3>
-                                        <p>数学建模就是通过计算得到的结果来解释实际问题，并接受实际的检验，来建立数学模型的全过程。当需要从定量的角度分析和研究一个实际问题时，人们就要在深入调查研究、了解对象信息、作出简化假设、分析内在规律等工作的基础上，用数学的符号和语言作表述来建立数学模型。</p>
+                                        <p>
+                                            数学建模就是通过计算得到的结果来解释实际问题，并接受实际的检验，来建立数学模型的全过程。当需要从定量的角度分析和研究一个实际问题时，人们就要在深入调查研究、了解对象信息、作出简化假设、分析内在规律等工作的基础上，用数学的符号和语言作表述来建立数学模型。</p>
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +363,8 @@
                                 <div class="col-xs-12 col-sm-6 v-align">
                                     <div class="context text-left" style="opacity: 0;">
                                         <h3>全国大学生结构竞赛</h3>
-                                        <p>全国大学生结构设计竞赛是由高等学校土木工程学科专业指导委员会和 中国土木工程学会联合主办，由高校轮流承办。是土木工程学科培养大学生创新精神、团队意识和实践能力的最高水平学科竞赛。</p>
+                                        <p>全国大学生结构设计竞赛是由高等学校土木工程学科专业指导委员会和
+                                            中国土木工程学会联合主办，由高校轮流承办。是土木工程学科培养大学生创新精神、团队意识和实践能力的最高水平学科竞赛。</p>
                                     </div>
                                 </div>
                             </div>
@@ -938,7 +940,8 @@
                                 <div class="col-xs-12 col-sm-6 col-sm-pull-6 v-align">
                                     <div class="context text-left" style="opacity: 0;">
                                         <h3>大学生国创</h3>
-                                        <p>国家大学生创新性实验计划是高等学校本科教学“质量工程”的重要组成部分，该计划的启动和实施，旨在探索并建立以问题和课题为核心的教学模式，倡导以本科学生为主体的创新性实验改革，调动学生的主动性、积极性和创造性，激发学生的创新思维和创新意识，在校园内形成创新教育氛围，建设创新教育文化，全面提升学生的创新实验能力。</p>
+                                        <p>
+                                            国家大学生创新性实验计划是高等学校本科教学“质量工程”的重要组成部分，该计划的启动和实施，旨在探索并建立以问题和课题为核心的教学模式，倡导以本科学生为主体的创新性实验改革，调动学生的主动性、积极性和创造性，激发学生的创新思维和创新意识，在校园内形成创新教育氛围，建设创新教育文化，全面提升学生的创新实验能力。</p>
                                     </div>
                                 </div>
                             </div>
@@ -994,7 +997,8 @@
                                 <div class="col-xs-12 col-sm-6 v-align">
                                     <div class="context text-left" style="opacity: 0;">
                                         <h3>大学生节能减排大赛</h3>
-                                        <p>全国大学生节能减排社会实践与科技竞赛是由教育部高等教育司主办、唯一由高等教育司办公室主抓的全国大学生学科竞赛， 为教育部确定的全国十大大学生学科竞赛之一，也是全国高校影响力最大的大学生科创竞赛之一</p>
+                                        <p>全国大学生节能减排社会实践与科技竞赛是由教育部高等教育司主办、唯一由高等教育司办公室主抓的全国大学生学科竞赛，
+                                            为教育部确定的全国十大大学生学科竞赛之一，也是全国高校影响力最大的大学生科创竞赛之一</p>
                                     </div>
                                 </div>
                             </div>
@@ -1006,16 +1010,35 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            window.onscroll = function () {
-                $(".navbar").css({
-                    "background": "",
-                    "border": "1px solid transparent"
-                })
-            };
             $("#all_project").removeClass("active");
             $(".navbar a").css({
-                "color":"#e4e7ed"
-            });
-        })
+                "color": "#e4e7ed"
+            })
+            var scroll_start = 0;
+            var start_change = $(".section-inner");
+            var offset = start_change.offset();
+            if (start_change.length) {
+                $(document).scroll(function () {
+                    scroll_start = $(this).scrollTop();
+                    if (scroll_start > offset.top) {
+                        $(".navbar").css({
+                            "background": "",
+                            "box-shadow": "0 4px 8px rgba(0,0,0,.1)"
+                        });
+                        $(".navbar a").css({
+                            "color": "#3d444f"
+                        });
+                    } else {
+                        $(".navbar").css({
+                            "background": "transparent",
+                            "box-shadow": ""
+                        });
+                        $(".navbar a").css({
+                            "color": "#e4e7ed"
+                        });
+                    }
+                });
+            }
+        });
     </script>
 {% endblock %}
