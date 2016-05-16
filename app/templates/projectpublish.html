@@ -1,80 +1,79 @@
 {% extends "navbar.html" %}
 {% block title %}
-发布项目
+    发布项目
 {% endblock %}
 {% block body %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/coding-project.min.css') }}">
-</head>
-<body>
-<div class="main-container">
-    <div class="view-container  ">
-        <style>
-            .select2-dropdown.select2-dropdown--above,.select2-dropdown.select2-dropdown--below{
-            margin-top: -12px;
-            }
-            .select2-selection.select2-selection--single{
-            display: none;
-            }
-        </style>
-        <div id="mart-reward">
-            <div class="form">
-                <div class="content">
-                    <div class="box">
-                        <div class="notice">您的项目信息不会透露给任何第三方。我们会与您联系确认适合公开的项目信息。</div>
-                        <input style="display: none" name="id" value="">
-                        <section>
-                            <div class="input">
-                                <div class="ds-table">
-                                    <div class="ds-table-cell pd-right-10">
-                                        <label><b>项目类型&nbsp;*</b></label>
-                                        <select class="form-input" name="type">
-                                            <option value="">请选择</option>
-                                            <option value="0">Web 网站</option>
-                                            <option value="5">移动应用 APP</option>
-                                            <option value="2">微信开发</option>
-                                            <option value="3">HTML5 应用</option>
-                                            <option value="4">其他</option>
-                                        </select>
-                                    </div>
-                                    <div class="ds-table-cell pd-left-10">
-                                        <label class="input-budget"><b>项目预算&nbsp;*</b></label>
-                                        <select class="form-input" name="budget">
-                                            <option value="">请选择</option>
-                                            <option value="0">1万以下</option>
-                                            <option value="1">1-3万</option>
-                                            <option value="2">3-5万</option>
-                                            <option value="3">5万以上</option>
-                                        </select>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/coding-project.min.css') }}">
+    <div class="main-container">
+        <div class="view-container  ">
+            <style>
+                .select2-dropdown.select2-dropdown--above, .select2-dropdown.select2-dropdown--below {
+                    margin-top: -12px;
+                }
+
+                .select2-selection.select2-selection--single {
+                    display: none;
+                }
+            </style>
+            <div id="mart-reward">
+                <div class="form">
+                    <div class="content">
+                        <div class="box">
+                            <div class="notice">您的项目信息不会透露给任何第三方。我们会与您联系确认适合公开的项目信息。</div>
+                            <input style="display: none" name="id" value="">
+                            <section>
+                                <div class="input">
+                                    <div class="ds-table">
+                                        <div class="ds-table-cell pd-right-10">
+                                            <label><b>项目类型&nbsp;*</b></label>
+                                            <select class="form-input" name="type">
+                                                <option value="">请选择</option>
+                                                <option value="0">Web 网站</option>
+                                                <option value="5">移动应用 APP</option>
+                                                <option value="2">微信开发</option>
+                                                <option value="3">HTML5 应用</option>
+                                                <option value="4">其他</option>
+                                            </select>
+                                        </div>
+                                        <div class="ds-table-cell pd-left-10">
+                                            <label class="input-budget"><b>项目预算&nbsp;*</b></label>
+                                            <select class="form-input" name="budget">
+                                                <option value="">请选择</option>
+                                                <option value="0">1万以下</option>
+                                                <option value="1">1-3万</option>
+                                                <option value="2">3-5万</option>
+                                                <option value="3">5万以上</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input">
-                                <label><b>项目名 （支持 1-30 个字符）&nbsp;*</b>
-                                    <span class="format-error" name="reward_name_format_error"></span>
-                                </label>
-                                <input class="form-input" type="text" placeholder="项目名, 30个字符" value=""
-                                       name="reward_name"/>
-                            </div>
-                            <div class="input">
-                                <label><b>项目描述 （至少 50 个字符）&nbsp;*</b>
-                                    <span class="format-error" name="description_format_error"></span>
-                                </label>
+                                <div class="input">
+                                    <label><b>项目名 （支持 1-30 个字符）&nbsp;*</b>
+                                        <span class="format-error" name="reward_name_format_error"></span>
+                                    </label>
+                                    <input class="form-input" type="text" placeholder="项目名, 30个字符" value=""
+                                           name="reward_name"/>
+                                </div>
+                                <div class="input">
+                                    <label><b>项目描述 （至少 50 个字符）&nbsp;*</b>
+                                        <span class="format-error" name="description_format_error"></span>
+                                    </label>
                         <textarea class="form-input" placeholder="50-2000个字符"
                                   rows="5" name="description"></textarea>
-                            </div>
-                            <div class="input" style="height:71px;">
-                                <div class="ds-table">
-                                    <div class="ds-table-cell pd-right-10">
-                                        <label><b>姓名&nbsp;*</b>
-                                            <span class="format-error" name="name_format_error"></span>
-                                        </label>
-                                        <input class="form-input" type="text" placeholder="姓名" value=""
-                                               name="name"/>
-                                    </div>
-                                    <div class="ds-table-cell pd-left-10">
-                                        <label><b>电话&nbsp;*</b>
-                                            <span class="format-error" name="mobile_format_error"></span>
-                                        </label>
+                                </div>
+                                <div class="input" style="height:71px;">
+                                    <div class="ds-table">
+                                        <div class="ds-table-cell pd-right-10">
+                                            <label><b>姓名&nbsp;*</b>
+                                                <span class="format-error" name="name_format_error"></span>
+                                            </label>
+                                            <input class="form-input" type="text" placeholder="姓名" value=""
+                                                   name="name"/>
+                                        </div>
+                                        <div class="ds-table-cell pd-left-10">
+                                            <label><b>电话&nbsp;*</b>
+                                                <span class="format-error" name="mobile_format_error"></span>
+                                            </label>
                                 <span class="phone-wrapper">
                                     <span class="countries-selector">
                                                                                                                         <i class="flag X1 cn"></i><i
@@ -83,26 +82,30 @@
                                     <input class="form-input" type="text" placeholder="电话" value="15221373685"
                                            name="mobile"/>
                                 </span>
-                                        <select id="country-dropdown-menu" style="display:none"></select>
-                                        <input type="hidden" name="default-phone-countryt-code" value="+86"/>
+                                            <select id="country-dropdown-menu" style="display:none"></select>
+                                            <input type="hidden" name="default-phone-countryt-code" value="+86"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input">
-                                <input type="checkbox" checked name="agreement" class="agreement-checkbox">
-                                <div class="agreement-text">
-                                    我同意<a href="/protocol.html" class="agreement-content">《码市平台需求方协议》</a>
+                                <div class="input">
+                                    <input type="checkbox" checked name="agreement" class="agreement-checkbox">
+                                    <div class="agreement-text">
+                                        我同意<a href="/protocol.html" class="agreement-content">《码市平台需求方协议》</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="last-row">
-                                <button class="sub-button mart-button btn-with-shadow">提交悬赏</button>
-                            </div>
-                        </section>
+                                <div class="last-row">
+                                    <button class="sub-button mart-button btn-with-shadow">提交悬赏</button>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</body>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#create_project").addClass("active");
+    });
+    </script>
 {% endblock %}
