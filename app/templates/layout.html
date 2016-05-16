@@ -13,7 +13,11 @@
     </title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-3.3.6.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/footer_style.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static',filename='css/footer-distributed-with-address-and-phones.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.useso.com/css?family=Cookie" rel="stylesheet" type="text/css">
     <script src="{{ url_for('static', filename='js/tether-1.3.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap-3.3.6.min.js') }}"></script>
@@ -51,10 +55,62 @@
     {% block body %}{% endblock %}
 </div>
 
-<div class="footer">
-    <p><span class="distance"><a href="#">关于济市</a></span><span class="distance"><a href="#">联系我们</a></span>
-        <span class="distance"><a href="#">法律声明</a></span><span class="distance"><a href="#">合作伙伴</a></span></p>
-</div>
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>济市<span> Make IT Happen</span></h3>
+
+        <p class="footer-links">
+            <a href="#">济市主页</a>
+            ·
+            <a href="#">关于济市</a>
+            ·
+            <a href="#">联系我们</a>
+        </p>
+
+        <p class="footer-company-name">Copyright © 2016 济市 </p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>曹安公路 4800 号</span> 中国, 上海</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+86 110 120119</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:support@company.com">support@jishi.com</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>这个网站在做什么？</span>
+            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus
+            vehicula sit amet.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
 
 </body>
 
