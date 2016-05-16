@@ -9,6 +9,7 @@
         }
     </style>
     <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
     <script>
         window.console = window.console || function (t) {
@@ -26,6 +27,7 @@
                     <th>Name</th>
                     <th>Link</th>
                     <th>Status</th>
+                    <th>Button</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +38,9 @@
                         <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank">GitHub</a>
                     </td>
                     <td data-title="Status">Completed</td>
+                    <td data-title="Button">
+                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
+                    </td>
                 </tr>
                 <tr>
                     <td data-title="ID">2</td>
@@ -45,6 +50,9 @@
                         <a href="https://github.com/zavoloklom/material-design-iconic-font" target="_blank">GitHub</a>
                     </td>
                     <td data-title="Status">Completed</td>
+                    <td data-title="Button">
+                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
+                    </td>
                 </tr>
                 <tr>
                     <td data-title="ID">3</td>
@@ -55,6 +63,9 @@
                            target="_blank">GitHub</a>
                     </td>
                     <td data-title="Status">Completed</td>
+                    <td data-title="Button">
+                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
+                    </td>
                 </tr>
                 <tr>
                     <td data-title="ID">4</td>
@@ -62,55 +73,9 @@
                     <td data-title="Link"><a href="http://codepen.io/zavoloklom/pen/dIgco" target="_blank">Codepen</a>
                     </td>
                     <td data-title="Status">Completed</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">5</td>
-                    <td data-title="Name">Material Design Tiles</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/wtApI" target="_blank">Codepen</a>
+                    <td data-title="Button">
+                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
                     </td>
-                    <td data-title="Status">Completed</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">6</td>
-                    <td data-title="Name">Material Design Typography</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/IkaFL" target="_blank">Codepen</a>
-                        <a href="https://github.com/zavoloklom/material-design-typography" target="_blank">GitHub</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">7</td>
-                    <td data-title="Name">Material Design Buttons</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/Gubja" target="_blank">Codepen</a>
-                    </td>
-                    <td data-title="Status">In progress</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">8</td>
-                    <td data-title="Name">Material Design Form Elements</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/yaozl" target="_blank">Codepen</a>
-                    </td>
-                    <td data-title="Status">In progress</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">9</td>
-                    <td data-title="Name">Material Design Email Template</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/qEVqzx" target="_blank">Codepen</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
-                </tr>
-                <tr>
-                    <td data-title="ID">10</td>
-                    <td data-title="Name">Material Design Animation Timing (old one)</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/Jbrho" target="_blank">Codepen</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
                 </tr>
                 </tbody>
             </table>
@@ -120,6 +85,41 @@
         $(document).ready(function () {
             $("#message_alert").addClass("active");
         });
+        // Ripple-effect animation
+        (function ($) {
+            $(".ripple-effect").click(function (e) {
+                var rippler = $(this);
+
+                // create .ink element if it doesn't exist
+                if (rippler.find(".ink").length == 0) {
+                    rippler.append("<span class='ink'></span>");
+                }
+
+                var ink = rippler.find(".ink");
+
+                // prevent quick double clicks
+                ink.removeClass("animate");
+
+                // set .ink diametr
+                if (!ink.height() && !ink.width()) {
+                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+                    ink.css({
+                        height: d,
+                        width: d
+                    });
+                }
+
+                // get click coordinates
+                var x = e.pageX - rippler.offset().left - ink.width() / 2;
+                var y = e.pageY - rippler.offset().top - ink.height() / 2;
+
+                // set .ink position and add class .animate
+                ink.css({
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("animate");
+            })
+        })(jQuery);
     </script>
 {% endblock %}
 <script>
