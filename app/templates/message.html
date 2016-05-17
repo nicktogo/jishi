@@ -11,13 +11,84 @@
     <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-sidebar.css') }}">
     <script>
         window.console = window.console || function (t) {
                 };
     </script>
 {% endblock %}
 {% block body %}
-    <div id="demo">
+    <!-- Material sidebar -->
+    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+        <!-- Sidebar navigation -->
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="#">
+                    <i class="sidebar-icon md-inbox"></i> Inbox
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="sidebar-icon md-star"></i> Starred
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="sidebar-icon md-send"></i> Sent Mail
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="sidebar-icon md-drafts"></i> Drafts
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown">
+                <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                    All Mail
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" tabindex="-1">
+                            Social
+                            <span class="sidebar-badge">12</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" tabindex="-1">
+                            Promo
+                            <span class="sidebar-badge">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    Trash
+                    <span class="sidebar-badge">3</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Spam
+                    <span class="sidebar-badge">456</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Follow Up
+                    <span class="sidebar-badge badge-circle">i</span>
+                </a>
+            </li>
+        </ul>
+        <!-- Sidebar divider -->
+        <!-- <div class="sidebar-divider"></div> -->
+
+        <!-- Sidebar text -->
+        <!--  <div class="sidebar-text">Text</div> -->
+    </aside>
+    <div id="demo" class="wrapper">
         <div class="table-responsive-vertical shadow-z-1">
             <!-- Table starts here -->
             <table id="table" class="table table-hover table-mc-light-blue">
@@ -121,6 +192,7 @@
             })
         })(jQuery);
     </script>
+    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>
 {% endblock %}
 <script>
     $(function () {
