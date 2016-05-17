@@ -39,7 +39,7 @@
             </li>
             <li class="divider"></li>
             <li class="dropdown">
-                <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                     All Mail
                     <b class="caret"></b>
                 </a>
@@ -186,8 +186,22 @@
                 }).addClass("animate");
             })
         })(jQuery);
+
+        var dropdown = $('.dropdown');
+
+        // Add slidedown animation to dropdown
+        dropdown.on('show.bs.dropdown', function (e) {
+            $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+            dropdown.addClass("open");
+            $('.dropdown-toggle').attr("");
+        });
+
+        // Add slideup animation to dropdown
+        dropdown.on('hide.bs.dropdown', function (e) {
+            $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+        });
     </script>
-    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>
+    {#    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>#}
 {% endblock %}
 <script>
     $(function () {
