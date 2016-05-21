@@ -29,7 +29,7 @@ def index():
 @app.context_processor
 def test():
     def ran():
-        return str(random.randint(1,9))
+        return str(random.randint(1, 9))
 
     return dict(ran=ran)
 
@@ -103,11 +103,20 @@ def login():
     username = request.form['username']
     password = request.form['password']
     if auth.valid_login(username, password):
+        session['signed'] = True
         session['username'] = username
         return render_template('homepage.html')
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
+
+
+@app.route('/auth/verify', methods=['POST'])
+def verify():
+    if 'username' in session:
+        return json.dumps({'is_verified': True}), 200, {'ContentType': 'application/json'}
+    else:
+        return json.dumps({'is_verified': False}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/project/all', methods=['GET'])
@@ -163,7 +172,6 @@ def projectpublish():
     return render_template('projectpublish.html')
 
 
-
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
     msg = message.show_all_message(session['username'])
@@ -178,7 +186,7 @@ def apply_project():
     username = session.get('username')
     if username:
         pm = project_manager.ProjectManager()
-        pm.apply_project(username,request.json['project_id'])
+        pm.apply_project(username, request.json['project_id'])
         # projectapplyed = pm.find_project_by_id(request.json['project_id'])
         # projectOwner = projectapplyed['name']
         # projectName = projectapplyed['projectname']
@@ -196,7 +204,7 @@ def permit_apply():
         pm = project_manager.ProjectManager()
         mes = message.find_mes_by_id(request.json['message_id'])
         project_id = mes['project_id']
-        pm.approve_applier(username,project_id)
+        pm.approve_applier(username, project_id)
     return 'login'
 
 
