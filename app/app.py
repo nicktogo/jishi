@@ -6,6 +6,7 @@ import json
 from weibo import APIClient
 from flask_oauthlib.client import OAuth
 import random
+from datetime import datetime
 
 from module import auth, project_manager, forms, message
 
@@ -112,7 +113,8 @@ def login():
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
     pm = project_manager.ProjectManager()
-    projects = pm.find_all_project()
+    page = request.args.get('page', 1)
+    projects = pm.find_all_project(page=page)
     return render_template('projectshow.html', projects=projects)
 
 
@@ -144,9 +146,11 @@ def create_project():
         project['contact'] = request.form.get('contact')
         project['contact_mobile'] = request.form.get('contact_mobile')
         project['currentPeople'] = 1
+        project['created_time'] = datetime.now()
         project['team'] = [session['username']]
         project['applier'] = []
         project['maxPeople'] = int(request.form.get('maxPeople'))
+
         pm = project_manager.ProjectManager()
         pm.create_project(project)
         return redirect(url_for('alldisplay'))
