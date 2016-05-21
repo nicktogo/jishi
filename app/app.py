@@ -90,6 +90,7 @@ def showprojectdetail():
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
+    session.pop('signed')
     session.pop('username', None)
     return render_template('login.html')
 
@@ -109,14 +110,6 @@ def login():
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
-
-
-@app.route('/auth/verify', methods=['POST'])
-def verify():
-    if 'username' in session:
-        return json.dumps({'is_verified': True}), 200, {'ContentType': 'application/json'}
-    else:
-        return json.dumps({'is_verified': False}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/project/all', methods=['GET'])
