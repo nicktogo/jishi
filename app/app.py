@@ -115,7 +115,7 @@ def login():
 @app.route('/user/info', methods=['GET'])
 def user_info():
     if session['signed']:
-        return render_template('user_info.html')
+        return render_template('user.html')
     from_url = '/user/info'
     return render_template('login.html', from_url=from_url)
 
