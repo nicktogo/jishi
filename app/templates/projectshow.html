@@ -43,12 +43,14 @@
                 {% endfor %}
 			</ul>
 			<ul class="pager">
-				{% if page != 1 %}
 				<li><a href="{{url_for('alldisplay', page=page-1)}}">前一页</a></li>
-				{% else %}
-				<li><a href="#">没有了</a></li>
-				{% endif %}
-				<li><a href="#">{{page}}</a></li>
+				{% for p in pages %}
+				    {% if p+1 == page %}
+				    <li><a href="#" style="color:black">{{p+1}}</a></li>
+				    {% else %}
+					<li><a href="{{url_for('alldisplay', page=p+1)}}" >{{p+1}}</a></li>
+				    {% endif %}
+				{% endfor %}
 				<li><a href="{{url_for('alldisplay', page=page+1)}}">下一页</a></li>
 			</ul>
 			<button class="button button--load" aria-label="Load more images">

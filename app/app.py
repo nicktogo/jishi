@@ -115,7 +115,8 @@ def alldisplay():
     pm = project_manager.ProjectManager()
     page = int(request.args.get('page', 1))
     projects = pm.find_all_project(page=page)
-    return render_template('projectshow.html', projects=projects,page=page)
+    pages = pm.project_count();
+    return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
 
 @app.route('/project/more', methods=['GET', 'POST'])
