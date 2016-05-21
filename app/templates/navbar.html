@@ -27,9 +27,10 @@
                 <ul class="nav navbar-nav">
                     <li id="all_project"><a href='{{ url_for('alldisplay') }}'>项目广场</a></li>
                     <li id="create_project"><a href='{{ url_for('projectpublish') }}'>项目发布</a></li>
-                    <li id="message_alert"><a href="{{ url_for('message_test') }}">消息提醒</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li id="message_alert"><a href="{{ url_for('message_test') }}">消息提醒</a></li>
+                    <li id="person"><a href="{{ url_for('persondisplay') }}">个人中心</a> </li>
                     <li id="jishi_login"><a href='{{ url_for('login') }}'>登录</a></li>
                     <li id="jishi_signup"><a href='{{ url_for('signup') }}'>注册</a></li>
                 </ul>
