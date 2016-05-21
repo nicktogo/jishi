@@ -4,17 +4,12 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='https://fonts.googleapis.com/css?family=Caveat:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.useso.com/css?family=Caveat:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_normalize.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_square-loader.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_default.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/projectshow_component.css')}}" />
-     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/navbar_styles.css') }}" />
     <!-- 当要展示更多的grid的时候，在projectshow_main.js中有loadNextItems这个函数来处理-->
-
-	<!--[if IE]>
-		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-	<![endif]-->
 	<script>
 		document.documentElement.className = 'js';
 	</script>
@@ -73,6 +68,5 @@
 	<script src="{{ url_for('static',filename='js/projectshow_dynamics.min.js')}}"></script>
 	<script src="{{ url_for('static',filename='js/projectshow_imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{ url_for('static',filename='js/projectshow_main.js')}}"></script>
-	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 </body>
 {% endblock %}
