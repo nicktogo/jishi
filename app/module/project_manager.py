@@ -98,7 +98,7 @@ class ProjectManager:
         })
 
     def find_all_project(self, page=1):
-        limit = 9
+        limit = 3
         offset = (page-1) * limit
         return self._projects.find().skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)])
 
