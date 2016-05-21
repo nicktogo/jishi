@@ -32,11 +32,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li id="message_alert"><a href="{{ url_for('message_test') }}">消息提醒</a></li>
                     <li id="person"><a href="{{ url_for('user_info') }}">个人中心</a></li>
-                    {% if not session['signed'] %}
+                    {% if not session.get('username') %}
                         <li id="jishi_login"><a href='{{ url_for('login') }}'>登录</a></li>
                         <li id="jishi_signup"><a href='{{ url_for('signup') }}'>注册</a></li>
                     {% endif %}
-                    {% if session['signed'] %}
+                    {% if session.get('username') %}
                         <li id="jishi_logout"><a href='{{ url_for('logout') }}'>退出</a></li>
                     {% endif %}
                 </ul>

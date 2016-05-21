@@ -90,9 +90,8 @@ def showprojectdetail():
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
-    session.pop('signed')
     session.pop('username', None)
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 
 @app.route('/auth/login', methods=['POST', 'GET'])
@@ -100,13 +99,16 @@ def login():
     if 'username' in session:
         return render_template('homepage.html')
     if request.method == 'GET':
-        return render_template('login.html')
+        next_url = request.args.get('next_url')
+        if next_url is not None:
+            return render_template('login.html', next_url=next_url)
+        return render_template('login.html', next_url=url_for('homepage'))
     username = request.form['username']
     password = request.form['password']
+    next_url = request.form['next_url']
     if auth.valid_login(username, password):
-        session['signed'] = True
         session['username'] = username
-        return render_template('homepage.html')
+        return redirect(next_url)
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
@@ -114,10 +116,10 @@ def login():
 
 @app.route('/user/info', methods=['GET'])
 def user_info():
-    if session['signed']:
+    if session.get('username'):
         return render_template('user.html')
-    from_url = '/user/info'
-    return render_template('login.html', from_url=from_url)
+    next_url = '/user/info'
+    return redirect(url_for('login', next_url=next_url))
 
 
 @app.route('/project/all', methods=['GET'])
@@ -220,7 +222,8 @@ def message_test():
             print index
             msg['message_finaltype'] = messtate[index]
         return render_template("message.html", msgs=msgs)
-    return render_template("login.html")
+    next_url = '/message/test'
+    return redirect(url_for('login', next_url=next_url))
 
 
 if __name__ == '__main__':
