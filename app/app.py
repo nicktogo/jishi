@@ -112,6 +112,14 @@ def login():
         return render_template('login.html', error=error)
 
 
+@app.route('/user/info', methods=['GET'])
+def user_info():
+    if session['signed']:
+        return render_template('user_info.html')
+    from_url = '/user/info'
+    return render_template('login.html', from_url=from_url)
+
+
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
     pm = project_manager.ProjectManager()
