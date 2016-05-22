@@ -6,6 +6,7 @@ import json
 from weibo import APIClient
 from flask_oauthlib.client import OAuth
 import random
+from datetime import datetime
 
 from module import auth, project_manager, forms, message
 
@@ -28,7 +29,7 @@ def index():
 @app.context_processor
 def test():
     def ran():
-        return str(random.randint(1,9))
+        return str(random.randint(1, 9))
 
     return dict(ran=ran)
 
@@ -90,7 +91,7 @@ def showprojectdetail():
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     session.pop('username', None)
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 
 @app.route('/auth/login', methods=['POST', 'GET'])
@@ -98,22 +99,36 @@ def login():
     if 'username' in session:
         return render_template('homepage.html')
     if request.method == 'GET':
-        return render_template('login.html')
+        next_url = request.args.get('next_url')
+        if next_url is not None:
+            return render_template('login.html', next_url=next_url)
+        return render_template('login.html', next_url=url_for('homepage'))
     username = request.form['username']
     password = request.form['password']
+    next_url = request.form['next_url']
     if auth.valid_login(username, password):
         session['username'] = username
-        return render_template('homepage.html')
+        return redirect(next_url)
     else:
         error = 'invalid username/password'
         return render_template('login.html', error=error)
 
 
+@app.route('/user/info', methods=['GET'])
+def user_info():
+    if session.get('username'):
+        return render_template('user.html')
+    next_url = '/user/info'
+    return redirect(url_for('login', next_url=next_url))
+
+
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
     pm = project_manager.ProjectManager()
-    projects = pm.find_all_project()
-    return render_template('projectshow.html', projects=projects)
+    page = int(request.args.get('page', 1))
+    projects = pm.find_all_project(page=page)
+    pages = pm.project_count();
+    return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
 
 @app.route('/project/more', methods=['GET', 'POST'])
@@ -133,20 +148,31 @@ def singledisplay(project_id):
 @app.route('/project/create', methods=['GET', 'POST'])
 def create_project():
     if request.method == 'GET':
-        return render_template('projectrelease.html')
-    project = request.get_json()
-    project['currentPeople'] = 1
-    project['team'] = []
-    print project
-    pm = project_manager.ProjectManager()
-    project_id = pm.create_project(project)
-    return json.dumps({'success': True, 'projectId': str(project_id)}), 200, {'ContentType': 'application/json'}
+        return render_template('projectpublish.html')
+    if session.get('username'):
+        project = dict()
+        project['creator'] = session['username']
+        project['name'] = request.form.get('name')
+        project['type'] = request.form.get('type')
+        project['budget'] = request.form.get('budget')
+        project['description'] = request.form.get('description')
+        project['contact'] = request.form.get('contact')
+        project['contact_mobile'] = request.form.get('contact_mobile')
+        project['currentPeople'] = 1
+        project['created_time'] = datetime.now()
+        project['team'] = [session['username']]
+        project['applier'] = []
+        project['maxPeople'] = int(request.form.get('maxPeople'))
+
+        pm = project_manager.ProjectManager()
+        pm.create_project(project)
+        return redirect(url_for('alldisplay'))
+    return redirect(url_for('login'))
 
 
 @app.route('/project/projectpublish', methods=['GET'])
 def projectpublish():
     return render_template('projectpublish.html')
-
 
 
 @app.route('/message', methods=['GET', 'POST'])
@@ -163,7 +189,7 @@ def apply_project():
     username = session.get('username')
     if username:
         pm = project_manager.ProjectManager()
-        pm.apply_project(username,request.json['project_id'])
+        pm.apply_project(username, request.json['project_id'])
         # projectapplyed = pm.find_project_by_id(request.json['project_id'])
         # projectOwner = projectapplyed['name']
         # projectName = projectapplyed['projectname']
@@ -181,7 +207,7 @@ def permit_apply():
         pm = project_manager.ProjectManager()
         mes = message.find_mes_by_id(request.json['message_id'])
         project_id = mes['project_id']
-        pm.approve_applier(username,project_id)
+        pm.approve_applier(username, project_id)
     return 'login'
 
 
@@ -196,7 +222,8 @@ def message_test():
             print index
             msg['message_finaltype'] = messtate[index]
         return render_template("message.html", msgs=msgs)
-    return render_template("login.html")
+    next_url = '/message/test'
+    return redirect(url_for('login', next_url=next_url))
 
 
 @app.route('/message/search', methods=['GET','POST'])
@@ -204,13 +231,6 @@ def message_search():
     username = session.get('username')
     if username:
         msgs = message.search_message(request.form['input'],username)
-        # for msg in msgs:
-        #     created_time = msg['created_time']
-        #     created_time = created_time.strftime('%Y-%m-%d %H:%M:%S')
-        #     msg['created_time'] = created_time
-        #     msg['_id'] = 1
-        print username
-        print msgs
         return render_template("message.html", msgs=msgs)
         # return json.dumps(msgs)
     return render_template("login.html")

@@ -2,6 +2,7 @@
 from bson.objectid import ObjectId
 from app.module.db.factory import MongoFactory
 import message
+import pymongo
 
 
 class ProjectManager:
@@ -96,8 +97,13 @@ class ProjectManager:
             }
         })
 
-    def find_all_project(self):
-        return self._projects.find()
+    def find_all_project(self, page=1):
+        limit = 3
+        offset = (page-1) * limit
+        return self._projects.find().skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)])
+
+    def project_count(self):
+        return len(list(self._projects.find())) / 3 + 1
 
     def find_project_by_id(self, project_id):
         return self._projects.find_one({
