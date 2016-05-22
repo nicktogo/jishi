@@ -174,6 +174,9 @@ def create_project():
 def projectpublish():
     return render_template('projectpublish.html')
 
+@app.route('/project/protocol', methods=['GET'])
+def projectprocotol():
+    return render_template('protocol.html')
 
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
