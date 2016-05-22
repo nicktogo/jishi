@@ -4,6 +4,7 @@
 {% endblock %}
 {% block page_specified_css %}
     <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-searchbar.css') }}"
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
     <script>
@@ -13,6 +14,13 @@
 {% endblock %}
 {% block body %}
     <div id="demo" class="wrapper">
+        <div class="sw">
+            <form>
+                <input type="search" class="search" placeholder="搜索..."/>
+                <button class="go"><span class="entypo-search"></span></button>
+                <a href="#" class="logo" title="logo"></a>
+            </form>
+        </div>
         <div class="table-responsive-vertical shadow-z-1">
             <!-- Table starts here -->
             <table id="table" class="table table-hover table-mc-light-blue">
