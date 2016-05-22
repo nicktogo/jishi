@@ -138,8 +138,7 @@ body {
 }
 .sidebar,
 .wrapper {
-  display: table-cell;
-  vertical-align: top;
+  display: inline-block;
 }
 .sidebar-stacked.open + .wrapper .constructor {
   margin-left: 280px;
@@ -151,6 +150,8 @@ body {
 }
 /* -- Sidebar style ------------------------------- */
 .sidebar {
+  vertical-align: top;
+  margin-top: 20px;
   position: relative;
   min-height: 100%;
   overflow-y: auto;
