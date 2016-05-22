@@ -164,7 +164,6 @@ class MongoConnection(AbstractConnection):
         self._conn_instance.messages.delete_many({'_id': ObjectId(message_id)})
         return True
 
-
     def read_message(self,message_id):
         return self._conn_instance.messages.update_one(
             { '_id': 'message_id'},
@@ -176,6 +175,14 @@ class MongoConnection(AbstractConnection):
         messagereceived = list(self._conn_instance.messages.find({'project_owner':username}))
         messagereceived.extend(messagesend)
         return messagereceived
+
+    def search_message(self, input, username):
+        messagereceived = self.get_all_message(username)
+        message_By_name = list(self._conn_instance.messages.find({'project_owner':{'$regex': input}}))
+        message_By_Project = list(self._conn_instance.messages.find({'projectname':{'$regex': input}}))
+        message_By_name.extend(message_By_Project)
+        tmp = [val for val in messagereceived if val in message_By_name]
+        return tmp
 
     def update_message(self, message):
         self._conn_instance.messages.update_one(message)
@@ -211,4 +218,9 @@ class RedisConnection(AbstractConnection):
 
 if __name__ == '__main__':
     test = MongoConnection()
-    test.read_message('57215e4023470e274030464d')
+    a = list(['a','b','c'])
+    b = list(['b','c','d'])
+    tmp = [val for val in a if val in b]
+    print a
+    print b
+    print tmp

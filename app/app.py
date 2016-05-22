@@ -229,5 +229,15 @@ def message_test():
     return redirect(url_for('login', next_url=next_url))
 
 
+@app.route('/message/search', methods=['GET','POST'])
+def message_search():
+    username = session.get('username')
+    if username:
+        msgs = message.search_message(request.form['input'],username)
+        return render_template("message.html", msgs=msgs)
+        # return json.dumps(msgs)
+    return render_template("login.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
