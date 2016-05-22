@@ -73,15 +73,21 @@ def signup():
         return render_template('signup.html')
 
 
-@app.route('/auth/person', methods=['GET'])
-def persondisplay():
-    return render_template('persondisplay.html')
+@app.route('/user/person', methods=['GET'])
+def person():
+    return render_template('user_info.html')
 
+@app.route('/user/userownproject', methods=['GET'])
+def userownproject():
+    return render_template('user_own_project.html')
 
-@app.route('/auth/personedit', methods=['GET'])
-def personedit():
-    return render_template('person.html')
+@app.route('/user/userattendproject', methods=['GET'])
+def userattendproject():
+    return render_template('user_attend_project.html')
 
+@app.route('/user/userinfoedit', methods=['GET'])
+def userinfoedit():
+    return render_template('user_info_edit.html')
 
 @app.route('/project/showprojectdetail', methods=['GET'])
 def showprojectdetail():
@@ -117,7 +123,7 @@ def login():
 @app.route('/user/info', methods=['GET'])
 def user_info():
     if session.get('username'):
-        return render_template('user.html')
+        return render_template('user_info.html')
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
 
