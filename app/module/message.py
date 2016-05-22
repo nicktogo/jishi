@@ -67,6 +67,13 @@ def get_all_message(username):
     return result
 
 
+def search_message(input,username):
+    conn = MongoFactory().get_connection()
+    result = conn.search_message(input,username)
+    return result
+
+
+
 def read_message(message_id):
     conn = MongoFactory().get_connection()
     return conn.read_message(message_id)
@@ -96,7 +103,8 @@ def show_joined_project_message(username):
 
 
 if __name__ == '__main__':
-    print read_message('57215e4023470e274030464d')
+    print get_all_message('admin')
+    print search_message('','admin')
 
 
 

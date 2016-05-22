@@ -14,229 +14,131 @@
 {% endblock %}
 {% block body %}
     <!-- Material sidebar -->
-    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-        <!-- Sidebar navigation -->
-        <ul class="nav sidebar-nav">
-            <li>
-                <a href="#">
-                    <i class="sidebar-icon md-inbox"></i> Inbox
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="sidebar-icon md-star"></i> Starred
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="sidebar-icon md-send"></i> Sent Mail
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="sidebar-icon md-drafts"></i> Drafts
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                    All Mail
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#" tabindex="-1">
-                            Social
-                            <span class="sidebar-badge">12</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" tabindex="-1">
-                            Promo
-                            <span class="sidebar-badge">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    Trash
-                    <span class="sidebar-badge">3</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Spam
-                    <span class="sidebar-badge">456</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Follow Up
-                    <span class="sidebar-badge badge-circle">i</span>
-                </a>
-            </li>
-        </ul>
-        <!-- Sidebar divider -->
-        <!-- <div class="sidebar-divider"></div> -->
+    <!--<aside id="sidebar" class="sidebar sidebar-default open" role="navigation">-->
+        <!--&lt;!&ndash; Sidebar navigation &ndash;&gt;-->
+        <!--<ul class="nav sidebar-nav">-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--<i class="sidebar-icon md-inbox"></i> Inbox-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--<i class="sidebar-icon md-star"></i> Starred-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--<i class="sidebar-icon md-send"></i> Sent Mail-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--<i class="sidebar-icon md-drafts"></i> Drafts-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li class="divider"></li>-->
+            <!--<li class="dropdown">-->
+                <!--<a class="dropdown-toggle" href="#" data-toggle="dropdown">-->
+                    <!--All Mail-->
+                    <!--<b class="caret"></b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li>-->
+                        <!--<a href="#" tabindex="-1">-->
+                            <!--Social-->
+                            <!--<span class="sidebar-badge">12</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="#" tabindex="-1">-->
+                            <!--Promo-->
+                            <!--<span class="sidebar-badge">0</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--Trash-->
+                    <!--<span class="sidebar-badge">3</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--Spam-->
+                    <!--<span class="sidebar-badge">456</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="#">-->
+                    <!--Follow Up-->
+                    <!--<span class="sidebar-badge badge-circle">i</span>-->
+                <!--</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--&lt;!&ndash; Sidebar divider &ndash;&gt;-->
+        <!--&lt;!&ndash; <div class="sidebar-divider"></div> &ndash;&gt;-->
 
-        <!-- Sidebar text -->
-        <!--  <div class="sidebar-text">Text</div> -->
-    </aside>
+        <!--&lt;!&ndash; Sidebar text &ndash;&gt;-->
+        <!--&lt;!&ndash;  <div class="sidebar-text">Text</div> &ndash;&gt;-->
+    <!--</aside>-->
+    <form id="search_mes" method="post" action="{{ url_for('message_search') }}">
+    <div class="input-group">
+        <input  name="input" id="search_message" type="text" placeholder="项目名称/所有人"/>
+        <button  id="search-btn" type="submit">搜索</button>
+    </div>
+    </form>
+
     <div id="demo" class="wrapper">
         <div class="table-responsive-vertical shadow-z-1">
             <!-- Table starts here -->
             <table id="table" class="table table-hover table-mc-light-blue">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Link</th>
-                    <th>Status</th>
+                    <th>项目名称</th>
+                    <th>所有人</th>
+                    <th>消息类型</th>
+                    <th>创建时间</th>
                     <th>Button</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td data-title="ID">1</td>
-                    <td data-title="Name">Material Design Color Palette</td>
-                    <td data-title="Link">
-                        <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank">GitHub</a>
+                {%for message in msgs %}
+                <tr data-toggle="modal" data-target="#myModal" data-message = "{{message['message_type']}}" >
+                    <td data-title="ProjectName">{{message['projectname']}}</td>
+                    <td data-title="Owner">{{message['project_owner']}}</td>
+                    <td data-title="Status" class="mes_type">
+                        {{message['message_type']}}
                     </td>
-                    <td data-title="Status">Completed</td>
+                    <td data-title="CreateTime">{{message['created_time']}}</td>
+                    <!--<td>{{message['project_owner']}}-->
+                    <!--<td class="mes_type">{{message['message_type']}}-->
+                    <!--<td >{{message['created_time']}}-->
+                    <!--<td class="mes_btn" onclick="permit(this)"> <button>同意</button>-->
                     <td data-title="Button">
-                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
+                        <button type="button" class="btn btn-raised ripple-effect btn-default" onclick="permit(this)">Approve</button>
                     </td>
-                </tr>
-                <tr>
-                    <td data-title="ID">2</td>
-                    <td data-title="Name">Material Design Iconic Font</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/uqCsB" target="_blank">Codepen</a>
-                        <a href="https://github.com/zavoloklom/material-design-iconic-font" target="_blank">GitHub</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
-                    <td data-title="Button">
-                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-title="ID">3</td>
-                    <td data-title="Name">Material Design Hierarchical Display</td>
-                    <td data-title="Link">
-                        <a href="http://codepen.io/zavoloklom/pen/eNaEBM" target="_blank">Codepen</a>
-                        <a href="https://github.com/zavoloklom/material-design-hierarchical-display"
-                           target="_blank">GitHub</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
-                    <td data-title="Button">
-                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-title="ID">4</td>
-                    <td data-title="Name">Material Design Sidebar</td>
-                    <td data-title="Link"><a href="http://codepen.io/zavoloklom/pen/dIgco" target="_blank">Codepen</a>
-                    </td>
-                    <td data-title="Status">Completed</td>
-                    <td data-title="Button">
-                        <button type="button" class="btn btn-raised ripple-effect btn-default">Approve</button>
-                    </td>
-                </tr>
+                    <input id="message_id" type="hidden" value="{{message['_id']}}">
+
+                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#message_alert").addClass("active");
-        });
-        // Ripple-effect animation
-        (function ($) {
-            $(".ripple-effect").click(function (e) {
-                var rippler = $(this);
-
-                // create .ink element if it doesn't exist
-                if (rippler.find(".ink").length == 0) {
-                    rippler.append("<span class='ink'></span>");
-                }
-
-                var ink = rippler.find(".ink");
-
-                // prevent quick double clicks
-                ink.removeClass("animate");
-
-                // set .ink diametr
-                if (!ink.height() && !ink.width()) {
-                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
-                    ink.css({
-                        height: d,
-                        width: d
-                    });
-                }
-
-                // get click coordinates
-                var x = e.pageX - rippler.offset().left - ink.width() / 2;
-                var y = e.pageY - rippler.offset().top - ink.height() / 2;
-
-                // set .ink position and add class .animate
-                ink.css({
-                    top: y + 'px',
-                    left: x + 'px'
-                }).addClass("animate");
-            })
-        })(jQuery);
-
-        var dropdown = $('.dropdown');
-
-        // Add slidedown animation to dropdown
-        dropdown.on('show.bs.dropdown', function (e) {
-            $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-            dropdown.addClass("open");
-            $('.dropdown-toggle').attr("");
+        $(function () {
+            var types = ["申请", "同意", "退出", "被踢出"];
+            $('.mes_type').each(function (elem) {
+                console.log($(this).text());
+                $(this).text(types[parseInt($(this).text())]);
+            });
         });
 
-        // Add slideup animation to dropdown
-        dropdown.on('hide.bs.dropdown', function (e) {
-            $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-        });
-    </script>
-    {#    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>#}
-{% endblock %}
-<script>
-    $(function () {
-        var types = ["申请", "同意", "退出", "被踢出"];
-        //  $('.mes_type').forEach(function(elem){$(this).text(types[Integer.parseInt($(this).text())])})
-        //
-        //             };
-        $('.mes_type').each(function (elem) {
-            console.log($(this).text());
-            $(this).text(types[parseInt($(this).text())]);
-        });
-    });
-
-    //     $('#myModal').on('show.bs.modal', function (event) {
-    //         var messagetd = $(event.relatedTarget) // Button that triggered the modal
-    //         var message = messagetd.data('message') // Extract info from data-* attributes
-    //
-    <!--var username = message["username"]-->
-    //
-    <!--var projectname = message["projectname"]-->
-    //
-    <!--var project_type = message["project_type"]-->
-    //         var types = new Array()
-    //         types[0]="申请"
-    //         types[1]="同意"
-    //         types[2]="退出"
-    //         types[3]="被踢出"
-    //         var type = types[message]
-    //         var modal = $(this)
-    //         modal.find('.modal-title').text('New message to ' + type)
-    //
-    // })
-
-    function permit(btn) {
+        function permit(btn) {
         var message_id = $("#message_id").val();
+        alert(message_id)
         var data = {'message_id': message_id}
         $.ajax({
             url: "/project/permit",
@@ -246,12 +148,39 @@
             dataType: 'json',
             success: function (data) {
                 alert(data['message_id'] + "同意申请!")
-            },
+                },
             error: function (data) {
                 console.log(data)
-            }
-        })
+                }
+            })
+
+        }
+        function search(btn){
+        var input = $("#search_message").val()
+        alert(input)
+        var data = {'input':input}
+         $.ajax({
+                url: "/message/search",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert(data['input'] + "创建成功!")
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            })
 
     }
+
+
+
+    </script>
+    {#    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>#}
+{% endblock %}
+<script>
+
 </script>
 
