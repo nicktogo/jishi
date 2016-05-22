@@ -199,5 +199,22 @@ def message_test():
     return render_template("login.html")
 
 
+@app.route('/message/search', methods=['GET','POST'])
+def message_search():
+    username = session.get('username')
+    if username:
+        msgs = message.search_message(request.form['input'],username)
+        # for msg in msgs:
+        #     created_time = msg['created_time']
+        #     created_time = created_time.strftime('%Y-%m-%d %H:%M:%S')
+        #     msg['created_time'] = created_time
+        #     msg['_id'] = 1
+        print username
+        print msgs
+        return render_template("message.html", msgs=msgs)
+        # return json.dumps(msgs)
+    return render_template("login.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
