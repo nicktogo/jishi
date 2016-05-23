@@ -31,7 +31,14 @@ def test():
     def ran():
         return str(random.randint(1, 9))
 
-    return dict(ran=ran)
+    def get_type(type):
+        types = [u'微信应用', u'APP', u'SITP', u'数学建模', u'上创']
+        return types[int(type)]
+
+    def get_budget(budget):
+        budgets = [u'1万以下', u'1-3万', u'3-5万', u'5万以上']
+        return budgets[int(budget)]
+    return dict(ran=ran, get_type=get_type, get_budget=get_budget)
 
 
 @app.route('/weibo')
@@ -89,9 +96,14 @@ def userattendproject():
 def userinfoedit():
     return render_template('user_info_edit.html')
 
-@app.route('/project/showprojectdetail', methods=['GET'])
+
+@app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
-    return render_template('showprojectdetail.html')
+    project_id = request.args.get('project_id')
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_id(project_id)
+    return render_template('showprojectdetail.html', project=project)
+
 
 
 @app.route('/auth/logout', methods=['GET'])
