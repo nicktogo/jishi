@@ -132,6 +132,7 @@ def user_info():
 def alldisplay():
     pm = project_manager.ProjectManager()
     page = int(request.args.get('page', 1))
+    page = max(1, page)
     projects = pm.find_all_project(page=page)
     pages = pm.project_count();
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
