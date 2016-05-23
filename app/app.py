@@ -140,6 +140,14 @@ def user_info():
     return redirect(url_for('login', next_url=next_url))
 
 
+@app.route('/user', methods=['GET'])
+def user():
+    if session.get('username'):
+        return render_template('user.html')
+    next_url = '/user'
+    return redirect(url_for('login', next_url=next_url))
+
+
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
     pm = project_manager.ProjectManager()
