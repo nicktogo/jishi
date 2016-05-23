@@ -181,9 +181,11 @@ def create_project():
 def projectpublish():
     return render_template('projectpublish.html')
 
+
 @app.route('/project/protocol', methods=['GET'])
 def projectprocotol():
     return render_template('protocol.html')
+
 
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
@@ -216,8 +218,13 @@ def permit_apply():
     if username:
         pm = project_manager.ProjectManager()
         mes = message.find_mes_by_id(request.json['message_id'])
+        applier = mes['username']
         project_id = mes['project_id']
-        pm.approve_applier(username, project_id)
+        if username == mes['project_owner']:
+            pm.approve_applier(applier, project_id)
+        else:
+            print '没有权限'
+            return '没有权限'
     return 'login'
 
 
