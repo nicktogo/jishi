@@ -40,40 +40,21 @@
                 <span class="detail-span border-right"><span class="darker">类型</span>
                 {{get_type(project.type)}}</span>
                         <span class="detail-span"><span class="darker">周期</span>40&nbsp;天</span>
+                        <span class="detail-span"><span class="darker">人数</span>{{ project.currentPeople }} / {{project.maxPeople}}</span>
                     </div>
                 </section>
-                <section class="reward-title-mobile" style="display:none;">
-                    <input style="display:none" value="49" name="id">
-                    <div style="background: url(https://dn-coding-net-production-static.qbox.me/231c1d64-6239-4695-a650-cefc78a7cb91.jpg) center/cover no-repeat"
-                         class="reward-cover">
-                        <span class="reward-no">No.49</span>
-                    </div>
-                    <div class="status status-7-label pull-right"><button>加入</button></div>
-                    <div class="title-row">
-                        <span class="title">私教管理平台</span>
-                    </div>
-                    <div class="type-row">
-                        <i class="fa fa-apple"></i>
-                    <span class="detail-span border-right">
-                    移动应用 APP
-                </span>
-                        <span class="type">设计师</span>
-                        <span class="type">iOS开发</span>
-                    </div>
-                    <div class="detail-row">
-                <span class="item">
-                    <span class="darker">金额</span><span class="number">&nbsp;￥60,000</span>
-                </span>
-                <span class="item">
-                    <span class="darker">周期</span><span class="number">&nbsp;40&nbsp;</span>天
-                </span>
-                    </div>
-                    <div class="button-row">
-                    </div>
-                </section>
+
                 <section class="reward-content">
-                    <div class="description typo"><h2 id="user-content-一、项目描述：">一、项目描述：</h2>
-                        {{project.description}}
+                    <div class="description typo">
+                        <h2 >一、项目描述：</h2>
+                        <p>{{project.description}}</p>
+                        <h2 >二、功能描述</h2>
+                        <p>无</p>
+                        <h2>三、联系人</h2>
+
+                        <p><strong>姓名:</strong>{{project.contact}}</p>
+                        <p><strong>邮箱:</strong>{{project.contact_email}}</p>
+                        <p><strong>电话:</strong>{{project.contact_mobile}}</p>
                     </div>
                 </section>
             </div>
