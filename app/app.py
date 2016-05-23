@@ -202,10 +202,6 @@ def apply_project():
     if username:
         pm = project_manager.ProjectManager()
         pm.apply_project(username, request.json['project_id'])
-        # projectapplyed = pm.find_project_by_id(request.json['project_id'])
-        # projectOwner = projectapplyed['name']
-        # projectName = projectapplyed['projectname']
-        # message.apply(username,request.json['project_id'],projectName,projectOwner)
         print request.json
         print pm.find_project_by_id(request.json['project_id'])
         return '123'
