@@ -164,6 +164,7 @@ def create_project():
         project['description'] = request.form.get('description')
         project['contact'] = request.form.get('contact')
         project['contact_mobile'] = request.form.get('contact_mobile')
+        project['contact_email'] = request.form.get('contact_email')
         project['currentPeople'] = 1
         project['created_time'] = datetime.now()
         project['team'] = [session['username']]

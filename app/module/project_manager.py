@@ -15,60 +15,88 @@ class ProjectManager:
     def apply_project(self, applier_name, project_id):
         # TODO project_owner
         projectapplyed = self.find_project_by_id(project_id)
-        projectOwner = projectapplyed['name']
-        projectName = projectapplyed['projectname']
+        projectOwner = projectapplyed['creator']
+        projectName = projectapplyed['name']
         message.apply(applier_name, project_id, projectName , projectOwner)
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$push': {
-                'appliers': applier_name
+                'applier': applier_name
             }
         })
 
     def approve_applier(self, applier_name, project_id):
         # TODO project_owner
         projectapplyed = self.find_project_by_id(project_id)
-        projectOwner = projectapplyed['name']
-        projectName = projectapplyed['projectname']
+        projectOwner = projectapplyed['creator']
+        projectName = projectapplyed['name']
+        currentPeople = projectapplyed['currentPeople'] + 1
         message.accept(applier_name, project_id, projectName,projectOwner)
         result = self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$pull': {
-                'appliers': applier_name
+                'applier': applier_name
             }
         })
         result_ = self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$push': {
-                'members': applier_name
+                'team': applier_name
             }
         })
-        return result and result_
+        result__ = self._projects.update_one({
+            '_id': ObjectId(project_id)
+        },{
+            '$set': {
+                'currentPeople' : currentPeople
+            }
+        })
+        return result and result_ and result__
 
     def quit(self, username, project_id):
         # TODO project_owner
         message.quit(username, project_id, "")
-        return self._projects.update_one({
+        project = self.find_project_by_id(project_id)
+        currentPeople = project['currentPeople'] - 1
+        result = self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$pull': {
-                'members': username
+                'team': username
             }
         })
+        result__ = self._projects.update_one({
+            '_id': ObjectId(project_id)
+        },{
+            '$set': {
+                'currentPeople' : currentPeople
+            }
+        })
+        return result and result__
 
     def kick_out(self, username, project_id):
         # TODO project_owner
+        project = self.find_project_by_id(project_id)
+        currentPeople = project['currentPeople'] - 1
         message.kick_out(username, project_id, "")
-        return self._projects.update_one({
+        result =  self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
             '$pull': {
-                'members': username
+                'team': username
             }
         })
+        result__ = self._projects.update_one({
+            '_id': ObjectId(project_id)
+        },{
+            '$set': {
+                'currentPeople': currentPeople
+            }
+        })
+        return result and result__
 
     def start_project(self, project_id):
         return self._projects.update_one({
