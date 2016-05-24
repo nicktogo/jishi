@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1">
-    <title>Coding 码市 - No.49 私教管理平台</title>
+    <title>{{project.name}}</title>
     <meta name="apple-itunes-app" content="app-id=1048541582">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -26,92 +26,36 @@
                 <section class="reward-title">
                     <input style="display:none" value="49" name="id">
                     <div class="title-row">
-                        <span class="title">私教管理平台</span>
-                        <span class="status status-7 pull-right"><button>加入</button></span>
-
+                        <span class="title">{{project.name}}</span>
                     </div>
+                    <button class="sub-button mart-button btn-with-shadow" style="float:right;" type="submit">申请加入</button>
                     <div class="desc-row">
                         <div class="role-type">
                             <span class="reward-no">No.49</span>
-                            <span class="type">设计师&nbsp;</span>
-                            <span class="type">iOS开发&nbsp;</span>
+                            <span class="type">{{get_type(project.type)}}&nbsp;</span>
                         </div>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-span border-right"><span class="darker">金额</span>￥60,000</span>
+                        <span class="detail-span border-right"><span class="darker">金额</span>{{get_budget(project.budget)}}</span>
                 <span class="detail-span border-right"><span class="darker">类型</span>
-                                                                                                                    移动应用 APP
-                                                                                                                                                                                                </span>
+                {{get_type(project.type)}}</span>
                         <span class="detail-span"><span class="darker">周期</span>40&nbsp;天</span>
+                        <span class="detail-span"><span class="darker">人数</span>{{ project.currentPeople }} / {{project.maxPeople}}</span>
                     </div>
                 </section>
-                <section class="reward-title-mobile" style="display:none;">
-                    <input style="display:none" value="49" name="id">
-                    <div style="background: url(https://dn-coding-net-production-static.qbox.me/231c1d64-6239-4695-a650-cefc78a7cb91.jpg) center/cover no-repeat"
-                         class="reward-cover">
-                        <span class="reward-no">No.49</span>
-                    </div>
-                    <div class="status status-7-label pull-right"><button>加入</button></div>
-                    <div class="title-row">
-                        <span class="title">私教管理平台</span>
-                    </div>
-                    <div class="type-row">
-                        <i class="fa fa-apple"></i>
-                    <span class="detail-span border-right">
-                    移动应用 APP
-                </span>
-                        <span class="type">设计师</span>
-                        <span class="type">iOS开发</span>
-                    </div>
-                    <div class="detail-row">
-                <span class="item">
-                    <span class="darker">金额</span><span class="number">&nbsp;￥60,000</span>
-                </span>
-                <span class="item">
-                    <span class="darker">周期</span><span class="number">&nbsp;40&nbsp;</span>天
-                </span>
-                    </div>
-                    <div class="button-row">
-                    </div>
-                </section>
+
                 <section class="reward-content">
-                    <div class="description typo"><h2 id="user-content-一、项目描述：">一、项目描述：</h2>
-                        <p>
-                            该项目是一款基于用户和私教的交易平台。项目分为两个APP（用户端，私教端）和一个后台，用户端的主要功能是根据条件筛选出合适的私教并预约该私教的课程，私教端的主要功能是管理发布课程计划，后台主要用来查看平台的使用情况及交易情况。</p>
-                        <h2 id="user-content-二、功能描述">二、功能描述</h2>
-                        <h3 id="user-content-1、学员端：">1、学员端：</h3>
-                        <p><strong>教练</strong><br> 包括教练搜索，教练筛选，教练列表详。</p>
-                        <p><strong>我的课程</strong><br> 包括我的课程订单及课程详情</p>
-                        <p><strong>系统</strong><br> 个人信息，系统消息，设置，关于我们</p>
-                        <h3 id="user-content-2、教练端：">2、教练端：</h3>
-                        <p><strong>课程排期</strong><br> 包括新建课程排期、排期列表</p>
-                        <p><strong>订单</strong><br> 包括订单筛选、订单列表</p>
-                        <p><strong>系统</strong><br> 包括基本信息和设置信息</p>
-                        <h3 id="user-content-3、后台：">3、后台：</h3>
-                        <p><strong>订单管理</strong><br> 后台运营筛选、查看并处理订单</p>
-                        <p><strong>用户管理</strong><br> 后台运营管理并编辑用户信息</p>
-                        <p><strong>后台管理</strong><br> 可以创建管理员账号和密码</p>
-                        <h2 id="user-content-项目说明">项目说明</h2>
-                        <h3 id="user-content-设计">设计</h3>
-                        <p>需求：</p>
-                            <p>根据我们提供的功能文档、需求文档和原型图完成产品设计。<br> （以iphone5S或者6的尺寸设计，设计好了切三套图：4、4s一套；5、5S、6、一套；6plus一套）</p>
-                        <p>时间安排：</p>
-                            <p>第一版交付：2 周<br> 修改调整：2 周</p>
-                        <p>交付物：</p>
-                            <p>产品设计需求文档<br> 界面效果图<br> 页面标注</p>
-                        <p>金额：</p>
-                            <p>15000 人民币</p>
-                        <h3 id="user-content-开发-两位">开发 两位</h3>
-                        <p>需求：</p>
-                            <p>开发者一：根据功能需求和产品设计交互文档，开发 IOS 版本。<br> 开发者二：提供相关数据接口及后台开发</p>
-                        <p>时间安排：</p>
-                            <p>第一版跑通：4 周<br> Bug 修复：2 周<br> 上线准备：2 周</p>
-                        <p>交付物：</p>
-                            <p>两个符合需求文档及功能文档规范的APP，以 ios版本在 Apple Store 成功上架为标准。<br> 源代码，需要随时把最新的代码 Push 到指定的私有项目中。<br>
-                                交付文档说明，描述基本技术框架和数据库设计。</p>
-                        <p>金额：</p>
-                            <p>45000 人民币（其中开发者一 25000，开发者二 20000）</p>
-                        <p>具体排期计划以项目启动后排期沟通为准（五阶段划分，阶段性验收并支付酬金）</p></div>
+                    <div class="description typo">
+                        <h2 >一、项目描述：</h2>
+                        <p>{{project.description}}</p>
+                        <h2 >二、功能描述</h2>
+                        <p>无</p>
+                        <h2>三、联系人</h2>
+
+                        <p><strong>姓名:</strong>{{project.contact}}</p>
+                        <p><strong>邮箱:</strong>{{project.contact_email}}</p>
+                        <p><strong>电话:</strong>{{project.contact_mobile}}</p>
+                    </div>
                 </section>
             </div>
             <div class="modal join_modal" style="display: none">

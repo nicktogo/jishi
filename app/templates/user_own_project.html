@@ -5,74 +5,130 @@
 {% block page_specified_css %}
     <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project_sidebar.css') }}">
     <script>
         window.console = window.console || function (t) {
                 };
     </script>
 {% endblock %}
 {% block body %}
-    <!-- Material sidebar -->
-    <div style="position:fixed;width:180px;height:100px;left:400px;top:100px;">
-    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-        {#        <div class="sidebar-text">Text</div>#}
-        <!-- Sidebar navigation -->
-        <ul class="nav sidebar-nav">
-            <li>
-                <a href="info">
-                    <i class="sidebar-icon md-inbox"></i> 我的信息
-                </a>
-            </li>
-            <li>
-                <a href="userownproject">
-                    <i class="sidebar-icon md-send"></i> 我创建的项目
-                </a>
-            </li>
-            <li>
-                <a href="userattendproject">
-                    <i class="sidebar-icon md-drafts"></i> 我加入的项目
-                </a>
-            </li>
-        </ul>
-    </aside>
-    </div>
-    <div id="demo" class="wrapper">
-        <div class="table-responsive-vertical shadow-z-1">
-            <!-- Table starts here -->
-             <table class="table table-striped custab">
-    <thead>
-        <tr>
-            <th>编号</th>
-            <th>名称</th>
-            <th>状态</th>
-            <th class="text-center">按钮</th>
-        </tr>
-    </thead>
-            <tr>
-                <td>1</td>
-                <td>全国大学生创新项目</td>
-                <td>招募中</td>
-                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span>查看</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>修改</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>全国大学生创新项目</td>
-                <td>已结束</td>
-                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span>查看</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>修改</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>全国大学生创新项目</td>
-                <td>招募中</td>
-                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span>查看</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>修改</a></td>
-            </tr>
-    </table>
+    <div class="user_content">
+        <!-- Material sidebar -->
+        <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+            {#        <div class="sidebar-text">Text</div>#}
+            <!-- Sidebar navigation -->
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="info">
+                        <i class="sidebar-icon md-inbox"></i> 我的信息
+                    </a>
+                </li>
+                <li>
+                    <a href="userownproject">
+                        <i class="sidebar-icon md-send"></i> 我创建的项目
+                    </a>
+                </li>
+                <li>
+                    <a href="userattendproject">
+                        <i class="sidebar-icon md-drafts"></i> 我加入的项目
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div id="demo" class="wrapper">
+            <div class="table-responsive-vertical shadow-z-1">
+                <!-- Table starts here -->
+                <table id="table" class="table table-hover table-mc-light-blue">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>项目</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td data-title="编号">1</td>
+                        <td data-title="项目">
+                            <a href="#" target="_blank">
+                                全国大学生创新项目
+                            </a>
+                        </td>
+                        <td data-title="状态">招募中</td>
+                        <td data-title="操作">
+                            <button type="button" class="btn btn-raised ripple-effect btn-default">修改</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-title="编号">2</td>
+                        <td data-title="项目">
+                            <a href="#" target="_blank">
+                                上海市大学生创新项目
+                            </a>
+                        </td>
+                        <td data-title="状态">已结束</td>
+                        <td data-title="操作">
+                            <button type="button" class="btn btn-raised ripple-effect btn-default">修改</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-title="编号">3</td>
+                        <td data-title="项目">
+                            <a href="#" target="_blank">
+                                同济大学创新项目
+                            </a>
+                        </td>
+                        <td data-title="状态">招募中</td>
+                        <td data-title="操作">
+                            <button type="button" class="btn btn-raised ripple-effect btn-default">修改</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#person").addClass("active");
         });
+        // Ripple-effect animation
+        (function ($) {
+            $(".ripple-effect").click(function (e) {
+                var rippler = $(this);
+
+                // create .ink element if it doesn't exist
+                if (rippler.find(".ink").length == 0) {
+                    rippler.append("<span class='ink'></span>");
+                }
+
+                var ink = rippler.find(".ink");
+
+                // prevent quick double clicks
+                ink.removeClass("animate");
+
+                // set .ink diametr
+                if (!ink.height() && !ink.width()) {
+                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+                    ink.css({
+                        height: d,
+                        width: d
+                    });
+                }
+
+                // get click coordinates
+                var x = e.pageX - rippler.offset().left - ink.width() / 2;
+                var y = e.pageY - rippler.offset().top - ink.height() / 2;
+
+                // set .ink position and add class .animate
+                ink.css({
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("animate");
+            })
+        })(jQuery);
     </script>
+    <script src="{{ url_for('static', filename='js/user_own_project.js') }}"></script>
 {% endblock %}

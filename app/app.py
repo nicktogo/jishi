@@ -31,7 +31,14 @@ def test():
     def ran():
         return str(random.randint(1, 9))
 
-    return dict(ran=ran)
+    def get_type(type):
+        types = [u'微信应用', u'APP', u'SITP', u'数学建模', u'上创']
+        return types[int(type)]
+
+    def get_budget(budget):
+        budgets = [u'1万以下', u'1-3万', u'3-5万', u'5万以上']
+        return budgets[int(budget)]
+    return dict(ran=ran, get_type=get_type, get_budget=get_budget)
 
 
 @app.route('/weibo')
@@ -89,9 +96,14 @@ def userattendproject():
 def userinfoedit():
     return render_template('user_info_edit.html')
 
-@app.route('/project/showprojectdetail', methods=['GET'])
+
+@app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
-    return render_template('showprojectdetail.html')
+    project_id = request.args.get('project_id')
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_id(project_id)
+    return render_template('showprojectdetail.html', project=project)
+
 
 
 @app.route('/auth/logout', methods=['GET'])
@@ -128,10 +140,19 @@ def user_info():
     return redirect(url_for('login', next_url=next_url))
 
 
+@app.route('/user', methods=['GET'])
+def user():
+    if session.get('username'):
+        return render_template('user.html')
+    next_url = '/user'
+    return redirect(url_for('login', next_url=next_url))
+
+
 @app.route('/project/all', methods=['GET'])
 def alldisplay():
     pm = project_manager.ProjectManager()
     page = int(request.args.get('page', 1))
+    page = max(1, page)
     projects = pm.find_all_project(page=page)
     pages = pm.project_count();
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
@@ -164,6 +185,7 @@ def create_project():
         project['description'] = request.form.get('description')
         project['contact'] = request.form.get('contact')
         project['contact_mobile'] = request.form.get('contact_mobile')
+        project['contact_email'] = request.form.get('contact_email')
         project['currentPeople'] = 1
         project['created_time'] = datetime.now()
         project['team'] = [session['username']]
@@ -180,9 +202,11 @@ def create_project():
 def projectpublish():
     return render_template('projectpublish.html')
 
+
 @app.route('/project/protocol', methods=['GET'])
 def projectprocotol():
     return render_template('protocol.html')
+
 
 @app.route('/message', methods=['GET', 'POST'])
 def my_message():
@@ -199,10 +223,6 @@ def apply_project():
     if username:
         pm = project_manager.ProjectManager()
         pm.apply_project(username, request.json['project_id'])
-        # projectapplyed = pm.find_project_by_id(request.json['project_id'])
-        # projectOwner = projectapplyed['name']
-        # projectName = projectapplyed['projectname']
-        # message.apply(username,request.json['project_id'],projectName,projectOwner)
         print request.json
         print pm.find_project_by_id(request.json['project_id'])
         return '123'
@@ -215,8 +235,13 @@ def permit_apply():
     if username:
         pm = project_manager.ProjectManager()
         mes = message.find_mes_by_id(request.json['message_id'])
+        applier = mes['username']
         project_id = mes['project_id']
-        pm.approve_applier(username, project_id)
+        if username == mes['project_owner']:
+            pm.approve_applier(applier, project_id)
+        else:
+            print '没有权限'
+            return '没有权限'
     return 'login'
 
 
