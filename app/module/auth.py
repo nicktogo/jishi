@@ -11,13 +11,12 @@ def valid_login(username, password):
         return True
 
 
-def signup(username, password):
+def signup(user):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
-
-    user = list(conn.find({'username': username}))
-    if not user_not_exist(user):
+    _user = list(conn.find({'username': user['username']}))
+    if not user_not_exist(_user):
         return False
-    result = conn.insert_one({'username': username, 'password': password})
+    result = conn.insert_one(user).inserted_id
     if result:
         return True
     else:

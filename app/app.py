@@ -70,10 +70,18 @@ def homepage():
 def signup():
     if request.method == 'GET':
         return render_template('signup.html')
-    username = request.form['email']
-    password = request.form['pass']
-    if auth.signup(username, password):
-        session['username'] = username
+    user = dict()
+    user['username'] = request.form['email']
+    user['password'] = request.form['pass']
+    user['nickname'] = request.form['nickname']
+    user['name'] = request.form['name']
+    user['gender'] = request.form['gender']
+    user['phone'] = request.form['phone']
+    user['school'] = request.form['school']
+    user['major'] = request.form['major']
+    user['grade'] = request.form['grade']
+    if auth.signup(user):
+        session['username'] = user['username']
         return render_template('homepage.html')
     else:
         error = 'sign up failed'
@@ -82,18 +90,24 @@ def signup():
 
 @app.route('/user/person', methods=['GET'])
 def person():
-    return render_template('user_info.html')
+    username = session.get('username')
+    user = auth.find_user_by_username(username)
+    return render_template('user_info.html', user=user)
+
 
 @app.route('/user/userownproject', methods=['GET'])
 def userownproject():
     return render_template('user_own_project.html')
 
+
 @app.route('/user/userattendproject', methods=['GET'])
 def userattendproject():
     return render_template('user_attend_project.html')
 
+
 @app.route('/user/userinfoedit', methods=['GET'])
 def userinfoedit():
+    username = session.get('username')
     return render_template('user_info_edit.html')
 
 
@@ -137,6 +151,14 @@ def user_info():
     if session.get('username'):
         return render_template('user_info.html')
     next_url = '/user/info'
+    return redirect(url_for('login', next_url=next_url))
+
+
+@app.route('/user', methods=['GET'])
+def user():
+    if session.get('username'):
+        return render_template('user.html')
+    next_url = '/user'
     return redirect(url_for('login', next_url=next_url))
 
 
