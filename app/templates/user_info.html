@@ -5,88 +5,143 @@
 {% block page_specified_css %}
     <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-sidebar.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info_sidebar.css') }}">
     <script>
         window.console = window.console || function (t) {
                 };
     </script>
 {% endblock %}
 {% block body %}
-    <!-- Material sidebar -->
-    <div style="position:fixed;width:180px;height:100px;left:400px;top:100px;">
-    <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-        {#        <div class="sidebar-text">Text</div>#}
-        <!-- Sidebar navigation -->
-        <ul class="nav sidebar-nav">
-            <li>
-                <a href="info">
-                    <i class="sidebar-icon md-inbox"></i> 我的信息
-                </a>
-            </li>
-            <li>
-                <a href="userownproject">
-                    <i class="sidebar-icon md-send"></i> 我创建的项目
-                </a>
-            </li>
-            <li>
-                <a href="userattendproject">
-                    <i class="sidebar-icon md-drafts"></i> 我加入的项目
-                </a>
-            </li>
-        </ul>
-    </aside>
-</div>
-    <div id="demo" class="wrapper">
-        <div class="panel panel-info" style="margin-left: 350px">
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center">
-                    <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
-                <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
-                    <tbody>
-                     <tr>
-                    <td><label>昵称</label></td>
-                    <td id="Nick">朝阳</a></td>
-                </tr>
-                <tr>
-                    <td><label>姓名</label></td>
-                    <td id="Name">侯潇雪</a></td>
-                </tr>
-                    <tr>
-                    <td><label>性别</label></td>
-                    <td id="Gender">男</a></td>
-                </tr>
-                    <tr>
-                    <td><label>手机号</label></td>
-                    <td id="Tele">15221373685</a></td>
-                </tr>
-                    <tr>
-                    <td><label>邮箱</label></td>
-                    <td id="Email">793777976@qq.com</a></td>
-                </tr>
-                    <tr>
-                    <td><label>年级</label></td>
-                    <td id="Grade">大三</a></td>
-                </tr>
-                    <tr> 
-                    <td><label>感兴趣的方面</label></td>
-                            <td><select>
-                                <option id="web">web开发</option>
-                                <option id="app">app开发</option>
-                                <option id="wechat">微信应用</option>
-                                <option id="db">数据库应用</option>
-                                <option id="foundation">基础学科</option>
-                            </select></td>
-                </tr>
-                    </tbody>
-                  </table>
-                  <a href="userinfoedit" class="btn btn-primary">编辑</a>
+    <div class="user_content">
+        <!-- Material sidebar -->
+        <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+            {#        <div class="sidebar-text">Text</div>#}
+            <!-- Sidebar navigation -->
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="info">
+                        <i class="sidebar-icon md-inbox"></i> 我的信息
+                    </a>
+                </li>
+                <li>
+                    <a href="userownproject">
+                        <i class="sidebar-icon md-send"></i> 我创建的项目
+                    </a>
+                </li>
+                <li>
+                    <a href="userattendproject">
+                        <i class="sidebar-icon md-drafts"></i> 我加入的项目
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div id="demo" class="wrapper">
+            <div class="table-responsive-vertical">
+                <div class="user-info-container shadow-z-1">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Sheena Kristin A.Eschor</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center">
+                                            <img alt="User Pic"
+                                                 src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+                                                 class="img-circle img-responsive">
+                                        </div>
+                                        <div class=" col-md-9 col-lg-9 ">
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                <tr>
+                                                    <td>Department:</td>
+                                                    <td>Programming</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hire date:</td>
+                                                    <td>06/23/2013</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date of Birth</td>
+                                                    <td>01/24/1988</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    <td>Male</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Home Address</td>
+                                                    <td>Metro Manila,Philippines</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td><a href="mailto:info@support.com">info@support.com</a></td>
+                                                </tr>
+                                                <td>Phone Number</td>
+                                                <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                                                </td>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <a data-original-title="编辑" data-toggle="tooltip" type="button"
+                                       class="btn btn-sm btn-primary">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-              </div>
+        </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#person").addClass("active");
+        });
+        // Ripple-effect animation
+        (function ($) {
+            $(".ripple-effect").click(function (e) {
+                var rippler = $(this);
+
+                // create .ink element if it doesn't exist
+                if (rippler.find(".ink").length == 0) {
+                    rippler.append("<span class='ink'></span>");
+                }
+
+                var ink = rippler.find(".ink");
+
+                // prevent quick double clicks
+                ink.removeClass("animate");
+
+                // set .ink diametr
+                if (!ink.height() && !ink.width()) {
+                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+                    ink.css({
+                        height: d,
+                        width: d
+                    });
+                }
+
+                // get click coordinates
+                var x = e.pageX - rippler.offset().left - ink.width() / 2;
+                var y = e.pageY - rippler.offset().top - ink.height() / 2;
+
+                // set .ink position and add class .animate
+                ink.css({
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("animate");
+            })
+        })(jQuery);
+    </script>
+    <script src="{{ url_for('static', filename='js/user_info.js') }}"></script>
 {% endblock %}
