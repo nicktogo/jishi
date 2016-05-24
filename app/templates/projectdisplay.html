@@ -14,7 +14,7 @@
                     <div class="head">
                         <img class="h" src="../img/title.png"/>
                     </div>
-                    <div class="name">{{ project.name }}</div>
+                    <div class="name"><strong>{{ project.name }}</strong></div>
                     <div class="digest">
                         人数
                         <span class="strong"> {{ project.currentPeople }} / {{project.maxPeople}} </span>
@@ -24,7 +24,7 @@
                     <div class="delimiter"></div>
                     <div class="intro">
                         <div class="title">项目描述</div>
-                        <p>{{ project.des }}</p>
+                        <p>{{ project.description }}</p>
                     </div>
                     <div class="title">项目需求</div>
                     <div class="show clearfix">
@@ -37,15 +37,10 @@
                     <div class="ceo">
                     </div>
                     <input id="project_id" type="hidden" value="{{project._id}}"/>
-                    <button id="applyBtn" class="btn btn-primary" onclick="apply(this)">申请加入该项目</button>
                     <div class="link">
-                        <div class="title">项目链接</div>
-                        <div class="subtitle">项目页面</div>
-                        <div>
-                            <p><a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a></p>
-                            <!--<p><a href="showprojectdetail">项目详情</a></p>-->
-                        </div>
+                        <div class="title"><a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a></div>
                     </div>
+                    <button id="applyBtn" class="btn btn-primary" onclick="apply(this)" style="margin-top: 20px;margin-bottom: 20px">申请加入该项目</button>
                 </div>
             </div>
         </div>
