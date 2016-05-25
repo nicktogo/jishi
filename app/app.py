@@ -212,11 +212,6 @@ def create_project():
     return redirect(url_for('login'))
 
 
-@app.route('/project/projectpublish', methods=['GET'])
-def projectpublish():
-    return render_template('projectpublish.html')
-
-
 @app.route('/project/protocol', methods=['GET'])
 def projectprocotol():
     return render_template('protocol.html')
