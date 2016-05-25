@@ -259,7 +259,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-body, html { font-size: 100%;   padding: 0; margin: 0;}
+body, html { font-size: 100%;   padding-top: 35px; margin: 0;}
 
 /* Reset */
 *,
