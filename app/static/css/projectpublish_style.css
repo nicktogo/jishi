@@ -1,3 +1,6 @@
+button[disabled] {
+    background-color: grey;
+}
 .form {
     max-width: 980px;
     margin: 0 auto;
