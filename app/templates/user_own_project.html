@@ -1,9 +1,9 @@
 {% extends "navbar.html" %}
 {% block page_specified %}
-    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/codepen-modernizr.js') }}" type="text/javascript"></script>
 {% endblock %}
 {% block page_specified_css %}
-    <link rel="stylesheet" href="http://codepen.io/assets/reset/normalize.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/codepen-modernizr.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project_sidebar.css') }}">
