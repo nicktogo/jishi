@@ -171,6 +171,13 @@ class ProjectManager:
             'name': project_title
         })
 
+    def find_all_projects_by_user(self, username):
+        return self._projects.find({
+            'creator': username
+        }).sort([
+            ('created_time', -1)
+        ])
+
 
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)

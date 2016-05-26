@@ -97,7 +97,9 @@ def person():
 
 @app.route('/user/userownproject', methods=['GET'])
 def userownproject():
-    return render_template('user_own_project.html')
+    pm = project_manager.ProjectManager()
+    projects = pm.find_all_projects_by_user(session.get('username'))
+    return render_template('user_own_project.html', user_own_project=projects)
 
 
 @app.route('/user/userattendproject', methods=['GET'])
