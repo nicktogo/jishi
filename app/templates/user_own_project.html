@@ -55,7 +55,7 @@
                         <tr>
                             <td data-title="编号">{{ loop.index }}</td>
                             <td data-title="项目">
-                                <a href="#" target="_blank">
+                                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}" target="_blank">
                                     {{  project['name']}}
                                 </a>
                             </td>
