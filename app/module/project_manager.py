@@ -12,7 +12,7 @@ class ProjectManager:
     def create_project(self, data):
         return self._projects.insert_one(data).inserted_id
 
-    def is_in_applier(self,username,project_id):
+    def is_in_applier(self, username, project_id):
         project = self.find_project_by_id(project_id)
         appliers = project['applier']
         for applier in appliers:
@@ -20,7 +20,7 @@ class ProjectManager:
                 return 1
         return 0
 
-    def is_in_team(self,username,project_id):
+    def is_in_team(self, username, project_id):
         project = self.find_project_by_id(project_id)
         members = project['team']
         for member in members:
@@ -33,10 +33,10 @@ class ProjectManager:
         projectapplyed = self.find_project_by_id(project_id)
         projectOwner = projectapplyed['creator']
         projectName = projectapplyed['name']
-        if(self.is_in_applier(applier_name,project_id)):
+        if (self.is_in_applier(applier_name, project_id)):
             return "已存在"
         else:
-            message.apply(applier_name, project_id, projectName , projectOwner)
+            message.apply(applier_name, project_id, projectName, projectOwner)
             return self._projects.update_one({
                 '_id': ObjectId(project_id)
             }, {
@@ -51,10 +51,10 @@ class ProjectManager:
         projectOwner = projectapplyed['creator']
         projectName = projectapplyed['name']
         currentPeople = projectapplyed['currentPeople'] + 1
-        if(self.is_in_team(applier_name,project_id)):
+        if (self.is_in_team(applier_name, project_id)):
             return '已在team中'
         else:
-            message.accept(applier_name, project_id, projectName,projectOwner)
+            message.accept(applier_name, project_id, projectName, projectOwner)
             result = self._projects.update_one({
                 '_id': ObjectId(project_id)
             }, {
@@ -71,16 +71,16 @@ class ProjectManager:
             })
             result__ = self._projects.update_one({
                 '_id': ObjectId(project_id)
-            },{
+            }, {
                 '$set': {
-                    'currentPeople' : currentPeople
+                    'currentPeople': currentPeople
                 }
             })
             return result and result_ and result__
 
     def quit(self, username, project_id):
         # TODO project_owner
-        if(self.is_in_team(username,project_id)):
+        if (self.is_in_team(username, project_id)):
             message.quit(username, project_id, "")
             project = self.find_project_by_id(project_id)
             currentPeople = project['currentPeople'] - 1
@@ -93,9 +93,9 @@ class ProjectManager:
             })
             result__ = self._projects.update_one({
                 '_id': ObjectId(project_id)
-            },{
+            }, {
                 '$set': {
-                    'currentPeople' : currentPeople
+                    'currentPeople': currentPeople
                 }
             })
             return result and result__
@@ -104,11 +104,11 @@ class ProjectManager:
 
     def kick_out(self, username, project_id):
         # TODO project_owner
-        if(self.is_in_team(username,project_id)):
+        if (self.is_in_team(username, project_id)):
             project = self.find_project_by_id(project_id)
             currentPeople = project['currentPeople'] - 1
             message.kick_out(username, project_id, "")
-            result =  self._projects.update_one({
+            result = self._projects.update_one({
                 '_id': ObjectId(project_id)
             }, {
                 '$pull': {
@@ -117,7 +117,7 @@ class ProjectManager:
             })
             result__ = self._projects.update_one({
                 '_id': ObjectId(project_id)
-            },{
+            }, {
                 '$set': {
                     'currentPeople': currentPeople
                 }
@@ -155,7 +155,7 @@ class ProjectManager:
 
     def find_all_project(self, page=1):
         limit = 3
-        offset = (page-1) * limit
+        offset = (page - 1) * limit
         return self._projects.find().skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)])
 
     def project_count(self):
@@ -172,12 +172,9 @@ class ProjectManager:
         })
 
 
-
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
     return type('Enum', (), enums)
 
 
 statuses = enum('CREATED', 'STARTED', 'FINISHED', 'CANCELED')
-
-
