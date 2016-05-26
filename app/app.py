@@ -190,9 +190,12 @@ def singledisplay(project_id):
 
 @app.route('/project/create', methods=['GET', 'POST'])
 def create_project():
+    if session.get('username') is None:
+        next_url = 'project/create'
+        return redirect(url_for('login', next_url=next_url))
     if request.method == 'GET':
         return render_template('projectpublish.html')
-    if session.get('username'):
+    if request.method == 'POST':
         project = dict()
         project['creator'] = session['username']
         project['name'] = request.form.get('name')
@@ -211,12 +214,6 @@ def create_project():
         pm = project_manager.ProjectManager()
         pm.create_project(project)
         return redirect(url_for('alldisplay'))
-    return redirect(url_for('login'))
-
-
-@app.route('/project/projectpublish', methods=['GET'])
-def projectpublish():
-    return render_template('projectpublish.html')
 
 
 @app.route('/project/protocol', methods=['GET'])
