@@ -148,8 +148,10 @@ def login():
 
 @app.route('/user/info', methods=['GET'])
 def user_info():
-    if session.get('username'):
-        return render_template('user_info.html')
+    username = session.get('username')
+    if username:
+        user = auth.find_user_by_username(username)
+        return render_template('user_info.html',user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
 
