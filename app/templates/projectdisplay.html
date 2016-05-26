@@ -40,7 +40,17 @@
                     <div class="link">
                         <div class="title"><a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a></div>
                     </div>
-                    <button id="applyBtn" class="btn btn-primary" onclick="apply(this)" style="margin-top: 20px;margin-bottom: 20px">申请加入该项目</button>
+                    {% if session.get('username') == project.creator %}
+                        <a id="modifyBtn" class="btn btn-primary" href="#" style="margin-top: 20px;margin-bottom: 20px">
+                            修改
+                        </a>
+                    {% endif %}
+                    {% if session.get('username') != project.creator %}
+                        <button id="applyBtn" class="btn btn-primary" onclick="apply(this)" style="margin-top: 20px;margin-bottom: 20px">申请加入该项目</button>
+                    {% endif %}
+                    {% if session.get('username') in project.team and session.get('username') != project.creator%}
+                        <button id="applyBtn" class="btn btn-primary" onclick="quit(this)" style="margin-top: 20px;margin-bottom: 20px">退出该项目</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -49,24 +59,41 @@
 <script>
     function apply(btn){
         var project_id = $("#project_id").val();
-        var data = {'project_id':project_id}
-         $.ajax({
-                url: "/project/apply",
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    alert(data['projectId'] + "创建成功!")
-                    $("#applyBtn").css({
+        var data = {'project_id':project_id};
+        $.ajax({
+            url: "/project/apply",
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                alert(data['projectId'] + "创建成功!");
+                $("#applyBtn").css({
 
-                    })
-                },
-                error: function (data) {
-                    console.log(data)
-                }
-            })
+                })
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        });
+    }
 
+    function quit(btn) {
+        var project_id = $("#project_id").val();
+        var data = {'project_id':project_id};
+        $.ajax({
+            url: '/project/quit',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                alert('退出成功');
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
     }
 </script>
 {% endblock %}

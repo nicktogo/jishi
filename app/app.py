@@ -1,5 +1,5 @@
 # coding=UTF-8
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask.ext.bootstrap import Bootstrap
 from bson import json_util
 import json
@@ -38,6 +38,7 @@ def test():
     def get_budget(budget):
         budgets = [u'1万以下', u'1-3万', u'3-5万', u'5万以上']
         return budgets[int(budget)]
+
     return dict(ran=ran, get_type=get_type, get_budget=get_budget)
 
 
@@ -121,7 +122,6 @@ def showprojectdetail():
     return render_template('showprojectdetail.html', project=project)
 
 
-
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     session.pop('username', None)
@@ -153,7 +153,7 @@ def user_info():
     username = session.get('username')
     if username:
         user = auth.find_user_by_username(username)
-        return render_template('user_info.html',user=user)
+        return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
 
@@ -244,6 +244,17 @@ def apply_project():
     return 'login'
 
 
+@app.route('/project/quit', methods=['POST'])
+def quit_project():
+    username = session.get('username')
+    if username:
+        pm = project_manager.ProjectManager()
+        is_success = pm.kick_out(username=username, project_id=request.json['project_id'])
+        return jsonify(result=is_success,
+                       mimetype="application/json",
+                       status=200)
+
+
 @app.route('/project/permit', methods=['POST'])
 def permit_apply():
     username = session.get('username')
@@ -275,11 +286,11 @@ def message_test():
     return redirect(url_for('login', next_url=next_url))
 
 
-@app.route('/message/search', methods=['GET','POST'])
+@app.route('/message/search', methods=['GET', 'POST'])
 def message_search():
     username = session.get('username')
     if username:
-        msgs = message.search_message(request.form['input'],username)
+        msgs = message.search_message(request.form['input'], username)
         return render_template("message.html", msgs=msgs)
         # return json.dumps(msgs)
     return render_template("login.html")
