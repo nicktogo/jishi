@@ -1,12 +1,8 @@
 {% extends "navbar.html" %}
 {% block page_specified %}
     <script src="{{ url_for('static', filename='js/codepen-modernizr.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/ripples.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/material.min.js') }}"></script>
 {% endblock %}
 {% block page_specified_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ripples.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/codepen-modernizr.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project.css') }}">
@@ -16,9 +12,6 @@
     <script>
         window.console = window.console || function (t) {
                 };
-        $(function () {
-            $.material.init();
-        });
     </script>
 {% endblock %}
 {% block body %}
@@ -68,7 +61,7 @@
                             </td>
                             <td data-title="状态">招募中</td>
                             <td data-title="操作">
-                                <button type="button" class="btn btn-raised ripple-effect btn-default">修改</button>
+                                <button type="button" class="btn btn-raised btn-default" style="margin: auto">修改</button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -109,42 +102,5 @@
             </ul>
         </div>
     </div>
-    <script type="text/javascript">
-        // Ripple-effect animation
-        (function ($) {
-            $(".ripple-effect").click(function (e) {
-                var rippler = $(this);
-
-                // create .ink element if it doesn't exist
-                if (rippler.find(".ink").length == 0) {
-                    rippler.append("<span class='ink'></span>");
-                }
-
-                var ink = rippler.find(".ink");
-
-                // prevent quick double clicks
-                ink.removeClass("animate");
-
-                // set .ink diametr
-                if (!ink.height() && !ink.width()) {
-                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
-                    ink.css({
-                        height: d,
-                        width: d
-                    });
-                }
-
-                // get click coordinates
-                var x = e.pageX - rippler.offset().left - ink.width() / 2;
-                var y = e.pageY - rippler.offset().top - ink.height() / 2;
-
-                // set .ink position and add class .animate
-                ink.css({
-                    top: y + 'px',
-                    left: x + 'px'
-                }).addClass("animate");
-            })
-        })(jQuery);
-    </script>
     <script src="{{ url_for('static', filename='js/user_own_project.js') }}"></script>
 {% endblock %}

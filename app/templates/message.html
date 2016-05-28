@@ -30,24 +30,20 @@
                     <th>所有人</th>
                     <th>消息类型</th>
                     <th>创建时间</th>
-                    <th>Button</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 {%for message in msgs %}
                 <tr data-toggle="modal" data-target="#myModal" data-message = "{{message['message_type']}}" >
-                    <td data-title="ProjectName">{{message['projectname']}}</td>
-                    <td data-title="Owner">{{message['project_owner']}}</td>
-                    <td data-title="Status" class="mes_type">
+                    <td data-title="项目名称">{{message['projectname']}}</td>
+                    <td data-title="所有人">{{message['project_owner']}}</td>
+                    <td data-title="消息类型" class="mes_type">
                         {{message['message_type']}}
                     </td>
-                    <td data-title="CreateTime">{{message['created_time']}}</td>
-                    <!--<td>{{message['project_owner']}}-->
-                    <!--<td class="mes_type">{{message['message_type']}}-->
-                    <!--<td >{{message['created_time']}}-->
-                    <!--<td class="mes_btn" onclick="permit(this)"> <button>同意</button>-->
-                    <td data-title="Button">
-                        <button type="button" class="btn btn-raised ripple-effect btn-default" onclick="permit(this)">Approve</button>
+                    <td data-title="创建时间">{{message['created_time']}}</td>
+                    <td data-title="操作">
+                        <button type="button" class="btn btn-raised btn-danger" onclick="permit(this)" style="margin: auto">通过</button>
                     </td>
                     <input id="message_id" type="hidden" value="{{message['_id']}}">
 
@@ -65,7 +61,6 @@
                 $(this).text(types[parseInt($(this).text())]);
             });
         });
-
 
         function permit(btn) {
         var message_id = $("#message_id").val();
@@ -106,9 +101,6 @@
 
     }
 
-
-
     </script>
-    {#    <script src="{{ url_for('static', filename='js/material-sidebar.js') }}"></script>#}
 {% endblock %}
 
