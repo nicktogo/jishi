@@ -43,15 +43,15 @@
                 {% endfor %}
 			</ul>
 			<ul class="pager">
-				<li><a href="{{url_for('alldisplay', page=page-1)}}">前一页</a></li>
+				<li><a class="withripple" href="{{url_for('alldisplay', page=page-1)}}">前一页</a></li>
 				{% for p in pages %}
-				    {% if p+1 == page %}
-				    <li><a href="#" style="color:black">{{p+1}}</a></li>
+				    {% if p + 1 == page %}
+				    <li><a class="withripple" href="#" style="color:black">{{p + 1}}</a></li>
 				    {% else %}
-					<li><a href="{{url_for('alldisplay', page=p+1)}}" >{{p+1}}</a></li>
+					<li><a class="withripple" href="{{url_for('alldisplay', page=p+1)}}" >{{p + 1}}</a></li>
 				    {% endif %}
 				{% endfor %}
-				<li><a href="{{url_for('alldisplay', page=page+1)}}">下一页</a></li>
+				<li><a class="withripple" href="{{url_for('alldisplay', page=page+1)}}">下一页</a></li>
 			</ul>
 		</section>
 		<div class="device">
