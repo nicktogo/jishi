@@ -164,22 +164,22 @@ class MongoConnection(AbstractConnection):
         self._conn_instance.messages.delete_many({'_id': ObjectId(message_id)})
         return True
 
-    def read_message(self,message_id):
+    def read_message(self, message_id):
         return self._conn_instance.messages.update_one(
-            { '_id': 'message_id'},
-            { '$set': {  'message_state': 1}}
+            {'_id': 'message_id'},
+            {'$set': {'message_state': 1}}
         )
 
     def get_all_message(self, username):
-        messagesend = list(self._conn_instance.messages.find({'username':username}))
-        messagereceived = list(self._conn_instance.messages.find({'project_owner':username}))
+        messagesend = list(self._conn_instance.messages.find({'username': username}))
+        messagereceived = list(self._conn_instance.messages.find({'project_owner': username}))
         messagereceived.extend(messagesend)
         return messagereceived
 
     def search_message(self, input, username):
         messagereceived = self.get_all_message(username)
-        message_By_name = list(self._conn_instance.messages.find({'project_owner':{'$regex': input}}))
-        message_By_Project = list(self._conn_instance.messages.find({'projectname':{'$regex': input}}))
+        message_By_name = list(self._conn_instance.messages.find({'project_owner': {'$regex': input}}))
+        message_By_Project = list(self._conn_instance.messages.find({'projectname': {'$regex': input}}))
         message_By_name.extend(message_By_Project)
         tmp = [val for val in messagereceived if val in message_By_name]
         return tmp
@@ -200,7 +200,17 @@ class MongoConnection(AbstractConnection):
             '_id': ObjectId(message_id)
         })
 
+    def find_message_by_user(self, username, page_no, page_size):
+        return self._conn_instance.messages.find({
+            'username': username
+        }).sort([
+            ('created_time', -1)
+        ]).skip((page_no - 1) * page_size).limit(page_size)
 
+    def count_message_by_user(self, username):
+        return self._conn_instance.messages.find({
+            'username': username
+        }).count()
 
 
 class RedisConnection(AbstractConnection):
@@ -220,8 +230,8 @@ class RedisConnection(AbstractConnection):
 
 if __name__ == '__main__':
     test = MongoConnection()
-    a = list(['a','b','c'])
-    b = list(['b','c','d'])
+    a = list(['a', 'b', 'c'])
+    b = list(['b', 'c', 'd'])
     tmp = [val for val in a if val in b]
     print a
     print b

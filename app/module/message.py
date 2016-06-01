@@ -3,12 +3,12 @@ from db.factory import MongoFactory
 from bson.objectid import ObjectId
 
 
-def apply(username, projectid, projectname,project_owner):
+def apply(username, projectid, projectname, project_owner):
     conn = MongoFactory().get_connection()
     m_type = 0
     message = {
         'username': username,
-        'projectname' : projectname,
+        'projectname': projectname,
         'project_id': projectid,
         'message_type': m_type,
         'message_state': 0,
@@ -24,7 +24,7 @@ def accept(username, projectid, projectname, project_owner):
     message = {
         'username': username,
         'project_id': projectid,
-        'projectname' : projectname,
+        'projectname': projectname,
         'message_type': m_type,
         'message_state': 0,
         'project_owner': project_owner
@@ -67,17 +67,15 @@ def get_all_message(username):
     return result
 
 
-def search_message(input,username):
+def search_message(input, username):
     conn = MongoFactory().get_connection()
-    result = conn.search_message(input,username)
+    result = conn.search_message(input, username)
     return result
-
 
 
 def read_message(message_id):
     conn = MongoFactory().get_connection()
     return conn.read_message(message_id)
-
 
 
 def show_myproject_message(username):
@@ -102,11 +100,15 @@ def show_joined_project_message(username):
     return result
 
 
+def find_message_by_user(username, page_no, page_size):
+    conn = MongoFactory().get_connection()
+    return conn.find_message_by_user(username=username, page_no=page_no, page_size=page_size)
+
+
+def count_message_by_user(username):
+    conn  = MongoFactory().get_connection()
+    return conn.count_message_by_user(username=username)
+
 if __name__ == '__main__':
     print get_all_message('admin')
-    print search_message('','admin')
-
-
-
-
-
+    print search_message('', 'admin')

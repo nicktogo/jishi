@@ -330,6 +330,40 @@ def message_test():
     return redirect(url_for('login', next_url=next_url))
 
 
+@app.route('/message/page', methods=['POST', 'GET'])
+def message_page():
+    if request.method == 'GET':
+        if session.get('username') is None:
+            next_url = '/message/test'
+            return redirect(url_for('login', next_url=next_url))
+        return render_template('message.html')
+    if request.method == 'POST':
+        if session.get('username') is None:
+            error = {'error': 'authorization failed'}
+            return json.dumps(error)
+
+        page_size = 4
+        page_no = int(request.json['page_no'])
+        messages = message.find_message_by_user(username=session.get('username'),
+                                                page_no=page_no,
+                                                page_size=page_size)
+        response = {}
+        message_list = []
+        for idx, msg in enumerate(messages):
+            proj = {'id': idx + 1, '_id': str(msg['_id']), 'project_owner': msg['project_owner'],
+                    'created_time': str(msg['created_time']),
+                    'message_type': msg['message_type'],
+                    'projectname': msg['projectname']}
+            message_list.append(proj)
+        response['messages'] = message_list
+        message_count = message.count_message_by_user(username=session.get('username'))
+        import math
+        page_count = int(math.ceil(message_count / page_size))
+        response['page_count'] = page_count
+        response_json = json.dumps(response, default=json_util.default)
+        return response_json
+
+
 @app.route('/message/search', methods=['GET', 'POST'])
 def message_search():
     username = session.get('username')

@@ -30,7 +30,7 @@
                     <li id="create_project"><a href='{{ url_for('create_project') }}'>项目发布</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="message_alert"><a href="{{ url_for('message_test') }}">消息提醒</a></li>
+                    <li id="message_alert"><a href="{{ url_for('message_page') }}">消息提醒</a></li>
                     <li id="person"><a href="{{ url_for('user_info') }}">个人中心</a></li>
                     {% if not session.get('username') %}
                         <li id="jishi_login"><a href='{{ url_for('login') }}'>登录</a></li>
