@@ -181,6 +181,16 @@ class ProjectManager:
     def get_projects_count_by_user(self, username):
         return self._projects.find({'creator': username}).count()
 
+    def find_attend_projects_by_user(self, username, page_no, page_size):
+        return self._projects.find({
+            'team': username
+        }).sort([
+            ('created_time', -1)
+        ]).skip((page_no - 1) * page_size).limit(page_size)
+
+    def get_attend_project_count_by_user(self, username):
+        return self._projects.find({'team': username}).count()
+
 
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)

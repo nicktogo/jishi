@@ -112,20 +112,44 @@ def userownproject():
         response = {}
         project_list = []
         for idx, project in enumerate(projects):
-            proj = {'id': idx+1, '_id': str(project['_id']), 'name': project['name'], 'created_time': str(project['created_time'])}
+            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],
+                    'created_time': str(project['created_time'])}
             project_list.append(proj)
         response['projects'] = project_list
         project_count = pm.get_projects_count_by_user(username=session.get('username'))
         import math
-        page_count = int(math.ceil(project_count/page_size))
+        page_count = int(math.ceil(project_count / page_size))
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
         return response_json
 
 
-@app.route('/user/userattendproject', methods=['GET'])
+@app.route('/user/userattendproject', methods=['POST', 'GET'])
 def userattendproject():
-    return render_template('user_attend_project.html')
+    # render template without data
+    if request.method == 'GET':
+        return render_template('user_attend_project.html')
+    # request for data
+    if request.method == 'POST':
+        page_size = 4
+        page_no = int(request.json['page_no'])
+        pm = project_manager.ProjectManager()
+        projects = pm.find_attend_projects_by_user(username=session.get('username'),
+                                                   page_no=page_no,
+                                                   page_size=page_size)
+        response = {}
+        project_list = []
+        for idx, project in enumerate(projects):
+            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],
+                    'created_time': str(project['created_time'])}
+            project_list.append(proj)
+        response['projects'] = project_list
+        project_count = pm.get_attend_project_count_by_user(username=session.get('username'))
+        import math
+        page_count = int(math.ceil(project_count / page_size))
+        response['page_count'] = page_count
+        response_json = json.dumps(response, default=json_util.default)
+        return response_json
 
 
 @app.route('/user/userinfoedit', methods=['GET'])
