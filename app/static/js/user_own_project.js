@@ -56,6 +56,10 @@ function getPage(e) {
                 newPagerLiHtml += '</li>';
             }
             pagerUl.empty().append(newPagerLiHtml);
+
+            $(function () {
+                $.material.init();
+            });
         }
     })
 }
