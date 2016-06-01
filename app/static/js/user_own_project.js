@@ -1,15 +1,13 @@
 function getPage(e) {
+    var page_no = 1;
     if (e != undefined) {
-        e.preventDefault();
+        console.log(e);
+        page_no = e.attr("href").match(/page=([0-9]+)/)[1];
+        console.log(page_no);
     }
     var tbody = $('#tbody');
-    var before = $('#before').val();
-    var data = {"before": before};
-    if (before == undefined) {
-        data = {"before": "0"};
-    } else {
-        data = {"before": before};
-    }
+    var pagerUl = $('#pager-ul');
+    var data = {"page_no": page_no};
     $.ajax({
         method: 'POST',
         url: '/user/userownproject',
@@ -19,7 +17,7 @@ function getPage(e) {
         success: function (data) {
             var newTbodyHtml = '';
             var last_created_time = '';
-            $(data).each(function () {
+            $(data.projects).each(function () {
                 newTbodyHtml += '<tr>';
                 newTbodyHtml += '<td data-title="编号">' + this.id + '</td>';
                 newTbodyHtml += '<td data-title="项目">' + '<a href="/project/' + this._id + '"' + ' target="_blank"> ';
@@ -36,8 +34,28 @@ function getPage(e) {
             });
             newTbodyHtml +=
                 '<tr><td id="before" hidden>' + last_created_time + '</td></tr>';
-            tbody.html(newTbodyHtml);
-            // TODO generate pagination...
+            tbody.empty().append(newTbodyHtml);
+
+            var newPagerLiHtml = '';
+            var previousPageNum = page_no - 1;
+            if (previousPageNum != 0) {
+                newPagerLiHtml += '<li>';
+                newPagerLiHtml += '<a class="withripple" href="?page=' + previousPageNum + '">' + '前一页' + '</a>';
+                newPagerLiHtml += '</li>';
+            }
+            var page_count = data.page_count;
+            for (var i = 1; i <= page_count; i++) {
+                newPagerLiHtml += '<li>';
+                newPagerLiHtml += '<a class="withripple" href="?page=' + i + '">' + i + '</a>';
+                newPagerLiHtml += '</li>';
+            }
+            var nextPageNum = +page_no + 1;
+            if (nextPageNum <= page_count) {
+                newPagerLiHtml += '<li>';
+                newPagerLiHtml += '<a class="withripple" href="?page=' + nextPageNum + '">' + '下一页' + '</a>';
+                newPagerLiHtml += '</li>';
+            }
+            pagerUl.empty().append(newPagerLiHtml);
         }
     })
 }
@@ -46,3 +64,7 @@ $(document).ready(function () {
     getPage();
 });
 
+$('#pager-ul').on('click', '.withripple', function (e) {
+    e.preventDefault();
+    getPage($(this));
+});

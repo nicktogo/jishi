@@ -103,18 +103,24 @@ def userownproject():
         return render_template('user_own_project.html')
     # request for data
     if request.method == 'POST':
-        before = request.json['before']
+        page_size = 4
+        page_no = int(request.json['page_no'])
         pm = project_manager.ProjectManager()
         projects = pm.find_all_projects_by_user(username=session.get('username'),
-                                                before=before,
-                                                page_size=4)
+                                                page_no=page_no,
+                                                page_size=page_size)
+        response = {}
         project_list = []
         for idx, project in enumerate(projects):
             proj = {'id': idx+1, '_id': str(project['_id']), 'name': project['name'], 'created_time': str(project['created_time'])}
             project_list.append(proj)
-        print project_list
-        project_json = json.dumps(project_list, default=json_util.default)
-        return project_json
+        response['projects'] = project_list
+        project_count = pm.get_projects_count_by_user(username=session.get('username'))
+        import math
+        page_count = int(math.ceil(project_count/page_size))
+        response['page_count'] = page_count
+        response_json = json.dumps(response, default=json_util.default)
+        return response_json
 
 
 @app.route('/user/userattendproject', methods=['GET'])
