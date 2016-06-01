@@ -22,17 +22,17 @@
             <!-- Sidebar navigation -->
             <ul class="nav sidebar-nav">
                 <li>
-                    <a href="info">
+                    <a class="withripple" href="info">
                         <i class="sidebar-icon zmdi zmdi-assignment-account"></i> 我的信息
                     </a>
                 </li>
                 <li>
-                    <a href="userownproject">
+                    <a class="withripple" href="userownproject">
                         <i class="sidebar-icon zmdi zmdi-flag"></i> 我创建的项目
                     </a>
                 </li>
                 <li>
-                    <a href="userattendproject">
+                    <a class="withripple" href="userattendproject">
                         <i class="sidebar-icon zmdi zmdi-accounts"></i> 我加入的项目
                     </a>
                 </li>
@@ -50,51 +50,47 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {% for project in user_own_project %}
-                        <tr>
-                            <td data-title="编号">{{ loop.index }}</td>
-                            <td data-title="项目">
-                                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}" target="_blank">
-                                    {{ project['name'] }}
-                                </a>
-                            </td>
-                            <td data-title="状态">招募中</td>
-                            <td data-title="操作">
-                                <button type="button" class="btn btn-raised btn-default" style="margin: auto">修改</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                    <tbody id="tbody">
+{#                    {% for project in user_own_project %}#}
+{#                        <tr>#}
+{#                            <td data-title="编号">{{ loop.index }}</td>#}
+{#                            <td data-title="项目">#}
+{#                                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}" target="_blank">#}
+{#                                    {{ project['name'] }}#}
+{#                                </a>#}
+{#                            </td>#}
+{#                            <td data-title="状态">招募中</td>#}
+{#                            <td data-title="操作">#}
+{#                                <button type="button" class="btn btn-raised btn-default" style="margin: auto">修改#}
+{#                                </button>#}
+{#                            </td>#}
+{#                            <td id="before" hidden>#}
+{#                                {{ project['created_time'] }}#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
                     </tbody>
                 </table>
             </div>
-            <ul class="pager">
-                <li>
-                    <a class="withripple" href="#!">
-                        前一页
-                    </a>
-                </li>
-                <li>
-                    <a class="withripple" href="#!">
-                        2
-                    </a>
-                </li>
-                <li>
-                    <a class="withripple" href="#!">
-                        3
-                    </a>
-                </li>
-                <li>
-                    <a class="withripple" href="#!">
-                        4
-                    </a>
-                </li>
-                <li>
-                    <a class="withripple" href="#!">
-                        后一页
-                    </a>
-                </li>
-            </ul>
+{#            <ul class="pager">#}
+{#                <li>#}
+{#                    <a class="withripple" href="#!">#}
+{#                        前一页#}
+{#                    </a>#}
+{#                </li>#}
+{#                {% for i in range(1, page_count + 1) %}#}
+{#                    <li>#}
+{#                        <a class="withripple" href="?page={{ i }}">#}
+{#                            {{ i }}#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#                <li>#}
+{#                    <a class="withripple" href="#!">#}
+{#                        后一页#}
+{#                    </a>#}
+{#                </li>#}
+{#            </ul>#}
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/user_own_project.js') }}"></script>

@@ -171,12 +171,16 @@ class ProjectManager:
             'name': project_title
         })
 
-    def find_all_projects_by_user(self, username):
-        return self._projects.find({
-            'creator': username
-        }).sort([
+    def find_all_projects_by_user(self, username, before=None, page_size=None):
+        condition = {'creator': username}
+        if before != '0':
+            condition['created_time'] = {'$lt': before}
+        print condition
+        return self._projects.find(
+            condition
+        ).sort([
             ('created_time', -1)
-        ])
+        ]).limit(page_size)
 
 
 def enum(*sequential, **named):

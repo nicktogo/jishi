@@ -96,11 +96,25 @@ def person():
     return render_template('user_info.html', user=user)
 
 
-@app.route('/user/userownproject', methods=['GET'])
+@app.route('/user/userownproject', methods=['POST', 'GET'])
 def userownproject():
-    pm = project_manager.ProjectManager()
-    projects = pm.find_all_projects_by_user(session.get('username'))
-    return render_template('user_own_project.html', user_own_project=projects)
+    # render template without data
+    if request.method == 'GET':
+        return render_template('user_own_project.html')
+    # request for data
+    if request.method == 'POST':
+        before = request.json['before']
+        pm = project_manager.ProjectManager()
+        projects = pm.find_all_projects_by_user(username=session.get('username'),
+                                                before=before,
+                                                page_size=4)
+        project_list = []
+        for idx, project in enumerate(projects):
+            proj = {'id': idx+1, '_id': str(project['_id']), 'name': project['name'], 'created_time': str(project['created_time'])}
+            project_list.append(proj)
+        print project_list
+        project_json = json.dumps(project_list, default=json_util.default)
+        return project_json
 
 
 @app.route('/user/userattendproject', methods=['GET'])
@@ -172,7 +186,7 @@ def alldisplay():
     page = int(request.args.get('page', 1))
     page = max(1, page)
     projects = pm.find_all_project(page=page)
-    pages = pm.project_count();
+    pages = pm.project_count()
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
 
