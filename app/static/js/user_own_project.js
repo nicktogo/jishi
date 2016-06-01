@@ -46,7 +46,7 @@ function getPage(e) {
             var page_count = data.page_count;
             for (var i = 1; i <= page_count; i++) {
                 newPagerLiHtml += '<li>';
-                newPagerLiHtml += '<a class="withripple" href="?page=' + i + '">' + i + '</a>';
+                newPagerLiHtml += '<a class="withripple" href="' + (i == page_no ? "javascript:void(0);" : "?page=" + i) + '">' + i + '</a>';
                 newPagerLiHtml += '</li>';
             }
             var nextPageNum = +page_no + 1;
