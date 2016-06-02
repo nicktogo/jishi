@@ -7,6 +7,7 @@ from weibo import APIClient
 from flask_oauthlib.client import OAuth
 import random
 from datetime import datetime
+import os
 from flask import g
 
 from module import auth, project_manager, forms, message
@@ -70,10 +71,12 @@ def get_code():
 def share_project():
     print '123'
     j = request.json
+    module_dir = os.path.dirname(__file__)
+    f_path = os.path.join(module_dir, 'static', 'img', 'logo.png')
+    f = open(f_path, 'rb')
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     client_.set_access_token(session['access_token'], session['expires_in'])
-    f = open(url_for('static', filename='img/logo.png'), 'rb')
-    client_.statuses.update.post(status=u'项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'],pic=f)
+    client_.statuses.update.post(status=u'项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'], pic=f)
     return jsonify(dict(a=123))
 
 
