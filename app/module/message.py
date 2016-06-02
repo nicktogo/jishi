@@ -12,21 +12,31 @@ def apply(username, projectid, projectname, project_owner):
         'project_id': projectid,
         'message_type': m_type,
         'message_state': 0,
+        'isSolved': 0,
         'project_owner': project_owner
     }
     result = conn.insert_message(message)
     return result
 
 
-def accept(username, projectid, projectname, project_owner):
+def accept(username, projectid, projectname, project_owner, message_id):
     conn = MongoFactory().get_connection()
     m_type = 1
+    conn.get_collection(collection_name='messages').update_one({
+                '_id': ObjectId(message_id)
+            }, {
+                '$set': {
+                    'isSolved': 1
+                }
+            })
+
     message = {
         'username': username,
         'project_id': projectid,
         'projectname': projectname,
         'message_type': m_type,
         'message_state': 0,
+        'isSolved': 1,
         'project_owner': project_owner
     }
     result = conn.insert_message(message)

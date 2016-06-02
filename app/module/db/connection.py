@@ -185,7 +185,7 @@ class MongoConnection(AbstractConnection):
         return tmp
 
     def update_message(self, message):
-        self._conn_instance.messages.update_one(message)
+        self._conn_instance.messages.update(message)
         return True
 
     def get_collection(self, collection_name):
@@ -206,9 +206,7 @@ class MongoConnection(AbstractConnection):
         ]).skip((page_no - 1) * page_size).limit(page_size)
 
     def count_message_by_user(self, username):
-        return self._conn_instance.messages.find({
-            'username': username
-        }).count()
+        return self._conn_instance.messages.find({'$or': [{'username': username}, {'project_owner': username}]}).count()
 
 
 class RedisConnection(AbstractConnection):

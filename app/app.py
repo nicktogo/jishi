@@ -333,7 +333,7 @@ def permit_apply():
         applier = mes['username']
         project_id = mes['project_id']
         if username == mes['project_owner']:
-            pm.approve_applier(applier, project_id)
+            pm.approve_applier(applier, project_id,request.json['message_id'])
             return jsonify(dict(result='ok'))
         else:
             print '没有权限'
@@ -387,6 +387,7 @@ def message_page():
         message_count = message.count_message_by_user(username=session.get('username'))
         import math
         page_count = int(math.ceil(float(message_count) / float(page_size)))
+        print page_count, message_count
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
         return response_json

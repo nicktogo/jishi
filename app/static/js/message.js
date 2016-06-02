@@ -32,10 +32,19 @@ function getPage(e) {
                 switch(this.message_type)
                 {
                 case 0:
+                        if(this.isSolved == 0)
+                        {
                         newTbodyHtml +=
                             '<td data-title="操作">' +
                             '<button id="apply_btn" type="button" class="btn btn-raised btn-danger" onclick="permit(this)" style="margin: auto">通过</button>' +
                             '</td>';
+                        }
+                        else{
+                        newTbodyHtml +=
+                            '<td data-title="操作">' +
+                            '<button id="apply_btn" type="button" class="btn btn-raised btn-danger" onclick="permit(this)" disabled="disabled" style="margin: auto">通过</button>' +
+                            '</td>';
+                        }
                         break;
                 case 1:
                         newTbodyHtml +=
