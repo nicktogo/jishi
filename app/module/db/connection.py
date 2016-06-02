@@ -201,9 +201,7 @@ class MongoConnection(AbstractConnection):
         })
 
     def find_message_by_user(self, username, page_no, page_size):
-        return self._conn_instance.messages.find({
-            'username': username
-        }).sort([
+        return self._conn_instance.messages.find({'$or': [{'username': username}, {'project_owner': username}]}).sort([
             ('created_time', -1)
         ]).skip((page_no - 1) * page_size).limit(page_size)
 
