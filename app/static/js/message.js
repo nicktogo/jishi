@@ -25,14 +25,38 @@ function getPage(e) {
                 newTbodyHtml += this.projectname;
                 newTbodyHtml += '</a>';
                 newTbodyHtml += '</td>';
+                newTbodyHtml += '<td data-title="消息发出者">' + this.username + '</td>';
                 newTbodyHtml += '<td data-title="所有人">' + this.project_owner + '</td>';
                 newTbodyHtml += '<td data-title="消息类型" class="mes_type">' + this.message_type + '</td>';
-                newTbodyHtml += '<td data-title="创建时间">' + this.created_time + '</td>';
-                newTbodyHtml +=
-                    '<td data-title="操作">' +
-                    '<button type="button" class="btn btn-raised btn-danger" onclick="permit(this)" style="margin: auto">通过</button>' +
-                    '</td>';
-                newTbodyHtml += '<input id="message_id" type="hidden" value="' + this._id +'">';
+                newTbodyHtml += '<td data-title="创建时间">' + this.created_time + '</td>'
+                switch(this.message_type)
+                {
+                case 0:
+                        newTbodyHtml +=
+                            '<td data-title="操作">' +
+                            '<button id="apply_btn" type="button" class="btn btn-raised btn-danger" onclick="permit(this)" style="margin: auto">通过</button>' +
+                            '</td>';
+                        break;
+                case 1:
+                        newTbodyHtml +=
+                            '<td data-title="操作">' +
+                            '<button type="button" class="btn btn-raised btn-danger" onclick="permit(this)" disabled="disabled" style="margin: auto">已同意</button>' +
+                            '</td>';
+                        break;
+                case 2:
+                        newTbodyHtml +=
+                            '<td data-title="操作">' +
+                            '<button type="button" class="btn btn-raised btn-danger" onclick="permit(this)" disabled="disabled" style="margin: auto">已踢出</button>' +
+                            '</td>';
+                        break;
+                case 3:
+                        newTbodyHtml +=
+                            '<td data-title="操作">' +
+                            '<button type="button" class="btn btn-raised btn-danger" onclick="permit(this)" disabled="disabled" style="margin: auto">已退出</button>' +
+                            '</td>';
+                        break;
+                }
+                newTbodyHtml += '<input class="message_id" type="hidden" value="' + this._id +'">';
                 newTbodyHtml += '</tr>';
             });
             tbody.empty().append(newTbodyHtml);
@@ -85,8 +109,7 @@ $('#pager-ul').on('click', '.withripple', function (e) {
 });
 
 function permit(btn) {
-    var message_id = $("#message_id").val();
-    alert(message_id)
+    var message_id = $(btn).parent().next('.message_id').val();
     var data = {'message_id': message_id}
     $.ajax({
         url: "/project/permit",
@@ -95,7 +118,7 @@ function permit(btn) {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            alert(data['message_id'] + "同意申请!")
+            $(btn).attr({"disabled": "disabled"});
         },
         error: function (data) {
             console.log(data)
