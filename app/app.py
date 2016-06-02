@@ -55,13 +55,13 @@ def login_weibo():
 def get_code():
     code = request.args.get('code')
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-    session['client'] = client_
     r = client_.request_access_token(code)
     access_token = r.access_token
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
-    g.uid = r.uid
-    session['weibo']['user'] = client_.users.show.get(uid=g.uid)
+    session['access_token'] = access_token
+    session['expires_in'] = expires_in
+    session['weibo']['user'] = client_.users.show.get(uid=r.uid)
     session['username'] = session['weibo']['user']['name']
     return redirect(url_for('index'))
 
@@ -70,7 +70,9 @@ def get_code():
 def share_project():
     print '123'
     j = request.json
-    session['client'].statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
+    client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    client_.set_access_token(session['access_token'], session['expires_in'])
+    client_.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
     return jsonify(dict(a=123))
 
 
