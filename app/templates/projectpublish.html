@@ -16,6 +16,11 @@
 
 {% endblock %}
 {% block body %}
+    <style>
+        label {
+            color: black !important;
+        }
+    </style>
     <form class="form" action="{{ url_for('create_project') }}" method="post">
         <div class="content">
             <div class="box">
