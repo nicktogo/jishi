@@ -16,6 +16,7 @@ def signup(user):
     _user = list(conn.find({'username': user['username']}))
     if not user_not_exist(_user):
         return False
+    user['wid'] = 0
     result = conn.insert_one(user).inserted_id
     if result:
         return True
