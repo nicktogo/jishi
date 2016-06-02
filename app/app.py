@@ -72,7 +72,7 @@ def share_project():
     j = request.json
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     client_.set_access_token(session['access_token'], session['expires_in'])
-    content = dict(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'])
+    content = dict(status=u'项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'])
     client_.statuses.update.post(json.dumps(content, ensure_ascii=False))
     return jsonify(dict(a=123))
 
