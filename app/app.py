@@ -61,8 +61,8 @@ def get_code():
     client_.set_access_token(access_token, expires_in)
     g.client = client_
     g.uid = r.uid
-    session['weibo'] = client_.users.show.get(uid=g.uid)
-    session['client'] = client_
+    session['weibo'] = g.client.users.show.get(uid=g.uid)
+    session['client'] = g.client
     session['username'] = session['weibo']['name']
     return redirect(url_for('index'))
 
@@ -70,7 +70,7 @@ def get_code():
 @app.route('/project/share', methods=['POST'])
 def share_project():
     j = request.json
-    session['client'].statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
+    session.client.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
     return jsonify(dict(a=123))
 
 
