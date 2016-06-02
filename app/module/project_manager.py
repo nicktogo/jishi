@@ -155,6 +155,9 @@ class ProjectManager:
             }
         })
 
+    def UnSolvedMessageCount(self):
+        return len(list(self._projects.find({'isSolved': '0'})))
+
     def project_search(self, input, page=1):
         limit = 3
         offset = (page - 1) * limit
