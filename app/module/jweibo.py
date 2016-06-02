@@ -6,7 +6,7 @@ from flask_oauthlib.client import OAuth
 
 APP_KEY = '148981535'  # app key
 APP_SECRET = 'b12ec09cd669a458262881e580eba12e'  # app secret
-CALLBACK_URL = 'http://tztztztztz.org:5000/code'  # callback url
+CALLBACK_URL = 'http://lvh.me:5000/code'  # callback url
 
 
 def get_db():
