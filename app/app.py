@@ -58,8 +58,7 @@ def get_code():
     code = request.args.get('code')
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     r = client_.request_access_token(code)
-    wuser = jweibo.find_user(r.uid)
-    print r.uid
+    wuser = jweibo.find_user(int(r.uid))
     if wuser:
         print 'no'
     else:
