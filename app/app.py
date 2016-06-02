@@ -66,6 +66,15 @@ def get_code():
     return redirect(url_for('index'))
 
 
+@app.route('/project/share', methods=['POST'])
+def share_project():
+    j = request.json
+    g.client.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
+    return jsonify(dict(a=123))
+
+
+
+
 @app.route('/auth/homepage', methods=['POST', 'GET'])
 def homepage():
     return render_template('homepage.html')

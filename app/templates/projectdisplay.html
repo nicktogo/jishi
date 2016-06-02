@@ -37,6 +37,7 @@
                     <div class="ceo">
                     </div>
                     <input id="project_id" type="hidden" value="{{project._id}}"/>
+                    <button id="share" onclick="shareProject()">分享</button>
                     <div class="link">
                         <div class="title"><a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a></div>
                     </div>
@@ -71,6 +72,24 @@
                 $("#applyBtn").css({
 
                 })
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        });
+    }
+
+    function shareProject() {
+        var project_id = $("#project_id").val();
+        var data = {'project_id':project_id};
+        $.ajax({
+            url: "/project/share",
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                alert(data['projectId'] + "分享成功");
             },
             error: function (data) {
                 console.log(data)
