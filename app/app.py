@@ -62,6 +62,7 @@ def get_code():
     g.uid = r.uid
     session['weibo'] = client_.users.show.get(uid=g.uid)
     print session['weibo']
+    session['weibo_client'] = client_
     #session['client'] = g.client
     session['username'] = session['weibo']['name']
     return redirect(url_for('index'))
