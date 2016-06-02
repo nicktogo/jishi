@@ -328,12 +328,11 @@ def permit_apply():
         applier = mes['username']
         project_id = mes['project_id']
         if username == mes['project_owner']:
-            print '加入成功！'
-            print 'applier:' + applier
             pm.approve_applier(applier, project_id)
+            return jsonify(dict(result='ok'))
         else:
             print '没有权限'
-            return '没有权限'
+            return jsonify(dict(result='false'))
     return 'login'
 
 
@@ -373,6 +372,7 @@ def message_page():
         message_list = []
         for idx, msg in enumerate(messages):
             proj = {'id': idx + 1, '_id': str(msg['_id']), 'project_owner': msg['project_owner'],
+                    'username':msg['username'],
                     'created_time': str(msg['created_time']),
                     'message_type': msg['message_type'],
                     'projectname': msg['projectname']}
