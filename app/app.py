@@ -378,7 +378,7 @@ def message_page():
         response['messages'] = message_list
         message_count = message.count_message_by_user(username=session.get('username'))
         import math
-        page_count = int(math.ceil(message_count / page_size))
+        page_count = int(math.ceil(float(message_count) / float(page_size)))
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
         return response_json
