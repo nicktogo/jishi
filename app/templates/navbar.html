@@ -37,6 +37,7 @@
                         <li id="jishi_signup"><a href='{{ url_for('signup') }}'>注册</a></li>
                     {% endif %}
                     {% if session.get('username') %}
+                        <li style="{{'background-image: ' + session.weibo.user.profile_image_url}}"></li>
                         <li id="jishi_logout"><a href='{{ url_for('logout') }}'>退出</a></li>
                     {% endif %}
                 </ul>
