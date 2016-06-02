@@ -59,6 +59,7 @@ def get_code():
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     r = client_.request_access_token(code)
     wuser = jweibo.find_user(r.uid)
+    print r.uid
     if wuser:
         print 'no'
     else:
@@ -68,6 +69,7 @@ def get_code():
         client_.set_access_token(access_token, expires_in)
         weibo_info = client_.users.show.get(uid=r.uid)
         wuser = jweibo.create_user(weibo_info, code, access_token, expires_in)
+    wuser['_id'] = str(wuser['_id'])
     session['user'] = wuser
     session['username'] = wuser['username']
     return redirect(url_for('index'))
