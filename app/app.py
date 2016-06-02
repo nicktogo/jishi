@@ -244,6 +244,19 @@ def alldisplay():
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
 
+@app.route('/project/search', methods=['GET','POST'])
+def project_search():
+    pm = project_manager.ProjectManager()
+    input = request.form['input']
+    print 'input' + input
+    page = int(request.args.get('page', 1))
+    page = max(1, page)
+    projects = pm.project_search(input, page=page)
+    pages = len(list(projects)) / 3 + 1
+    print pages
+    return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
+
+
 @app.route('/project/more', methods=['GET', 'POST'])
 def more_projects():
     pm = project_manager.ProjectManager()
@@ -340,6 +353,8 @@ def permit_apply():
             print '没有权限'
             return jsonify(dict(result='false'))
     return 'login'
+
+
 
 
 @app.route('/message/test', methods=['GET', 'POST'])

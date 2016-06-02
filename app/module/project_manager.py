@@ -45,6 +45,8 @@ class ProjectManager:
                 }
             })
 
+
+
     def approve_applier(self, applier_name, project_id, message_id):
         # TODO project_owner
         projectapplyed = self.find_project_by_id(project_id)
@@ -152,6 +154,14 @@ class ProjectManager:
                 'status': statuses.CANCELED
             }
         })
+
+    def project_search(self, input, page=1):
+        limit = 3
+        offset = (page - 1) * limit
+        projects = list(self._projects.find({
+            '$or': [{'name': {'$regex': input}}, {'creator': {'$regex': input}}]
+        }).skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)]))
+        return projects
 
     def find_all_project(self, page=1):
         limit = 3

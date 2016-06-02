@@ -28,6 +28,10 @@
 
 		</div>
 		<section class="page page--static">
+			<form id="search_project" method="post" action="{{ url_for('project_search') }}" style="margin-top:40px;">
+                <input name="input" type="text" class="search" placeholder="项目名称/所有人"/>
+                <button class="go" type="submit"><span class="entypo-search"></span></button>
+            </form>
 			<div class="page__title">
 				<h2 class="page__title-main"></h2>
 				<p class="page__title-sub"></p>
