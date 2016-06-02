@@ -1,7 +1,12 @@
 {% extends "navbar.html" %}
 {% block body %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login_style.css') }}" >
-    <div class="container">
+    <style>
+        input:focus{
+            border:0 !important;
+        }
+    </style>
+    <div class="container" style="text-align: center">
         <div class="card card-container">
             <img id="profile-img" class="profile-img-card" src="{{url_for('static', filename='img/logo.png')}}" />
             <p id="profile-name" class="profile-name-card"></p>
@@ -10,11 +15,11 @@
                 <input type="text" id="inputEmail" class="form-control" placeholder="用户名" required autofocus name="username">
                 <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="password">
                 <input type="hidden" name="next_url" value="{{ next_url }}">
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> 记住我
-                    </label>
-                </div>
+                <!--<div id="remember" class="checkbox">-->
+                    <!--<label>-->
+                        <!--<input type="checkbox" value="remember-me"> 记住我-->
+                    <!--</label>-->
+                <!--</div>-->
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登录</button>
             </form><!-- /form -->
             <a href="{{ url_for('login_weibo') }}" style="float: left">微博登录</a>

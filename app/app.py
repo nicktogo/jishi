@@ -7,6 +7,7 @@ from weibo import APIClient
 from flask_oauthlib.client import OAuth
 import random
 from datetime import datetime
+from flask import g
 
 from module import auth, project_manager, forms, message
 
@@ -56,9 +57,10 @@ def get_code():
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     r = client_.request_access_token(code)
     access_token = r.access_token
-    print 'access_token is', access_token
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
+    g.client = client_
+    print client_.statuses.user_timeline.get()
     return redirect(url_for('index'))
 
 
@@ -243,6 +245,8 @@ def create_project():
         return render_template('projectpublish.html')
     if request.method == 'POST':
         project = dict()
+        project['startTime'] = request.form.get('startTime')
+        project['endTime'] = request.form.get('endTime')
         project['creator'] = session['username']
         project['name'] = request.form.get('name')
         project['type'] = request.form.get('type')
