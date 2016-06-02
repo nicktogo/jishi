@@ -1,5 +1,6 @@
 from db.factory import MysqlFactory
 from db.factory import MongoFactory
+from flask import g
 
 
 def valid_login(username, password):
@@ -8,6 +9,8 @@ def valid_login(username, password):
     if user_not_exist(user):
         return False
     if equal_password(user, password):
+        user[0]['_id'] = str(user[0]['_id'])
+        g.user = user[0]
         return True
 
 

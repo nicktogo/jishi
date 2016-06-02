@@ -81,10 +81,15 @@ def share_project():
     module_dir = os.path.dirname(__file__)
     f_path = os.path.join(module_dir, 'static', 'img', 'logo.png')
     f = open(f_path, 'rb')
-    client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-    client_.set_access_token(session['access_token'], session['expires_in'])
-    client_.statuses.upload.post(status=u'济事项目分享,小伙伴们快来加入吧 http://tztztztztz.org:5000/project/'+j['project_id'], pic=f)
-    return jsonify(dict(a=123))
+    wid = jweibo.get_wid(session['username'])
+    print wid
+    if wid:
+        wclient = jweibo.get_client(wid=wid)
+        wclient.statuses.upload.post(status=u'济事项目分享,小伙伴们快来加入吧 http://tztztztztz.org:5000/project/' + j['project_id'],
+                                     pic=f)
+        return jsonify(dict(result='success'))
+    else:
+        return jsonify(dict(result='error'))
 
 
 @app.route('/auth/homepage', methods=['POST', 'GET'])
@@ -210,6 +215,8 @@ def login():
     password = request.form['password']
     next_url = request.form['next_url']
     if auth.valid_login(username, password):
+        session['user'] = g.user
+        print g.user
         session['username'] = username
         return redirect(next_url)
     else:
