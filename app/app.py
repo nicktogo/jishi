@@ -62,6 +62,7 @@ def get_code():
     g.client = client_
     g.uid = r.uid
     session['weibo'] = g.client.users.show.get(uid=g.uid)
+    session['client'] = g.client
     session['username'] = session['weibo']['name']
     return redirect(url_for('index'))
 
@@ -70,7 +71,7 @@ def get_code():
 def share_project():
     print '123'
     j = request.json
-    #g.client.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
+    session.client.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
     return jsonify(dict(a=123))
 
 
