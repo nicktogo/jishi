@@ -59,9 +59,9 @@ def get_code():
     access_token = r.access_token
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
-    g.client = client_
     g.uid = r.uid
-    session['weibo'] = g.client.users.show.get(uid=g.uid)
+    session['weibo'] = client_.users.show.get(uid=g.uid)
+    print session['weibo']
     #session['client'] = g.client
     session['username'] = session['weibo']['name']
     return redirect(url_for('index'))
