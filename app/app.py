@@ -328,6 +328,8 @@ def permit_apply():
         applier = mes['username']
         project_id = mes['project_id']
         if username == mes['project_owner']:
+            print '加入成功！'
+            print 'applier:' + applier
             pm.approve_applier(applier, project_id)
         else:
             print '没有权限'
@@ -354,7 +356,7 @@ def message_test():
 def message_page():
     if request.method == 'GET':
         if session.get('username') is None:
-            next_url = '/message/test'
+            next_url = '/message/page'
             return redirect(url_for('login', next_url=next_url))
         return render_template('message.html')
     if request.method == 'POST':
