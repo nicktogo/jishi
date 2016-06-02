@@ -73,7 +73,8 @@ def share_project():
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     client_.set_access_token(session['access_token'], session['expires_in'])
     content = dict(status=u'项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'])
-    client_.statuses.update.post(content)
+    #client_.statuses.update.post(content)
+    client_.statuses.update.post(status=u'测试OAuth 2.0发微博')
     return jsonify(dict(a=123))
 
 
