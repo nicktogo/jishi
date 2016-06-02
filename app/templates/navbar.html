@@ -31,14 +31,32 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li id="message_alert"><a href="{{ url_for('message_page') }}">消息提醒</a></li>
-                    <li id="person"><a href="{{ url_for('user_info') }}">个人中心</a></li>
+                     <li class="dropdown" id="person"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('user_info') }}">个人中心</a>
+                         <ul class="dropdown-menu">
+                             <li>
+                    <a class="withripple" href="{{ url_for('user_info') }}">
+                        <i class="sidebar-icon zmdi zmdi-assignment-account"></i> 我的信息
+                    </a>
+                </li>
+                <li>
+                    <a class="withripple" href="{{ url_for('user_own') }}">
+                        <i class="sidebar-icon zmdi zmdi-flag"></i> 我创建的项目
+                    </a>
+                </li>
+                <li>
+                    <a class="withripple" href="{{ url_for('user_attend') }}">
+                        <i class="sidebar-icon zmdi zmdi-accounts"></i> 我加入的项目
+                    </a>
+                </li>
+                                </ul>
+                    </li>
                     {% if not session.get('username') %}
                         <li id="jishi_login"><a href='{{ url_for('login') }}'>登录</a></li>
                         <li id="jishi_signup"><a href='{{ url_for('signup') }}'>注册</a></li>
                     {% endif %}
                     {% if session.get('username') %}
                         {% if session.get('user') %}
-                        <img src="{{session.user.profile_image_url}}" style="border-radius: 50%;float: left;width:40px;margin-top: 5px"></img>
+                        <img src="{{session.user.profile_image_url}}" style="border-radius: 50%;float: left;width:40px;margin-top: 5px">
                         {% endif %}
                         <li id="jishi_logout"><a href='{{ url_for('logout') }}'>退出</a></li>
                     {% endif %}
@@ -56,6 +74,9 @@
             $(".navbar a").css({
                 "color": "#3d444f"
             });
+        });
+    $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
         });
     </script>
     {% block projectshow %}{% endblock %}

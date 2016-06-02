@@ -12,6 +12,10 @@
   height: 48px;
   width: 100%;
 }
+.navbar .dropdown-menu, .navbar.navbar-default .dropdown-menu {
+    border-radius: 2px;
+    margin-right: -60px;
+}
 
 #cssmenu,
 #cssmenu ul,

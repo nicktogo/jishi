@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/codepen-modernizr.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project.css') }}">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_own_project_sidebar.css') }}">
     <script>
         window.console = window.console || function (t) {
@@ -17,27 +15,6 @@
 {% block body %}
     <div class="user_content">
         <!-- Material sidebar -->
-        <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-            {#        <div class="sidebar-text">Text</div>#}
-            <!-- Sidebar navigation -->
-            <ul class="nav sidebar-nav">
-                <li>
-                    <a id="user-info" class="withripple" href="info">
-                        <i class="sidebar-icon zmdi zmdi-assignment-account"></i> 我的信息
-                    </a>
-                </li>
-                <li>
-                    <a id="own-project" class="withripple" href="userownproject">
-                        <i class="sidebar-icon zmdi zmdi-flag"></i> 我创建的项目
-                    </a>
-                </li>
-                <li>
-                    <a id="attend-project" class="withripple" href="userattendproject">
-                        <i class="sidebar-icon zmdi zmdi-accounts"></i> 我加入的项目
-                    </a>
-                </li>
-            </ul>
-        </aside>
         <div id="demo" class="wrapper">
             <div class="table-responsive-vertical shadow-z-1">
                 <!-- Table starts here -->

@@ -10,8 +10,8 @@
 
 /* -- Demo style ------------------------------- */
 #demo {
-    width: 700px;
-    padding-left: 60px;
+    width: 1000px;
+    max-width: 1000px;
 }
 
 #demo h1 {
