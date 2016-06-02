@@ -9,6 +9,7 @@ import random
 from datetime import datetime
 import os
 from flask import g
+from module import jweibo
 
 from module import auth, project_manager, forms, message
 
@@ -57,14 +58,19 @@ def get_code():
     code = request.args.get('code')
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     r = client_.request_access_token(code)
-    access_token = r.access_token
-    expires_in = r.expires_in
-    client_.set_access_token(access_token, expires_in)
-    session['access_token'] = access_token
-    session['expires_in'] = expires_in
-    session['weibo'] = dict()
-    session['weibo']['user'] = client_.users.show.get(uid=r.uid)
-    session['username'] = session['weibo']['user']['name']
+    if jweibo.is_exist(r.uid):
+        pass
+    else:
+        access_token = r.access_token
+        expires_in = r.expires_in
+        client_.set_access_token(access_token, expires_in)
+        session['access_token'] = access_token
+        session['expires_in'] = expires_in
+        weibo_info = client_.users.show.get(uid=r.uid)
+        jweibo.create_user(weibo_info, code)
+    # session['weibo'] = dict()
+    # session['weibo']['user'] = client_.users.show.get(uid=r.uid)
+    # session['username'] = session['weibo']['user']['name']
     return redirect(url_for('index'))
 
 
@@ -375,6 +381,7 @@ def message_page():
                     'message_type': msg['message_type'],
                     'projectname': msg['projectname']}
             message_list.append(proj)
+
         response['messages'] = message_list
         message_count = message.count_message_by_user(username=session.get('username'))
         import math
