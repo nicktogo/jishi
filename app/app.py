@@ -60,7 +60,8 @@ def get_code():
     expires_in = r.expires_in
     client_.set_access_token(access_token, expires_in)
     g.client = client_
-    print client_.statuses.user_timeline.get()
+    g.uid = r.uid
+    print g.client.users.show(uid=g.uid)
     return redirect(url_for('index'))
 
 
