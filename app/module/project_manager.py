@@ -45,7 +45,7 @@ class ProjectManager:
                 }
             })
 
-    def approve_applier(self, applier_name, project_id):
+    def approve_applier(self, applier_name, project_id, message_id):
         # TODO project_owner
         projectapplyed = self.find_project_by_id(project_id)
         projectOwner = projectapplyed['creator']
@@ -54,7 +54,7 @@ class ProjectManager:
         if (self.is_in_team(applier_name, project_id)):
             return '已在team中'
         else:
-            message.accept(applier_name, project_id, projectName, projectOwner)
+            message.accept(applier_name, project_id, projectName, projectOwner, message_id)
             result = self._projects.update_one({
                 '_id': ObjectId(project_id)
             }, {
