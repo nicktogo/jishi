@@ -334,6 +334,8 @@ def permit_apply():
         applier = mes['username']
         project_id = mes['project_id']
         if username == mes['project_owner']:
+            print '加入成功！'
+            print 'applier:' + applier
             pm.approve_applier(applier, project_id)
         else:
             print '没有权限'
@@ -360,7 +362,7 @@ def message_test():
 def message_page():
     if request.method == 'GET':
         if session.get('username') is None:
-            next_url = '/message/test'
+            next_url = '/message/page'
             return redirect(url_for('login', next_url=next_url))
         return render_template('message.html')
     if request.method == 'POST':
@@ -385,7 +387,7 @@ def message_page():
         response['messages'] = message_list
         message_count = message.count_message_by_user(username=session.get('username'))
         import math
-        page_count = int(math.ceil(message_count / page_size))
+        page_count = int(math.ceil(float(message_count) / float(page_size)))
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
         return response_json
