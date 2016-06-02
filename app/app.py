@@ -71,7 +71,7 @@ def get_code():
 def share_project():
     print '123'
     j = request.json
-    session.client.statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
+    session['client'].statuses.update.post(status='项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j.project_id)
     return jsonify(dict(a=123))
 
 
