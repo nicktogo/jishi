@@ -72,7 +72,7 @@ def share_project():
     j = request.json
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     client_.set_access_token(session['access_token'], session['expires_in'])
-    f = open('/app/static/img/logo.png', 'rb')
+    f = open(url_for('static', filename='img/logo.png'), 'rb')
     client_.statuses.update.post(status=u'项目分享!! 项目地址: http://tztztztztz.org:5000/project/'+j['project_id'],pic=f)
     return jsonify(dict(a=123))
 
