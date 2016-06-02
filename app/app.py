@@ -42,7 +42,11 @@ def test():
         budgets = [u'1万以下', u'1-3万', u'3-5万', u'5万以上']
         return budgets[int(budget)]
 
-    return dict(ran=ran, get_type=get_type, get_budget=get_budget)
+    def get_type_img(type):
+        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png']]
+        return types[int(type)]
+
+    return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img)
 
 
 @app.route('/weibo')

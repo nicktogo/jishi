@@ -52,8 +52,3 @@ def get_client(wid):
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     client_.set_access_token(weibo_info['access_token'], weibo_info['expire_in'])
     return client_
-
-
-if __name__ == '__main__':
-    conn = get_db()
-    print conn.users.find_one({'wid':5148478576})

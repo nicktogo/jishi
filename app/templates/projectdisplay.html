@@ -11,15 +11,15 @@
         <div class="view-container  " >
             <div id="case_detail" class="onepcssgrid-1000 onerow">
                 <div class="case_content">
-                    <div class="head">
-                        <img class="h" src="../img/title.png"/>
-                    </div>
                     <div class="name"><strong>{{ project.name }}</strong></div>
-                    <div class="digest">
+                    <div style="margin-top: 10px">
                         人数
                         <span class="strong"> {{ project.currentPeople }} / {{project.maxPeople}} </span>
                         项目时间
                         <span class="strong"> {{ project.time }} </span>
+                    </div>
+                    <div style="float: right;margin-right: 10px">
+                        <a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a>
                     </div>
                     <div class="delimiter"></div>
                     <div class="intro">
@@ -27,31 +27,29 @@
                         <p>{{ project.description }}</p>
                     </div>
                     <div class="title">项目需求</div>
-                    <div class="show clearfix">
+                    <div class="show clearfix" style="background-color: rgba(204,217,232,0.3)">
                         <div class="case-image">
-                            <img src="/img/p2.png" style="float: none;">
-                            <img src="/img/p3.png" style="float: none;">
-                            <img src="/img/p1.png" style="float: none;">
+                            {% for img in get_type_img(project.type) %}
+                                <img src="{{url_for('static', filename='img/'+img)}}" style="float: none;width:600px;height: 337.5px">
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="ceo">
                     </div>
                     <input id="project_id" type="hidden" value="{{project._id}}"/>
-                    <button id="share" onclick="shareProject()">分享</button>
-                    <div class="link">
-                        <div class="title"><a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a></div>
-                    </div>
                     {% if session.get('username') == project.creator %}
                         <a id="modifyBtn" class="btn btn-primary" href="#" style="margin-top: 20px;margin-bottom: 20px">
                             修改
                         </a>
                     {% endif %}
                     {% if session.get('username') != project.creator %}
-                        <button id="applyBtn" class="btn btn-primary" onclick="apply(this)" style="margin-top: 20px;margin-bottom: 20px">申请加入该项目</button>
+                        <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="apply(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">申请加入该项目</button>
                     {% endif %}
                     {% if session.get('username') in project.team and session.get('username') != project.creator%}
-                        <button id="applyBtn" class="btn btn-primary" onclick="quit(this)" style="margin-top: 20px;margin-bottom: 20px">退出该项目</button>
+                        <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="quit(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">退出该项目</button>
                     {% endif %}
+                    <button  id="share" class="sub-button mart-button btn-with-shadow" onclick="shareProject()" style="margin-top: 20px;background:#32be77;float: right;margin-right: 20px" type="submit">分享</button>
+                    <div style="height: 100px">&nbsp</div>
                 </div>
             </div>
         </div>
