@@ -59,8 +59,9 @@ def get_code():
     client_ = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     r = client_.request_access_token(code)
     if jweibo.is_exist(r.uid):
-        pass
+        print 'no'
     else:
+        print 'yes'
         access_token = r.access_token
         expires_in = r.expires_in
         client_.set_access_token(access_token, expires_in)

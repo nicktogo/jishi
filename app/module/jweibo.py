@@ -3,7 +3,7 @@ from bson.objectid import ObjectId
 
 
 def get_db():
-    return MongoFactory().get_connection()
+    return MongoFactory().get_connection()._conn_instance
 
 
 def is_exist(wid):
@@ -23,6 +23,7 @@ def create_user(weibo_info, code):
     user['major'] = ''
     user['phone'] = ''
     user['nickname'] = ''
+    user['profile_image_url'] = weibo_info['profile_image_url']
     conn = get_db()
     conn.users.insert_one(user)
     conn.weibos.insert_one(dict(wid=weibo_info['id'], code=code))
