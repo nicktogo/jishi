@@ -6,9 +6,9 @@ class CommentManager:
     def __init__(self):
         self._comments = MongoFactory().get_connection().get_collection(collection_name='comments')
 
-    def create_comment(self, user_id, content, project_id):
+    def create_comment(self, username, content, project_id):
         self._comments.insert_one({
-            'userid': user_id,
+            'username': username,
             'content': content,
             'project_id': project_id,
             'created_time': datetime.now()

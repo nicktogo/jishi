@@ -113,24 +113,24 @@ def homepage():
     followings = []
     if isFirst == 'yes':
         client_ = jweibo.get_client(session['user']['wid'])
-        result = client_.friendships.followers.get(uid=session['user']['wid'])
-        if result['total_number'] < 3:
-            followers_number = result['total_number']
+        follower_result = client_.friendships.followers.get(uid=session['user']['wid'])
+        if follower_result['total_number'] < 3:
+            followers_number = follower_result['total_number']
         else:
             followers_number = 3
         if followers_number == 0:
             followers = []
         else:
-            followers = result['users'][:followers_number]
-        result = client_.friendships.friends.get(uid=session['user']['wid'])
-        if result['total_number'] < 3:
-            followings_number = result['total_number']
+            followers = follower_result['users'][:followers_number]
+        folloing_result = client_.friendships.friends.get(uid=session['user']['wid'])
+        if folloing_result['total_number'] < 3:
+            followings_number = folloing_result['total_number']
         else:
             followings_number = 3
         if followings_number == 0:
             followings = []
         else:
-            followings = result['users'][:followings_number]
+            followings = folloing_result['users'][:followings_number]
     return render_template('homepage.html', isFirst=isFirst, followers=followers, followings=followings)
 
 
@@ -233,8 +233,8 @@ def showprojectdetail():
     cm = comment.CommentManager()
     comments = cm.get_all_comment_by_projectid(str(project['_id']))
     for _comment in comments:
-        _user_id = _comment['userid']
-        _user = auth.find_user_by_userId(_user_id)
+        _username = _comment['username']
+        _user = auth.find_user_by_username(_username)
         _comment['user'] = _user
     print project['_id']
     print comments
@@ -499,9 +499,8 @@ def message_search():
 def create_comment():
     username = session.get('username')
     if username:
-        user = auth.find_user_by_username(username)
         cm = comment.CommentManager()
-        cm.create_comment(user['_id'],request.form['input'],request.form['project_id'])
+        cm.create_comment(username, request.form['input'], request.form['project_id'])
         return redirect(url_for('showprojectdetail',project_id=request.form['project_id']))
     return redirect(url_for('login'))
 if __name__ == '__main__':
