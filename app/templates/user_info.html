@@ -38,36 +38,40 @@
                                             <table class="table table-user-information">
                                                 <tbody>
                                                 <tr>
-                                                    <td>昵称</td>
+                                                    <td class="tbhead">昵称：</td>
                                                     <td>{{ user.nickname }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>姓名</td>
-                                                    <td>{{ session.user.name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>学校</td>
-                                                    <td>{{ user.school }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>性别</td>
-                                                    <td>{{ user.gender }}</td>
 
+                                                <tr>
+                                                    <td>姓名：</td>
+                                                    <td>性别：</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>手机号</td>
-                                                    <td>{{ user.phone }}</td>
+                                                    <td>{{ session.user.name }}</td>
+                                                    <td>{{ user.gender }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email地址</td>
-                                                    <td>{{ user.username }}</td>
+                                                    <td>学校:</td>
+                                                    <td>年级:</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>年级</td>
+                                                    <td>{{ user.school }}</td>
                                                     <td>{{ user.grade }}</td>
                                                 </tr>
-                                                    <td>感兴趣的方面</td>
+                                                <tr>
+                                                    <td>手机号：</td>
+                                                    <td>Email地址：</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ user.phone }}</td>
+                                                    <td>{{ user.email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>感兴趣的方面:</td>
+                                                    </tr>
+                                                <tr>
                                                     <td>null</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
