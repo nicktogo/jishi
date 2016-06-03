@@ -207,8 +207,8 @@ def showprojectdetail():
     cm = comment.CommentManager()
     comments = cm.get_all_comment_by_projectid(str(project['_id']))
     for _comment in comments:
-        _user_id = _comment['userid']
-        _user = auth.find_user_by_userId(_user_id)
+        _username = _comment['username']
+        _user = auth.find_user_by_username(_username)
         _comment['user'] = _user
     print project['_id']
     print comments
@@ -473,9 +473,8 @@ def message_search():
 def create_comment():
     username = session.get('username')
     if username:
-        user = auth.find_user_by_username(username)
         cm = comment.CommentManager()
-        cm.create_comment(user['_id'],request.form['input'],request.form['project_id'])
+        cm.create_comment(username, request.form['input'], request.form['project_id'])
         return redirect(url_for('showprojectdetail',project_id=request.form['project_id']))
     return redirect(url_for('login'))
 if __name__ == '__main__':
