@@ -492,5 +492,14 @@ def message_search():
     return render_template("login.html")
 
 
+@app.route('/project/createcomment', methods=['GET','POST'])
+def create_comment():
+    username = session.get('username')
+    if username:
+        user = auth.find_user_by_username(username)
+        cm = comment.CommentManager()
+        cm.create_comment(user['_id'],request.form['input'],request.form['project_id'])
+        return redirect(url_for('showprojectdetail',project_id=request.form['project_id']))
+    return redirect(url_for('login'))
 if __name__ == '__main__':
     app.run(debug=True)
