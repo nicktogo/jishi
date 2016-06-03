@@ -46,7 +46,13 @@ def test():
         types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png'],['app1.png', 'app2.jpg', 'app3.jpg'],['sitp1.jpg', 'sitp2.jpg', 'sitp3.png'],['math1.jpg', 'math2.jpg', 'math3.jpg'],['shanghai1.jpg', 'shanghai2.jpg', 'shanghai3.jpg']]
         return types[int(type)]
 
-    return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img)
+    def get_messgae_number():
+        username = session.get('username')
+        if username:
+            return 1
+        else:
+            return 0
+    return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img,get_messgae_number=get_messgae_number)
 
 
 @app.route('/weibo')
@@ -204,6 +210,7 @@ def showprojectdetail():
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     session.pop('username', None)
+    session.pop('user', None)
     return redirect(url_for('login'))
 
 
@@ -237,6 +244,7 @@ def user_info():
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
+
 
 @app.route('/user/attend', methods=['GET'])
 def user_attend():
