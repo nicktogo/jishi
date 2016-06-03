@@ -79,11 +79,14 @@ def get_code():
         client_.set_access_token(access_token, expires_in)
         weibo_info = client_.users.show.get(uid=r.uid)
         wuser = jweibo.create_user(weibo_info, code, access_token, expires_in)
-    print wuser
+        wuser['_id'] = str(wuser['_id'])
+        session['user'] = wuser
+        session['username'] = wuser['username']
+        return redirect(url_for('homepage', first='yes'))
     wuser['_id'] = str(wuser['_id'])
     session['user'] = wuser
     session['username'] = wuser['username']
-    return redirect(url_for('index'))
+    return redirect(url_for('homepage'))
 
 
 @app.route('/project/share', methods=['POST'])
@@ -105,7 +108,30 @@ def share_project():
 
 @app.route('/auth/homepage', methods=['POST', 'GET'])
 def homepage():
-    return render_template('homepage.html')
+    isFirst = request.args.get('first','no')
+    followers = []
+    followings = []
+    if isFirst == 'yes':
+        client_ = jweibo.get_client(session['user']['wid'])
+        follower_result = client_.friendships.followers.get(uid=session['user']['wid'])
+        if follower_result['total_number'] < 3:
+            followers_number = follower_result['total_number']
+        else:
+            followers_number = 3
+        if followers_number == 0:
+            followers = []
+        else:
+            followers = follower_result['users'][:followers_number]
+        folloing_result = client_.friendships.friends.get(uid=session['user']['wid'])
+        if folloing_result['total_number'] < 3:
+            followings_number = folloing_result['total_number']
+        else:
+            followings_number = 3
+        if followings_number == 0:
+            followings = []
+        else:
+            followings = folloing_result['users'][:followings_number]
+    return render_template('homepage.html', isFirst=isFirst, followers=followers, followings=followings)
 
 
 @app.route('/auth/signup', methods=['POST', 'GET'])
