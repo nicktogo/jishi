@@ -164,12 +164,12 @@ class ProjectManager:
         return projects
 
     def find_all_project(self, page=1):
-        limit = 3
+        limit = 9
         offset = (page - 1) * limit
         return self._projects.find().skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)])
 
     def project_count(self):
-        return len(list(self._projects.find())) / 3 + 1
+        return len(list(self._projects.find())) / 9 + 1
 
     def find_project_by_id(self, project_id):
         return self._projects.find_one({

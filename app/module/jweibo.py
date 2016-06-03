@@ -30,6 +30,7 @@ def create_user(weibo_info, code, access_token, expire_in):
     user['major'] = ''
     user['phone'] = ''
     user['nickname'] = ''
+    user['avatar_large'] = weibo_info['avatar_large']
     user['profile_image_url'] = weibo_info['profile_image_url']
     conn = get_db()
     conn.users.insert_one(user)

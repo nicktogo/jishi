@@ -37,16 +37,8 @@
                     <div class="ceo">
                     </div>
                     <input id="project_id" type="hidden" value="{{project._id}}"/>
-                    {% if session.get('username') == project.creator %}
-                        <a id="modifyBtn" class="btn btn-primary" href="#" style="margin-top: 20px;margin-bottom: 20px">
-                            修改
-                        </a>
-                    {% endif %}
                     {% if session.get('username') != project.creator %}
                         <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="apply(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">申请加入该项目</button>
-                    {% endif %}
-                    {% if session.get('username') in project.team and session.get('username') != project.creator%}
-                        <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="quit(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">退出该项目</button>
                     {% endif %}
                     <button  id="share" class="sub-button mart-button btn-with-shadow" onclick="shareProject()" style="margin-top: 20px;background:#32be77;float: right;margin-right: 20px" type="submit">分享</button>
                     <div style="height: 100px">&nbsp</div>
