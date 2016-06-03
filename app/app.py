@@ -444,6 +444,8 @@ def message_page():
                     'username':msg['username'],
                     'created_time': str(msg['created_time']),
                     'message_type': msg['message_type'],
+                    'isSolved': msg['isSolved'],
+                    'user_name':session.get('username'),
                     'projectname': msg['projectname']}
             message_list.append(proj)
 
