@@ -49,7 +49,7 @@ def test():
     def get_messgae_number():
         username = session.get('username')
         if username:
-            return 1
+            return message.UnSolvedMessageCount(username)
         else:
             return 0
     return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img,get_messgae_number=get_messgae_number)
