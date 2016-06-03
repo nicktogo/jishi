@@ -10,7 +10,7 @@
 
 /* -- Demo style ------------------------------- */
 #demo {
-    width: 1000px;
+    width: 800px;
     max-width: 1000px;
 }
 
@@ -36,7 +36,7 @@
 
 .user_content {
     margin: 0 auto;
-    width: 70%;
+    width: 60%;
 }
 
 .shadow-z-1 {

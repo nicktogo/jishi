@@ -222,7 +222,9 @@ def userattendproject():
 @app.route('/user/userinfoedit', methods=['GET'])
 def userinfoedit():
     username = session.get('username')
-    return render_template('user_info_edit.html')
+    if username:
+        user = auth.find_user_by_username(username)
+        return render_template('user_info_edit.html', user=user)
 
 
 @app.route('/project/showprojectdetail)', methods=['GET'])
