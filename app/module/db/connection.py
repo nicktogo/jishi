@@ -177,12 +177,12 @@ class MongoConnection(AbstractConnection):
         return messagereceived
 
     def search_message(self, input, username):
-        messagereceived = self.get_all_message(username)
-        message_By_name = list(self._conn_instance.messages.find({'project_owner': {'$regex': input}}))
-        message_By_Project = list(self._conn_instance.messages.find({'projectname': {'$regex': input}}))
-        message_By_name.extend(message_By_Project)
-        tmp = [val for val in messagereceived if val in message_By_name]
-        return tmp
+        message_search = self._conn_instance.messages.find({'$and': [{'$or': [{'project_owner': {'$regex': input}},
+                                                                          {'projectname': {'$regex': input}}]},
+                                                                          {'$or': [{'project_owner': username},
+                                                                          {'projectname': username}]}]}).sort([
+            ('created_time', -1)])
+        return message_search
 
     def update_message(self, message):
         self._conn_instance.messages.update(message)

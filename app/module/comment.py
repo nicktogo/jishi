@@ -27,12 +27,13 @@ class CommentManager:
         })
 
     def get_all_comment_by_projectid(self, project_id):
-        return self._comments.find({
+        return list(self._comments.find({
             'project_id': project_id
-        })
+        }))
 
 
 if __name__ == '__main__':
     cm = CommentManager()
+    cm.create_comment('123','have a test', '574fda1523470e1cc83a2fb7')
 
 

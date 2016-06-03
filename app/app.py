@@ -11,7 +11,7 @@ import os
 from flask import g
 from module import jweibo
 
-from module import auth, project_manager, forms, message
+from module import auth, project_manager, forms, message, comment
 
 app = Flask(__name__, static_url_path='')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -204,7 +204,15 @@ def showprojectdetail():
     project_id = request.args.get('project_id')
     pm = project_manager.ProjectManager()
     project = pm.find_project_by_id(project_id)
-    return render_template('showprojectdetail.html', project=project)
+    cm = comment.CommentManager()
+    comments = cm.get_all_comment_by_projectid(str(project['_id']))
+    for _comment in comments:
+        _user_id = _comment['userid']
+        _user = auth.find_user_by_userId(_user_id)
+        _comment['user'] = _user
+    print project['_id']
+    print comments
+    return render_template('showprojectdetail.html', project=project, comments=comments)
 
 
 @app.route('/auth/logout', methods=['GET'])
