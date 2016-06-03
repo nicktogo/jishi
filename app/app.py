@@ -113,24 +113,24 @@ def homepage():
     followings = []
     if isFirst == 'yes':
         client_ = jweibo.get_client(session['user']['wid'])
-        result = client_.friendships.followers.get(uid=session['user']['wid'])
-        if result['total_number'] < 3:
-            followers_number = result['total_number']
+        follower_result = client_.friendships.followers.get(uid=session['user']['wid'])
+        if follower_result['total_number'] < 3:
+            followers_number = follower_result['total_number']
         else:
             followers_number = 3
         if followers_number == 0:
             followers = []
         else:
-            followers = result['users'][:followers_number]
-        result = client_.friendships.friends.get(uid=session['user']['wid'])
-        if result['total_number'] < 3:
-            followings_number = result['total_number']
+            followers = follower_result['users'][:followers_number]
+        folloing_result = client_.friendships.friends.get(uid=session['user']['wid'])
+        if folloing_result['total_number'] < 3:
+            followings_number = folloing_result['total_number']
         else:
             followings_number = 3
         if followings_number == 0:
             followings = []
         else:
-            followings = result['users'][:followings_number]
+            followings = folloing_result['users'][:followings_number]
     return render_template('homepage.html', isFirst=isFirst, followers=followers, followings=followings)
 
 
