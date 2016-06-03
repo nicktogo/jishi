@@ -1,0 +1,79 @@
+/* -- You can use this tables in Bootstrap (v3) projects. -- */
+/* -- Box model ------------------------------- */
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* -- Demo style ------------------------------- */
+#demo {
+  width: 1000px;
+    max-width: 1000px;
+}
+#demo h1 {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  letter-spacing: 0;
+  font-weight: 300;
+  color: #212121;
+  text-transform: inherit;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+#demo h2 {
+  bold:150;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.01rem;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+}
+.user_content {
+    margin: 0 auto;
+    width: 70%;
+}
+.shadow-z-1 {
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+}
+.user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad {
+    margin: 0 auto;
+    width: 100%;
+}
+.panel.panel-info {
+    margin: 0 auto;
+}
