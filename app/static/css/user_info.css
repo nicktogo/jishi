@@ -33,7 +33,6 @@
 .user_content {
     margin: 0 auto;
     width: 60%;
-    margin-top: 50px;
 }
 .shadow-z-1 {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
@@ -127,3 +126,23 @@ border:1px;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     box-sizing: border-box;
 }
+
+.sub-button {
+    display: inline-block;
+    background: #4289DB;
+    border-radius: 30px;
+    color: #fff;
+    padding: 9px 27px;
+    font-size: 18px;
+}
+
+.btn-with-shadow {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.2);
+}
+
+.mart-button{
+	border: none;
+    outline: 0;
+    transition: background .5s cubic-bezier(0,.98,.68,.92);
+}
+

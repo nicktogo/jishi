@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info_sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.pro.css') }}">
+
     <script>
         window.console = window.console || function (t) {
                 };
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <div class="text-right">
-                                    <button  id="save" type="submit" class="sub-button mart-button btn-with-shadow" onclick="" style="">保存</button>
+                                     <button  id="save" type="submit" class="sub-button mart-button btn-with-shadow" onclick="">保存</button>
                                         </div>
                                 </div>
                                 </form>
@@ -92,5 +92,40 @@
         </div>
     </div>
     <script type="text/javascript">
+     // Ripple-effect animation
+        (function ($) {
+            $(".ripple-effect").click(function (e) {
+                var rippler = $(this);
+
+                // create .ink element if it doesn't exist
+                if (rippler.find(".ink").length == 0) {
+                    rippler.append("<span class='ink'></span>");
+                }
+
+                var ink = rippler.find(".ink");
+
+                // prevent quick double clicks
+                ink.removeClass("animate");
+
+                // set .ink diametr
+                if (!ink.height() && !ink.width()) {
+                    var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+                    ink.css({
+                        height: d,
+                        width: d
+                    });
+                }
+
+                // get click coordinates
+                var x = e.pageX - rippler.offset().left - ink.width() / 2;
+                var y = e.pageY - rippler.offset().top - ink.height() / 2;
+
+                // set .ink position and add class .animate
+                ink.css({
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("animate");
+            })
+        })(jQuery);
     </script>
 {% endblock %}
