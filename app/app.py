@@ -43,7 +43,7 @@ def test():
         return budgets[int(budget)]
 
     def get_type_img(type):
-        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png']]
+        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png'],['app1.png', 'app2.jpg', 'app3.jpg'],['sitp1.jpg', 'sitp2.jpg', 'sitp3.png'],['math1.jpg', 'math2.jpg', 'math3.jpg'],['shanghai1.jpg', 'shanghai2.jpg', 'shanghai3.jpg']]
         return types[int(type)]
 
     return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img)
