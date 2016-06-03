@@ -23,7 +23,9 @@
         <div class="column">
           <div class="col-sm-6 col-md-4">
             <div class="thumbnail" style="box-shadow: 1px 1px 1px #888888;">
-              <img src="{{url_for('static', filename='img/'+get_type_img(project.type)[0])}}" style="width: 269px;height: 169px" >
+                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}">
+                <img src="{{url_for('static', filename='img/'+get_type_img(project.type)[0])}}" style="width:100%;height: 179px">
+                </a>
                 <h5 class="text-left">{{project.name}}</h5>
                 <div class="text-right">
                     <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id']) }}">招募中</a>
