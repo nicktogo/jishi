@@ -43,7 +43,7 @@ def test():
         return budgets[int(budget)]
 
     def get_type_img(type):
-        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png']]
+        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png'],['app1.png', 'app2.jpg', 'app3.jpg'],['sitp1.jpg', 'sitp2.jpg', 'sitp3.png'],['math1.jpg', 'math2.jpg', 'math3.jpg'],['shanghai1.jpg', 'shanghai2.jpg', 'shanghai3.jpg']]
         return types[int(type)]
 
     return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img)
@@ -245,6 +245,25 @@ def user_info():
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
+
+@app.route('/user/attend', methods=['GET'])
+def user_attend():
+    username = session.get('username')
+    if username:
+        user = auth.find_user_by_username(username)
+        return render_template('user_attend_project.html', user=user)
+    next_url = '/user/attend'
+    return redirect(url_for('login', next_url=next_url))
+
+@app.route('/user/own', methods=['GET'])
+def user_own():
+    username = session.get('username')
+    if username:
+        user = auth.find_user_by_username(username)
+        return render_template('user_own_project.html', user=user)
+    next_url = '/user/own'
+    return redirect(url_for('login', next_url=next_url))
+
 
 
 @app.route('/user', methods=['GET'])

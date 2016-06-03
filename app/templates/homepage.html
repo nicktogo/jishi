@@ -1013,6 +1013,9 @@
             $(".navbar a").css({
                 "color": "#e4e7ed"
             });
+            $(".navbar .dropdown-menu, .navbar.navbar-default .dropdown-menu").css({
+                            "background": "transparent"
+            });
 
             // scroll to change navbar style
             var scroll_start = 0;
@@ -1029,6 +1032,9 @@
                         $(".navbar a").css({
                             "color": "#3d444f"
                         });
+                        $(".navbar .dropdown-menu, .navbar.navbar-default .dropdown-menu").css({
+                            "background": "#fff"
+                        });
                     } else {
                         $(".navbar").css({
                             "background": "transparent",
@@ -1037,6 +1043,10 @@
                         $(".navbar a").css({
                             "color": "#e4e7ed"
                         });
+                        $(".navbar .dropdown-menu, .navbar.navbar-default .dropdown-menu").css({
+                            "background": "transparent"
+                        });
+
                     }
                 });
             }
