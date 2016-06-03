@@ -121,7 +121,7 @@ def count_message_by_user(username):
 
 def UnSolvedMessageCount(username):
     conn = MongoFactory().get_connection()
-    return len(list(conn.get_collection(collection_name='messages').find({'$and': [{'username': username},{'isSolved': '0'}]})))
+    return len(list(conn.get_collection(collection_name='messages').find({'project_owner': username,'isSolved': 0})))
 
 if __name__ == '__main__':
     print UnSolvedMessageCount('admin')
