@@ -58,7 +58,7 @@
 }
 
 .table-user-information > tbody > tr {
-    border-top: 1px solid rgb(221, 221, 221);
+    border-top: 0px solid rgb(221, 221, 221);
 }
 
 .table-user-information > tbody > tr:first-child {
@@ -75,4 +75,26 @@
 }
 .panel.panel-info {
     margin: 0 auto;
+}
+
+
+.panel-body {
+    padding-top: 50px;
+}
+
+.img-responsive {
+    display: block;
+    height: auto;
+    width: 100px;
+}
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, Neue Haas Grotesk Text Pro, Arial Nova, Segoe UI, Helvetica Neue, \.PingFang SC, PingFang SC, Microsoft YaHei, Microsoft JhengHei, Source Han Sans SC, Noto Sans CJK SC, Source Han Sans CN, Noto Sans SC, Source Han Sans TC, Noto Sans CJK TC, Hiragino Sans GB, sans-serif;
+}
+
+.table .table-user-information
+{
+border:1px;
 }
