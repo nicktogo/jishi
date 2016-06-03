@@ -219,13 +219,16 @@ def userattendproject():
         return response_json
 
 
-@app.route('/user/userinfoedit', methods=['GET'])
+@app.route('/user/userinfoedit', methods=['GET','POST'])
 def userinfoedit():
     username = session.get('username')
     if username:
         user = auth.find_user_by_username(username)
+    if request.method == 'GET':
         return render_template('user_info_edit.html', user=user)
-
+    if request.method == 'POST':
+       #这里主要加上获取表单的内容
+       return redirect(url_for('user_info'))
 
 @app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
