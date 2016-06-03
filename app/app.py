@@ -11,7 +11,7 @@ import os
 from flask import g
 from module import jweibo
 
-from module import auth, project_manager, forms, message
+from module import auth, project_manager, forms, message, comment
 
 app = Flask(__name__, static_url_path='')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -43,10 +43,16 @@ def test():
         return budgets[int(budget)]
 
     def get_type_img(type):
-        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png']]
+        types = [['wechat1.jpg', 'wechat2.jpg', 'wechat3.png'],['app1.png', 'app2.jpg', 'app3.jpg'],['sitp1.jpg', 'sitp2.jpg', 'sitp3.png'],['math1.jpg', 'math2.jpg', 'math3.jpg'],['shanghai1.jpg', 'shanghai2.jpg', 'shanghai3.jpg']]
         return types[int(type)]
 
-    return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img)
+    def get_messgae_number():
+        username = session.get('username')
+        if username:
+            return message.UnSolvedMessageCount(username)
+        else:
+            return 0
+    return dict(ran=ran, get_type=get_type, get_budget=get_budget, get_type_img=get_type_img,get_messgae_number=get_messgae_number)
 
 
 @app.route('/weibo')
@@ -198,12 +204,21 @@ def showprojectdetail():
     project_id = request.args.get('project_id')
     pm = project_manager.ProjectManager()
     project = pm.find_project_by_id(project_id)
-    return render_template('showprojectdetail.html', project=project)
+    cm = comment.CommentManager()
+    comments = cm.get_all_comment_by_projectid(str(project['_id']))
+    for _comment in comments:
+        _user_id = _comment['userid']
+        _user = auth.find_user_by_userId(_user_id)
+        _comment['user'] = _user
+    print project['_id']
+    print comments
+    return render_template('showprojectdetail.html', project=project, comments=comments)
 
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     session.pop('username', None)
+    session.pop('user', None)
     return redirect(url_for('login'))
 
 
@@ -237,6 +252,7 @@ def user_info():
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
+
 
 @app.route('/user/attend', methods=['GET'])
 def user_attend():
@@ -428,6 +444,8 @@ def message_page():
                     'username':msg['username'],
                     'created_time': str(msg['created_time']),
                     'message_type': msg['message_type'],
+                    'isSolved': msg['isSolved'],
+                    'user_name':session.get('username'),
                     'projectname': msg['projectname']}
             message_list.append(proj)
 

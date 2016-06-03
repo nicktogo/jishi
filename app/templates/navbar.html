@@ -30,8 +30,11 @@
                     <li id="create_project"><a href='{{ url_for('create_project') }}'>项目发布</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="message_alert"><a href="{{ url_for('message_page') }}">消息提醒</a></li>
-                     <li class="dropdown" id="person"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('user_info') }}">个人中心</a>
+                    {% if session.get('user') %}
+                        <img src="{{session.user.profile_image_url}}" style="border-radius: 50%;float: left;width:40px;margin-top: 9px;margin-right: 10px">
+                    {% endif %}
+                    <li id="message_alert"><a href="{{ url_for('message_page') }}" aria-hidden="true"><span class="glyphicon glyphicon-bell"></span>{% if get_messgae_number() != 0 %}<span class="badge" style="background-color: red">{{get_messgae_number()}}</span>{% endif %}</a></li>
+                     <li class="dropdown" id="person"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('user_info') }}"><span class="glyphicon glyphicon-user"></span></a>
                          <ul class="dropdown-menu">
                              <li>
                     <a class="withripple" href="{{ url_for('user_info') }}">
@@ -51,14 +54,11 @@
                                 </ul>
                     </li>
                     {% if not session.get('username') %}
-                        <li id="jishi_login"><a href='{{ url_for('login') }}'>登录</a></li>
-                        <li id="jishi_signup"><a href='{{ url_for('signup') }}'>注册</a></li>
+                        <li id="jishi_login"><a href='{{ url_for('login') }}'><span class="glyphicon glyphicon-log-in"></span></a></li>
+                        <li id="jishi_signup"><a href='{{ url_for('signup') }}'><span class="glyphicon glyphicon-plus"></span></a></li>
                     {% endif %}
                     {% if session.get('username') %}
-                        {% if session.get('user') %}
-                        <img src="{{session.user.profile_image_url}}" style="border-radius: 50%;float: left;width:40px;margin-top: 5px">
-                        {% endif %}
-                        <li id="jishi_logout"><a href='{{ url_for('logout') }}'>退出</a></li>
+                        <li id="jishi_logout"><a href='{{ url_for('logout') }}'><span class="glyphicon glyphicon-log-out"></span></a></li>
                     {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->

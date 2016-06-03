@@ -32,7 +32,7 @@ function getPage(e) {
                 switch(this.message_type)
                 {
                 case 0:
-                        if(this.isSolved == 0)
+                        if(this.isSolved == 0&&this.project_owner==this.user_name)
                         {
                         newTbodyHtml +=
                             '<td data-title="操作">' +

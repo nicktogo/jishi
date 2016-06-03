@@ -1,7 +1,7 @@
 from db.factory import MysqlFactory
 from db.factory import MongoFactory
 from flask import g
-
+from bson import ObjectId
 
 def valid_login(username, password):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
@@ -30,6 +30,11 @@ def signup(user):
 def find_user_by_username(username):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
     return conn.find_one({'username': username})
+
+
+def find_user_by_userId(userId):
+    conn = MongoFactory().get_connection().get_collection(collection_name='users')
+    return conn.find_one({'_id': ObjectId(userId)})
 
 
 def user_not_exist(user):

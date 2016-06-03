@@ -116,9 +116,13 @@ def find_message_by_user(username, page_no, page_size):
 
 
 def count_message_by_user(username):
-    conn  = MongoFactory().get_connection()
+    conn = MongoFactory().get_connection()
     return conn.count_message_by_user(username=username)
 
+def UnSolvedMessageCount(username):
+    conn = MongoFactory().get_connection()
+    return len(list(conn.get_collection(collection_name='messages').find({'project_owner': username,'isSolved': 0})))
+
 if __name__ == '__main__':
-    print get_all_message('admin')
-    print search_message('', 'admin')
+    print UnSolvedMessageCount('admin')
+

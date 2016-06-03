@@ -58,6 +58,30 @@
                     </div>
                 </section>
             </div>
+            <div class="list-group">
+                <section class="reward-content">
+                    <div class="comment">
+                        <h3>评论：</h3>
+                        <p style="margin-top:20px"></p>
+                        {% for comment in comments %}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object" src={{comment['user']['profile_image_url']}}>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{comment['user']['name']}}</h4>
+                                <p>{{ comment['content'] }}</p>
+                            </div>
+                            <div class="media-right">
+                                <p>{{comment['created_time']}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
             <div class="modal join_modal" style="display: none">
                 <div class="box">
                     <div class="form">
