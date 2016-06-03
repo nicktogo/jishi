@@ -79,11 +79,12 @@ def get_code():
         client_.set_access_token(access_token, expires_in)
         weibo_info = client_.users.show.get(uid=r.uid)
         wuser = jweibo.create_user(weibo_info, code, access_token, expires_in)
+        return redirect(url_for('homepage', first='yes'))
     print wuser
     wuser['_id'] = str(wuser['_id'])
     session['user'] = wuser
     session['username'] = wuser['username']
-    return redirect(url_for('homepage', first='yes'))
+    return redirect(url_for('homepage'))
 
 
 @app.route('/project/share', methods=['POST'])
