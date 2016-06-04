@@ -179,7 +179,7 @@ def userownproject():
         response = {}
         project_list = []
         for idx, project in enumerate(projects):
-            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],
+            proj = {'id': idx + 1,'status': project['status'],'_id': str(project['_id']), 'name': project['name'],
                     'created_time': str(project['created_time'])}
             project_list.append(proj)
         response['projects'] = project_list
@@ -190,6 +190,12 @@ def userownproject():
         response_json = json.dumps(response, default=json_util.default)
         return response_json
 
+
+@app.route('/projectstart', methods=['GET'])
+def start_project():
+    project_id = request.args.get('project_id')
+    project_manager.ProjectManager().start_project(project_id)
+    return redirect(url_for('showprojectdetail', project_id=project_id))
 
 @app.route('/user/userattendproject', methods=['POST', 'GET'])
 def userattendproject():
@@ -253,6 +259,10 @@ def showprojectdetail():
     project_id = request.args.get('project_id')
     pm = project_manager.ProjectManager()
     project = pm.find_project_by_id(project_id)
+    for i, t_user in enumerate(project['team']):
+        _user = auth.find_user_by_username(t_user)
+        project['team'][i] = _user
+    project['creator'] = auth.find_user_by_username(project['creator'])
     cm = comment.CommentManager()
     comments = cm.get_all_comment_by_projectid(str(project['_id']))
     for _comment in comments:
@@ -265,10 +275,10 @@ def showprojectdetail():
 
 @app.route('/project/edit',methods=['GET','POST'])
 def project_edit():
-    if request.method=='GET':
-        return render_template('project_edit.html')
-    if request.method=='POST':
-        render_template('project_edit.html')
+    project_id =  request.args.get('project_id')
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_id(project_id)
+    return render_template('project_edit.html', project=project)
 
 
 @app.route('/auth/logout', methods=['GET'])
@@ -308,6 +318,12 @@ def user_info():
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url, ))
+
+
+@app.route('/user/<username>', methods=['GET'])
+def show_user(username):
+    user = auth.find_user_by_username(username)
+    return render_template('user_info.html', user=user)
 
 
 @app.route('/user/attend', methods=['GET'])
@@ -387,6 +403,7 @@ def create_project():
         project['startTime'] = request.form.get('startTime')
         project['endTime'] = request.form.get('endTime')
         project['creator'] = session['username']
+        project['status'] = 0
         project['name'] = request.form.get('name')
         project['type'] = request.form.get('type')
         project['budget'] = request.form.get('budget')
