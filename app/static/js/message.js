@@ -21,7 +21,7 @@ function getPage(e) {
             var newTbodyHtml = '';
             $(data.messages).each(function () {
                 newTbodyHtml += '<tr>';
-                newTbodyHtml += '<td data-title="项目名称">' + '<a href="/project/' + this._id + '"' + ' target="_blank"> ';
+                newTbodyHtml += '<td data-title="项目名称">' + '<a href="/project/' + this.project_id + '"' + ' target="_blank"> ';
                 newTbodyHtml += this.projectname;
                 newTbodyHtml += '</a>';
                 newTbodyHtml += '</td>';

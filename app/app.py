@@ -519,6 +519,7 @@ def message_page():
                     'message_type': msg['message_type'],
                     'isSolved': msg['isSolved'],
                     'user_name':session.get('username'),
+                    'project_id':msg['project_id'],
                     'projectname': msg['projectname']}
             message_list.append(proj)
 
