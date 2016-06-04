@@ -1,0 +1,178 @@
+{% extends "navbar.html" %}
+{% block title %}
+    编辑项目
+{% endblock %}
+{% block page_specified_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/projectpublish_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/fileinput.css') }}">
+{% endblock %}
+{% block page_specified %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/moment-with-locales.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/prettify-1.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/fileinput.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static',filename='js/fileinput_locale_zh.js') }}" type="text/javascript"></script>
+
+{% endblock %}
+{% block body %}
+    <style>
+        label {
+            color: black !important;
+        }
+    </style>
+    <form class="form" action="{{ url_for('create_project') }}" method="post">
+        <div class="content">
+            <div class="box">
+                <div class="input">
+                    <fieldset class="form-group">
+                        <div class="ds-table">
+                            <div class="ds-table-cell pd-right-10">
+                                <label>项目类型&nbsp;*</label>
+                                <select class="form-input" name="type">
+                                    <option value="0" selected>微信应用</option>
+                                    <option value="1">APP</option>
+                                    <option value="2">SITP</option>
+                                    <option value="3">数学建模</option>
+                                    <option value="4">上创</option>
+                                </select>
+                            </div>
+                            <div class="ds-table-cell pd-left-10">
+                                <label class="input-budget">项目预算&nbsp;*</label>
+                                <select class="form-input" name="budget">
+                                    <option value="0" selected>1万以下</option>
+                                    <option value="1">1-3万</option>
+                                    <option value="2">3-5万</option>
+                                    <option value="3">5万以上</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+                <div class="input">
+                    <fieldset class="form-group">
+                        <label>项目名 （支持 1-30 个字符）&nbsp;*</label>
+                        <input class="form-input" type="text" placeholder="一个吸引人的项目名字不应该超过 30 字" name="name" required/>
+                    </fieldset>
+                </div>
+
+                <div class="input">
+                    <fieldset class="form-group">
+                        <label>项目描述 （至少 50 个字符）&nbsp;*
+                        </label>
+                        <textarea class="form-input" placeholder="50-2000个字符"
+                                  rows="5" name="description" required></textarea>
+
+                    </fieldset>
+                </div>
+
+
+                <div class="input">
+                    <fieldset class="form-group">
+                        <div class="ds-table">
+                            <div class="ds-table-cell pd-right-10">
+                                <label>招募截至&nbsp;*</label>
+                                <input name="endTime" type='text' class="form-input" id="end" required/>
+                            </div>
+                            <div class="ds-table-cell pd-left-10">
+                                <label>开始时间&nbsp;*</label>
+                                <input name="startTime" type='text' class="form-input" id="start" required/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="input">
+                    <fieldset class="form-group">
+
+                        <label>最大人数&nbsp;*</label>
+                        <input class="form-input" type="text" placeholder="填写你希望该项目最多的人数(包括你自己)" value=""
+                               name="maxPeople" required/>
+
+                    </fieldset>
+
+                </div>
+
+                <div class="input">
+                   <div class="form-group">
+                    <label><b>上传图片</b></label>
+                    <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
+                </div>
+        </div>
+
+                <div class="input">
+                    <fieldset class="form-group">
+                        <div class="ds-table">
+                            <div class="ds-table-cell pd-right-10">
+                                <label>姓名&nbsp;*</label>
+                                <input class="form-input" type="text" value="" name="contact" required/>
+                            </div>
+                            <div class="ds-table-cell pd-left-10">
+                                <label>电话&nbsp;*</label>
+                                <input class="form-input" type="text" placeholder="电话" value="" name="contact_mobile"
+                                       required/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="input">
+                    <fieldset class="form-group">
+
+                        <label>邮箱&nbsp;*</label>
+                        <input class="form-input" type="text" placeholder="填写你的邮箱地址" value=""
+                               name="contact_email" required/>
+
+                    </fieldset>
+
+                </div>
+                <div class="input">
+                    <input id="checkbox" type="checkbox" class="agreement-checkbox">
+                    <div class="agreement-text">
+                        我同意<a href="{{ url_for("projectprocotol") }}" class="agreement-content">《济市平台需求方协议》</a>
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="last-row">
+                        <button id="submit" class="sub-button mart-button btn-with-shadow" type="submit" disabled>发布项目
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        </div>
+
+
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            $('#start').datepicker();
+        });
+        $(function () {
+            $('#end').datepicker();
+        });
+        $(function () {
+            $('#checkbox').change(function () {
+                var submit_button = $('#submit');
+                if (this.checked == true) {
+                    submit_button.prop('disabled', false);
+                    submit_button.css({
+                        'background-color': '#4289DB'
+                    });
+                } else {
+                    submit_button.prop('disabled', true);
+                    submit_button.css({
+                        'background-color': '#808080'
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
