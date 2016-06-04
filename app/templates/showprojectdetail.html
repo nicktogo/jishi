@@ -28,11 +28,30 @@
                     <div class="title-row">
                         <span class="title">{{project.name}}</span>
                     </div>
+                    {% if project.status == 0 %}
+                    {% if session.get('username') != project.creator %}
                     <button class="sub-button mart-button btn-with-shadow" style="float:right;background:#32be77" type="submit">申请加入</button>
+                    {% endif %}
+                    {% endif %}
+                    {% if project.status == 1 %}
+                    <button class="sub-button mart-button btn-with-shadow" style="float:right;background:grey">正在开发</button>
+                    {% endif %}
+                    {% if project.status == 2 %}
+                    <button class="sub-button mart-button btn-with-shadow" style="float:right;background:grey">已经结束</button>
+                    {% endif %}
                     <div class="desc-row">
                         <div class="role-type">
                             <span class="reward-no">No.49</span>
                             <span class="type">{{get_type(project.type)}}&nbsp;</span>
+                            {% if project.status == 0 %}
+                            <a class="label label-success" style="border-radius: 5px" href="{{ url_for('singledisplay', project_id=project['_id']) }}">招募中</a><br>
+                            {% endif %}
+                            {% if project.status == 1 %}
+                            <a class="label label-info" style="border-radius: 5px" href="{{ url_for('singledisplay', project_id=project['_id']) }}">开发中</a>
+                            {% endif %}
+                            {% if project.status == 2 %}
+                            <a class="label label-danger" style="border-radius: 5px" href="{{ url_for('singledisplay', project_id=project['_id']) }}">已结束</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="detail-row">

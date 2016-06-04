@@ -13,10 +13,7 @@
                 <div class="case_content">
                     <div class="name"><strong>{{ project.name }}</strong></div>
                     <div style="margin-top: 10px">
-                        人数
-                        <span class="strong"> {{ project.currentPeople }} / {{project.maxPeople}} </span>
-                        项目时间
-                        <span class="strong"> {{ project.time }} </span>
+                        <span class="type">{{get_type(project.type)}}&nbsp;</span>
                     </div>
                     <div style="float: right;margin-right: 10px">
                         <a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a>
