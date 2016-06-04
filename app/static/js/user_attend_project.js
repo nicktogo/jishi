@@ -27,7 +27,7 @@ function getPage(e) {
                 newTbodyHtml += '<td data-title="状态">招募中</td>';
                 newTbodyHtml +=
                     '<td data-title="操作">' +
-                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto">修改</button>' +
+                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto">退出</button>' +
                     '</td>';
                 newTbodyHtml += '</tr>';
                 last_created_time = this.created_time;
