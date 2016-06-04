@@ -231,8 +231,9 @@ def userinfoedit():
         user['grade'] = request.form['usergrade']
         user['phone'] = request.form['userphone']
         user['email'] = request.form['useremail']
-        interest = request.form['userinterest']
-        redirect(url_for('user_info'))
+        user['interest'] = request.form['userinterest']
+        auth.user_info_edit(user)
+        return redirect(url_for('user_info'))
 
 @app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
