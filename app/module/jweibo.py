@@ -25,11 +25,13 @@ def create_user(weibo_info, code, access_token, expire_in):
     user['name'] = weibo_info['name']
     user['password'] = '123456'
     user['school'] = ''
-    user['gender'] = ''
+    user['gender'] = weibo_info['gender']
     user['grade'] = ''
     user['major'] = ''
     user['phone'] = ''
     user['nickname'] = ''
+    user['email'] = ''
+    user['interest'] = []
     user['avatar_large'] = weibo_info['avatar_large']
     user['profile_image_url'] = weibo_info['profile_image_url']
     conn = get_db()

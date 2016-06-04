@@ -227,8 +227,12 @@ def userinfoedit():
     if request.method == 'GET':
         return render_template('user_info_edit.html', user=user)
     if request.method == 'POST':
-       #这里主要加上获取表单的内容
-       return redirect(url_for('user_info'))
+        user['school'] = request.form['userschool']
+        user['grade'] = request.form['usergrade']
+        user['phone'] = request.form['userphone']
+        user['email'] = request.form['useremail']
+        interest = request.form['userinterest']
+        redirect(url_for('user_info'))
 
 @app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
