@@ -239,6 +239,10 @@ def showprojectdetail():
     project_id = request.args.get('project_id')
     pm = project_manager.ProjectManager()
     project = pm.find_project_by_id(project_id)
+    for i, t_user in enumerate(project['team']):
+        _user = auth.find_user_by_username(t_user)
+        project['team'][i] = _user
+    project['creator'] = auth.find_user_by_username(project['creator'])
     cm = comment.CommentManager()
     comments = cm.get_all_comment_by_projectid(str(project['_id']))
     for _comment in comments:
@@ -251,10 +255,10 @@ def showprojectdetail():
 
 @app.route('/project/edit',methods=['GET','POST'])
 def project_edit():
-    if request.method=='GET':
-        return render_template('project_edit.html')
-    if request.method=='POST':
-        render_template('project_edit.html')
+    project_id =  request.args.get('project_id')
+    pm = project_manager.ProjectManager()
+    project = pm.find_project_by_id(project_id)
+    return render_template('project_edit.html', project=project)
 
 
 @app.route('/auth/logout', methods=['GET'])
@@ -294,6 +298,12 @@ def user_info():
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
     return redirect(url_for('login', next_url=next_url))
+
+
+@app.route('/user/<username>', methods=['GET'])
+def show_user(username):
+    user = auth.find_user_by_username(username)
+    return render_template('user_info.html', user=user)
 
 
 @app.route('/user/attend', methods=['GET'])

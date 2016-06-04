@@ -51,10 +51,16 @@
                         <h2 >二、功能描述</h2>
                         <p>无</p>
                         <h2>三、联系人</h2>
-
                         <p><strong>姓名:</strong>{{project.contact}}</p>
                         <p><strong>邮箱:</strong>{{project.contact_email}}</p>
                         <p><strong>电话:</strong>{{project.contact_mobile}}</p>
+                        <h2>四、项目团队</h2>
+                        <h3>项目负责人</h3>
+                           <img src="{{project.creator.profile_image_url}}" style="border-radius: 50%;border: transparent"><a href="{{url_for('show_user', username=project.creator.username)}}"><strong>{{project.creator.name}}</strong></a>
+                        <h3>项目成员</h3>
+                        {% for member in project.team %}
+                           <img src="{{member.profile_image_url}}" style="border-radius: 50% ;border: transparent"><a href="{{url_for('show_user', username=member.username)}}"><strong>{{member.name}}</strong></a>
+                        {% endfor %}
                     </div>
                 </section>
             </div>
