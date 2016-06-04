@@ -44,7 +44,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td>{{ session.user.name }}</td>
-                                                    <td>{{ user.gender }}</td>
+                                                    {% if user.gender == 'm'%}
+                                                    <td>男</td>
+                                                    {% else %}
+                                                    <td>女</td>
+                                                    {% endif %}
                                                 </tr>
                                                 <tr>
                                                     <td class="tbhead">学校:</td>
