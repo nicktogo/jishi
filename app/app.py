@@ -179,7 +179,7 @@ def userownproject():
         response = {}
         project_list = []
         for idx, project in enumerate(projects):
-            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],
+            proj = {'id': idx + 1,'status': project['status'],'_id': str(project['_id']), 'name': project['name'],
                     'created_time': str(project['created_time'])}
             project_list.append(proj)
         response['projects'] = project_list
@@ -190,6 +190,12 @@ def userownproject():
         response_json = json.dumps(response, default=json_util.default)
         return response_json
 
+
+@app.route('/projectstart', methods=['GET'])
+def start_project():
+    project_id = request.args.get('project_id')
+    project_manager.ProjectManager().start_project(project_id)
+    return redirect(url_for('showprojectdetail', project_id=project_id))
 
 @app.route('/user/userattendproject', methods=['POST', 'GET'])
 def userattendproject():
@@ -384,6 +390,7 @@ def create_project():
         project['startTime'] = request.form.get('startTime')
         project['endTime'] = request.form.get('endTime')
         project['creator'] = session['username']
+        project['status'] = 0
         project['name'] = request.form.get('name')
         project['type'] = request.form.get('type')
         project['budget'] = request.form.get('budget')

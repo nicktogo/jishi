@@ -26,10 +26,22 @@ function getPage(e) {
                 newTbodyHtml += '</td>';
                 newTbodyHtml += '<td data-title="状态">招募中</td>';
                 newTbodyHtml +=
-                    '<td data-title="操作">' +
+                    '<td data-title="管理">' +
                     '<a  href="/project/edit?project_id='+this._id+ '"class="btn btn-raised btn-default" onclick="" style="margin: auto">修改</a>' +
                     '</td>';
+                if(this.status == 0){
+                    newTbodyHtml +=
+                    '<td data-title="操作">' +
+                    '<a  href="/projectstart?project_id='+this._id+ '"class="btn btn-raised btn-success" onclick="" style="margin: auto">开始项目</a>' +
+                    '</td>';
+                }if(this.status == 1){
+                    newTbodyHtml +=
+                    '<td data-title="操作">' +
+                    '<button disabled="disabled" class="btn btn-primary btn-default" onclick="" style="margin: auto">项目已开始</button>' +
+                    '</td>';
+                }
                 newTbodyHtml += '</tr>';
+
                 last_created_time = this.created_time;
             });
             newTbodyHtml +=
