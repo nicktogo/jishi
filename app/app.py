@@ -245,6 +245,13 @@ def showprojectdetail():
     print comments
     return render_template('showprojectdetail.html', project=project, comments=comments)
 
+@app.route('/project/edit',methods=['GET','POST'])
+def project_edit():
+    if request.method=='GET':
+        return render_template('project_edit.html')
+    if request.method=='POST':
+        render_template('project_edit.html')
+
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
