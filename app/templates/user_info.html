@@ -68,9 +68,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="tbhead">感兴趣的方面:</td>
-                                                    </tr>
-                                                <tr>
-                                                    <td></td>
+                                                    <td>
+                                                    {% for interest in user.interest%}
+                                                    <p>{{get_type(interest)}}</p>
+                                                    {% endfor %}
+                                                    </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

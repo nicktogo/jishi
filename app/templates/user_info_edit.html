@@ -48,10 +48,15 @@
                                                     <td>
                                                         <input class="form-input" type="text" name="username" value={{ session.user.name }}>
                                                     </td>
-                                                    <td><select class="form-input" name="usergendar">
-                                                         <option value="f" selected>女</option>
-                                                         <option value="m">男</option>
-                                                         </select></td>
+                                                    <td><select class="form-input" name="usergender">
+                                                        {% if user.gender== 'm'%}
+                                                        <option value="f">女</option>
+                                                        <option value="m" selected>男</option>
+                                                        {% else %}
+                                                        <option value="f" selected>女</option>
+                                                        <option value="m">男</option>
+                                                        {% endif %}
+                                                    </select></td>
                                                 </tr>
                                                 <tr>
                                                     <td>学校:</td>
@@ -72,9 +77,29 @@
                                                 <tr>
                                                     <td>感兴趣的方面:</td>
                                                     </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><ul class="list-group" required>
+                                              <li class="list-group-item" >
+                                                  <input type="radio" value="0" name="type_0">    微信应用
+                                              </li>
+                                              <li class="list-group-item" >
+                                                  <input type="radio" value="1" name="type_1">    App
+                                              </li>
+                                              <li class="list-group-item" >
+                                                  <input type="radio" value="2" name="type_2">    Sitp
+                                              </li>
+                                              <li class="list-group-item" >
+                                                  <input type="radio" value="3" name="type_3">    数学建模
+                                              </li>
+                                              <li class="list-group-item" >
+                                                  <input type="radio" value="4" name="type_4">    上创
+                                              </li>
+                                            </ul></td>
+                                                </tr>
                                                 </tbody>
                                             </table>
-                                            <textarea class="form-input" placeholder="50-2000个字符" rows="5" name="userinterest" required></textarea>
+
                                         </div>
                                     </div>
                                 </div>
