@@ -28,7 +28,15 @@
                 </a>
                 <h5 class="text-left">{{project.name}}</h5>
                 <div class="text-right">
+                    {% if project.status == 0 %}
                     <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id']) }}">招募中</a>
+                    {% endif %}
+                    {% if project.status == 1 %}
+                    <a class="label label-info" href="{{ url_for('singledisplay', project_id=project['_id']) }}">开发中</a>
+                    {% endif %}
+                    {% if project.status == 2 %}
+                    <a class="label label-danger" href="{{ url_for('singledisplay', project_id=project['_id']) }}">已结束</a>
+                    {% endif %}
                 </div>
                 <div style="width: 100%;height:1px;background-color: #b7b7b7;margin-top: 5px"></div>
                 <div class="caption">
