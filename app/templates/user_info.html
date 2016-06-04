@@ -44,7 +44,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td>{{ user.name }}</td>
-                                                    <td>{{ user.gender }}</td>
+                                                    {% if user.gender == 'm'%}
+                                                    <td>男</td>
+                                                    {% else %}
+                                                    <td>女</td>
+                                                    {% endif %}
                                                 </tr>
                                                 <tr>
                                                     <td class="tbhead">学校:</td>
@@ -66,7 +70,7 @@
                                                     <td class="tbhead">感兴趣的方面:</td>
                                                     </tr>
                                                 <tr>
-                                                    <td>null</td>
+                                                    <td></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

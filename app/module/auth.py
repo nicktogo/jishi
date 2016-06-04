@@ -36,6 +36,23 @@ def find_user_by_userId(userId):
     conn = MongoFactory().get_connection().get_collection(collection_name='users')
     return conn.find_one({'_id': ObjectId(userId)})
 
+def user_info_edit(user):
+    conn = MongoFactory().get_connection().get_collection(collection_name='users')
+    interest = user['interest']
+    interests = interest.split(' ')
+    print interests
+    user_id = find_user_by_username(user['username'])['_id']
+    return conn.update_one({
+        '_id': ObjectId(user_id)
+    },{
+        '$set': {
+            'school': user['school'],
+            'grade': user['grade'],
+            'phone': user['phone'],
+            'email': user['email'],
+            'interest': interests
+        }
+    })
 
 def user_not_exist(user):
     if len(user) == 0:
