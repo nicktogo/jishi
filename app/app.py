@@ -237,9 +237,22 @@ def userinfoedit():
         user['grade'] = request.form['usergrade']
         user['phone'] = request.form['userphone']
         user['email'] = request.form['useremail']
-        user['interest'] = request.form['userinterest']
+        user['gender'] = request.form['usergender']
+        interests = []
+        if request.form.get('type_0'):
+            interests.append(0)
+        if request.form.get('type_1'):
+            interests.append(1)
+        if request.form.get('type_2'):
+            interests.append(2)
+        if request.form.get('type_3'):
+            interests.append(3)
+        if request.form.get('type_4'):
+            interests.append(4)
+        user['interest'] = interests
         auth.user_info_edit(user)
         return redirect(url_for('user_info'))
+
 
 @app.route('/project/showprojectdetail)', methods=['GET'])
 def showprojectdetail():
@@ -304,7 +317,7 @@ def user_info():
         user = auth.find_user_by_username(username)
         return render_template('user_info.html', user=user)
     next_url = '/user/info'
-    return redirect(url_for('login', next_url=next_url))
+    return redirect(url_for('login', next_url=next_url, ))
 
 
 @app.route('/user/<username>', methods=['GET'])
@@ -506,6 +519,7 @@ def message_page():
                     'message_type': msg['message_type'],
                     'isSolved': msg['isSolved'],
                     'user_name':session.get('username'),
+                    'project_id':msg['project_id'],
                     'projectname': msg['projectname']}
             message_list.append(proj)
 
