@@ -64,6 +64,15 @@ class ProjectManager:
             return '已在team中'
         else:
             message.accept(applier_name, project_id, projectName, projectOwner, message_id)
+            logs_conn = MongoFactory().get_connection().get_collection("logs")
+            log = dict(created_time=datetime.now(), type=1, applier=applier_name)
+            logs_conn.update_one({
+                'project_id':project_id
+            },{
+                '$push': {
+                    'timelines':log
+                }
+            })
             result = self._projects.update_one({
                 '_id': ObjectId(project_id)
             }, {
@@ -92,6 +101,15 @@ class ProjectManager:
         if (self.is_in_team(username, project_id)):
             project = self.find_project_by_id(project_id)
             message.quit(username, project_id,project['name'], project['creator'])
+            logs_conn = MongoFactory().get_connection().get_collection("logs")
+            log = dict(created_time=datetime.now(), type=2, applier=username)
+            logs_conn.update_one({
+                'project_id':project_id
+            },{
+                '$push': {
+                    'timelines':log
+                }
+            })
             currentPeople = project['currentPeople'] - 1
             result = self._projects.update_one({
                 '_id': ObjectId(project_id)
