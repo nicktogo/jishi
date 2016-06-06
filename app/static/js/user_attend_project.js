@@ -26,10 +26,20 @@ function getPage(e) {
                 newTbodyHtml += '</a>';
                 newTbodyHtml += '</td>';
                 newTbodyHtml += '<td data-title="状态">招募中</td>';
-                newTbodyHtml +=
+                if(this.creator==this.username)
+                {
+                    newTbodyHtml +=
                     '<td data-title="操作">' +
-                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto" onclick="quit(this)">退出</button>' +
+                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto" onclick="quit(this)" disabled="disabled">退出</button>' +
                     '</td>';
+                }
+                else{
+                    newTbodyHtml +=
+                        '<td data-title="操作">' +
+                        '<button type="button" class="btn btn-raised btn-default" style="margin: auto" onclick="quit(this)">退出</button>' +
+                        '</td>';
+                }
+
                 newTbodyHtml += '<input class="project_id" type="hidden" value="' + this._id +'">';
                 newTbodyHtml += '</tr>';
                 last_created_time = this.created_time;

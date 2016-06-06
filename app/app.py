@@ -212,9 +212,10 @@ def userattendproject():
                                                    page_size=page_size)
         response = {}
         project_list = []
+        username = session.get('username')
         for idx, project in enumerate(projects):
-            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],
-                    'created_time': str(project['created_time'])}
+            proj = {'id': idx + 1, '_id': str(project['_id']), 'name': project['name'],'creator':str(project['creator'])
+                , 'created_time': str(project['created_time']),'username': username}
             project_list.append(proj)
         response['projects'] = project_list
         project_count = pm.get_attend_project_count_by_user(username=session.get('username'))
