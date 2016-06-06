@@ -94,6 +94,7 @@ class ProjectManager:
                     'currentPeople': currentPeople
                 }
             })
+            print '同意'
             return result and result_ and result__
 
     def quit(self, username, project_id):
@@ -154,6 +155,15 @@ class ProjectManager:
             return '不在项目中'
 
     def start_project(self, project_id):
+        logs_conn = MongoFactory().get_connection().get_collection("logs")
+        log = dict(created_time=datetime.now(), type=3)
+        logs_conn.update_one({
+                'project_id':project_id
+            },{
+                '$push': {
+                    'timelines':log
+                }
+            })
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
@@ -163,6 +173,15 @@ class ProjectManager:
         })
 
     def finish_project(self, project_id):
+        logs_conn = MongoFactory().get_connection().get_collection("logs")
+        log = dict(created_time=datetime.now(), type=4)
+        logs_conn.update_one({
+                'project_id':project_id
+            },{
+                '$push': {
+                    'timelines':log
+                }
+            })
         return self._projects.update_one({
             '_id': ObjectId(project_id)
         }, {
