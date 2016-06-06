@@ -99,7 +99,7 @@ def share_project():
     print wid
     if wid:
         wclient = jweibo.get_client(wid=wid)
-        wclient.statuses.upload.post(status=u'济事项目分享,小伙伴们快来加入吧 http://tztztztztz.org:5000/project/' + j['project_id'],
+        wclient.statuses.upload.post(status=j['shareContent']+u'http://tztztztztz.org:5000/project/' + j['project_id'],
                                      pic=f)
         return jsonify(dict(result='success'))
     else:
