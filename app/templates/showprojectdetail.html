@@ -31,7 +31,11 @@
                     <input id="project_id" value="{{project._id}}" type="hidden">
                     {% if project.status == 0 %}
                     {% if session.get('username') != project.creator.username %}
-                    <button class="sub-button mart-button btn-with-shadow" style="float:right;background:#32be77" onclick="apply(this)">申请加入</button>
+                        {% if session.get('username') in project['teamList'] %}
+                        <button class="sub-button mart-button btn-with-shadow btn-primary" style="float:right;background-color: grey">已在项目中</button>
+                        {% else %}
+                        <button class="sub-button mart-button btn-with-shadow" style="float:right;background:#32be77" onclick="apply(this)">申请加入</button>
+                        {% endif %}
                     {% endif %}
                     {% endif %}
                     {% if project.status == 1 %}

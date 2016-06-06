@@ -260,6 +260,7 @@ def showprojectdetail():
     project_id = request.args.get('project_id')
     pm = project_manager.ProjectManager()
     project = pm.find_project_by_id(project_id)
+    project['teamList'] = project['team'][:]
     for i, t_user in enumerate(project['team']):
         _user = auth.find_user_by_username(t_user)
         project['team'][i] = _user
@@ -389,6 +390,7 @@ def more_projects():
 def singledisplay(project_id):
     pm = project_manager.ProjectManager()
     projects = pm.find_project_by_id(project_id)
+    print projects['team']
     return render_template('projectdisplay.html', project=projects)
 
 

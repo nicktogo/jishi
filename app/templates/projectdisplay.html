@@ -39,7 +39,11 @@
                     <button  id="share" class="sub-button mart-button btn-with-shadow" onclick="readyShare()" style="margin-top: 20px;background:#32be77;float: right;margin-right: 20px" type="submit">分享</button>
                     {% if project.status == 0 %}
                     {% if session.get('username') != project.creator %}
+                        {% if session.get('username') in project['team'] %}
+                        <button disabled="applyBtn" class="btn btn-danger" onclick="" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">已在项目中</button>
+                        {% else %}
                         <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="apply(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">申请加入该项目</button>
+                        {% endif %}
                     {% endif %}
                     {% endif %}
 
