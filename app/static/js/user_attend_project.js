@@ -28,8 +28,9 @@ function getPage(e) {
                 newTbodyHtml += '<td data-title="状态">招募中</td>';
                 newTbodyHtml +=
                     '<td data-title="操作">' +
-                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto">退出</button>' +
+                    '<button type="button" class="btn btn-raised btn-default" style="margin: auto" onclick="quit(this)">退出</button>' +
                     '</td>';
+                newTbodyHtml += '<input class="project_id" type="hidden" value="' + this._id +'">';
                 newTbodyHtml += '</tr>';
                 last_created_time = this.created_time;
             });
@@ -77,3 +78,20 @@ $('#pager-ul').on('click', '.withripple', function (e) {
     e.preventDefault();
     getPage($(this));
 });
+function quit(btn) {
+        var project_id = $(btn).parent().next('.project_id').val();
+        var data = {'project_id':project_id};
+        $.ajax({
+            url: '/project/quit',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $.amaran({'message':'退出成功'});
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+        }

@@ -43,14 +43,16 @@ def accept(username, projectid, projectname, project_owner, message_id):
     return result
 
 
-def quit(username, projectid, project_owner):
+def quit(username, projectid, projectname, project_owner):
     conn = MongoFactory().get_connection()
     m_type = 2
     message = {
         'username': username,
         'project_id': projectid,
+        'projectname':projectname,
         'message_type': m_type,
         'message_state': 0,
+        'isSolved': 1,
         'project_owner': project_owner
     }
     result = conn.insert_message(message)

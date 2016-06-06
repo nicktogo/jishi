@@ -453,10 +453,11 @@ def quit_project():
     username = session.get('username')
     if username:
         pm = project_manager.ProjectManager()
-        is_success = pm.kick_out(username=username, project_id=request.json['project_id'])
-        return jsonify(result=is_success,
-                       mimetype="application/json",
-                       status=200)
+        is_success = pm.quit(username=username, project_id=request.json['project_id'])
+        if is_success:
+            return jsonify(dict(result='ok'))
+        else:
+            return jsonify(dict(result='fail'))
 
 
 @app.route('/project/permit', methods=['POST'])
