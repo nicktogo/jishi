@@ -12,20 +12,17 @@
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" action="{{ url_for('login') }}" method="post">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="text" id="inputEmail" class="form-control" placeholder="用户名" required autofocus name="username">
-                <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="password">
+                <input type="text" id="inputEmail" style="margin-top: -15px" class="form-control" placeholder="用户名" required autofocus name="username">
+                <input type="password" id="inputPassword" style="margin-top: -15px" class="form-control" placeholder="密码" required name="password">
                 <input type="hidden" name="next_url" value="{{ next_url }}">
                 <!--<div id="remember" class="checkbox">-->
                     <!--<label>-->
                         <!--<input type="checkbox" value="remember-me"> 记住我-->
                     <!--</label>-->
                 <!--</div>-->
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登录</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" style="color:white" type="submit">登录</button>
             </form><!-- /form -->
-            <a href="{{ url_for('login_weibo') }}" style="float: left">微博登录</a>
-            <a href="#" class="forgot-password">
-                忘记密码?
-            </a>
+            <a href="{{ url_for('login_weibo') }}" style="float: left"><img src="{{url_for('static',filename='img/weiboicon.png')}}" style="height: 25px;margin-top: -5px">微博登录</a>
             <a href="{{ url_for('signup') }}" class="forgot-password" style="float:right">
                 注册
             </a>
