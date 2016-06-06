@@ -28,9 +28,10 @@
                     <div class="title-row">
                         <span class="title">{{project.name}}</span>
                     </div>
+                    <input id="project_id" value="{{project._id}}" type="hidden">
                     {% if project.status == 0 %}
-                    {% if session.get('username') != project.creator %}
-                    <button class="sub-button mart-button btn-with-shadow" style="float:right;background:#32be77" type="submit">申请加入</button>
+                    {% if session.get('username') != project.creator.username %}
+                    <button class="sub-button mart-button btn-with-shadow" style="float:right;background:#32be77" onclick="apply(this)">申请加入</button>
                     {% endif %}
                     {% endif %}
                     {% if project.status == 1 %}
@@ -153,6 +154,24 @@
         </div>
     </div>
 </div>
-
+<script>
+    function apply(btn){
+    var project_id = $("#project_id").val();
+    var data = {'project_id':project_id};
+    $.ajax({
+        url: "/project/apply",
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            alert(data['projectId'] + "申请成功!");
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    });
+}
+</script>
 </body>
 {% endblock %}
