@@ -453,10 +453,11 @@ def quit_project():
     username = session.get('username')
     if username:
         pm = project_manager.ProjectManager()
-        is_success = pm.kick_out(username=username, project_id=request.json['project_id'])
-        return jsonify(result=is_success,
-                       mimetype="application/json",
-                       status=200)
+        is_success = pm.quit(username=username, project_id=request.json['project_id'])
+        if is_success:
+            return jsonify(dict(result='ok'))
+        else:
+            return jsonify(dict(result='fail'))
 
 
 @app.route('/project/permit', methods=['POST'])
@@ -514,7 +515,9 @@ def message_page():
         message_list = []
         for idx, msg in enumerate(messages):
             proj = {'id': idx + 1, '_id': str(msg['_id']), 'project_owner': msg['project_owner'],
-                    'username':msg['username'],
+                    'puser': auth.find_user_by_username(msg['project_owner']),
+                    'username': msg['username'],
+                    'user': auth.find_user_by_username(msg['username']),
                     'created_time': str(msg['created_time']),
                     'message_type': msg['message_type'],
                     'isSolved': msg['isSolved'],

@@ -90,8 +90,8 @@ class ProjectManager:
     def quit(self, username, project_id):
         # TODO project_owner
         if (self.is_in_team(username, project_id)):
-            message.quit(username, project_id, "")
             project = self.find_project_by_id(project_id)
+            message.quit(username, project_id,project['name'], project['creator'])
             currentPeople = project['currentPeople'] - 1
             result = self._projects.update_one({
                 '_id': ObjectId(project_id)
