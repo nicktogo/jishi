@@ -197,6 +197,13 @@ def start_project():
     project_manager.ProjectManager().start_project(project_id)
     return redirect(url_for('showprojectdetail', project_id=project_id))
 
+
+@app.route('/projectend', methods=['GET'])
+def end_project():
+    project_id = request.args.get('project_id')
+    project_manager.ProjectManager().finish_project(project_id)
+    return redirect(url_for('showprojectdetail', project_id=project_id))
+
 @app.route('/user/userattendproject', methods=['POST', 'GET'])
 def userattendproject():
     # render template without data

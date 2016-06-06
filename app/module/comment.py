@@ -33,7 +33,6 @@ class CommentManager:
 
 
 if __name__ == '__main__':
-    cm = CommentManager()
-    cm.create_comment('123','have a test', '574fda1523470e1cc83a2fb7')
+    pass
 
 

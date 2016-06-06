@@ -38,7 +38,13 @@ function getPage(e) {
                 }if(this.status == 1){
                     newTbodyHtml +=
                     '<td data-title="操作">' +
-                    '<button disabled="disabled" class="btn btn-primary btn-default" onclick="" style="margin: auto">项目已开始</button>' +
+                    '<a  href="/projectend?project_id='+this._id+ '"class="btn btn-raised btn-danger" onclick="" style="margin: auto">结束项目</a>' +
+                    '</td>';
+                }
+                if(this.status == 2){
+                    newTbodyHtml +=
+                    '<td data-title="操作">' +
+                    '<button class="btn btn-danger btn-default" onclick="" style="margin: auto">项目已结束</button>' +
                     '</td>';
                 }
                 newTbodyHtml += '</tr>';
