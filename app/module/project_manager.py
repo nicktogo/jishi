@@ -186,7 +186,7 @@ class ProjectManager:
             '_id': ObjectId(project_id)
         }, {
             '$set': {
-                'status': statuses.FINISHED
+                'status': 2
             }
         })
 
