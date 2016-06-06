@@ -25,8 +25,8 @@ function getPage(e) {
                 newTbodyHtml += this.projectname;
                 newTbodyHtml += '</a>';
                 newTbodyHtml += '</td>';
-                newTbodyHtml += '<td data-title="消息发出者">' + this.username + '</td>';
-                newTbodyHtml += '<td data-title="所有人">' + this.project_owner + '</td>';
+                newTbodyHtml += '<td data-title="消息发出者">' + this.user.name + '</td>';
+                newTbodyHtml += '<td data-title="所有人">' + this.puser.name + '</td>';
                 newTbodyHtml += '<td data-title="消息类型" class="mes_type">' + this.message_type + '</td>';
                 newTbodyHtml += '<td data-title="创建时间">' + this.created_time + '</td>'
                 switch(this.message_type)

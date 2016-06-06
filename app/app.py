@@ -514,7 +514,9 @@ def message_page():
         message_list = []
         for idx, msg in enumerate(messages):
             proj = {'id': idx + 1, '_id': str(msg['_id']), 'project_owner': msg['project_owner'],
-                    'username':msg['username'],
+                    'puser': auth.find_user_by_username(msg['project_owner']),
+                    'username': msg['username'],
+                    'user': auth.find_user_by_username(msg['username']),
                     'created_time': str(msg['created_time']),
                     'message_type': msg['message_type'],
                     'isSolved': msg['isSolved'],
