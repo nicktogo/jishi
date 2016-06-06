@@ -3,6 +3,7 @@ from bson.objectid import ObjectId
 from app.module.db.factory import MongoFactory
 import message
 import pymongo
+from datetime import datetime
 
 
 class ProjectManager:
@@ -10,7 +11,13 @@ class ProjectManager:
         self._projects = MongoFactory().get_connection().get_collection(collection_name='projects')
 
     def create_project(self, data):
-        return self._projects.insert_one(data).inserted_id
+        project_id = self._projects.insert_one(data).inserted_id
+        # insert log
+        logs_conn = MongoFactory().get_connection().get_collection("logs")
+        log = dict(project_id=str(project_id))
+        log['timelines'] = [dict(created_time=data['created_time'], type=0, creator=data['creator'])]
+        logs_conn.insert_one(log)
+        return project_id
 
     def is_in_applier(self, username, project_id):
         project = self.find_project_by_id(project_id)
