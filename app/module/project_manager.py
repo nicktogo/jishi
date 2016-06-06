@@ -163,11 +163,11 @@ class ProjectManager:
         })
 
     def project_search(self, input, page=1):
-        limit = 3
+        limit = 9
         offset = (page - 1) * limit
-        projects = list(self._projects.find({
-            '$or': [{'name': {'$regex': input}}, {'creator': {'$regex': input}}]
-        }).skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)]))
+        projects = list(self._projects.find(
+             {'name': {'$regex': input}}
+        ).skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)]))
         return projects
 
     def find_all_project(self, page=1):

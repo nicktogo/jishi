@@ -373,7 +373,7 @@ def project_search():
     page = int(request.args.get('page', 1))
     page = max(1, page)
     projects = pm.project_search(input, page=page)
-    pages = len(list(projects)) / 3 + 1
+    pages = len(list(projects)) / 9 + 1
     print pages
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
