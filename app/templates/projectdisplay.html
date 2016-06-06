@@ -1,10 +1,6 @@
 {% extends "navbar.html" %}
 {% block body %}
-<html lang="zh-cn">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/main.min.pro.css">
-</head>
+<link rel="stylesheet" href="../css/main.min.pro.css">
 <body>
     <div class="main-container">
         <header id="mart-header" class=" "></header>
@@ -67,7 +63,7 @@
             type: 'POST',
             dataType: 'json',
             success: function (data) {
-                alert(data['projectId'] + "申请成功!");
+                $.amaran({'message':'申请成功'});
             },
             error: function (data) {
                 console.log(data)
@@ -85,7 +81,7 @@
             type: 'POST',
             dataType: 'json',
             success: function (data) {
-                alert(data['projectId'] + "分享成功");
+                $.amaran({'message':'分享成功'});
             },
             error: function (data) {
                 console.log(data)
@@ -103,7 +99,7 @@
             type: 'POST',
             dataType: 'json',
             success: function (data) {
-                alert('退出成功');
+                $.amaran({'message':'退出成功'});
             },
             error: function (data) {
                 console.log(data);

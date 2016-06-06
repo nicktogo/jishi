@@ -33,7 +33,7 @@
                     {% if session.get('user') %}
                         <img src="{{session.user.profile_image_url}}" style="border-radius: 50%;float: left;width:40px;margin-top: 9px;margin-right: 10px">
                     {% endif %}
-                    <li id="message_alert"><a href="{{ url_for('message_page') }}" aria-hidden="true"><span class="glyphicon glyphicon-bell"></span>{% if get_messgae_number() != 0 %}<span class="badge" style="background-color: red">{{get_messgae_number()}}</span>{% endif %}</a></li>
+                    <li id="message_alert"><a href="{{ url_for('message_page') }}" aria-hidden="true"><span class="glyphicon glyphicon-bell"></span>{% if get_messgae_number() != 0 %}<span class="badge" id="msgNum" style="background-color: red">{{get_messgae_number()}}</span>{% endif %}</a></li>
                      <li class="dropdown" id="person"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('user_info') }}"><span class="glyphicon glyphicon-user"></span></a>
                          <ul class="dropdown-menu">
                              <li>
@@ -65,7 +65,12 @@
         </div><!-- /.container-fluid -->
     </nav>
     <script type="text/javascript">
+
         $(document).ready(function () {
+            if($('#msgNum').text() != ''){
+              $.amaran({'message': '您有新的消息<span class="glyphicon glyphicon-envelope"></span>'});
+            }
+
             $(".navbar").css({
                 "background": "#fff",
                 "height": "60px",
@@ -74,9 +79,6 @@
             $(".navbar a").css({
                 "color": "#3d444f"
             });
-        });
-    $(document).ready(function () {
-            $('.dropdown-toggle').dropdown();
         });
     </script>
     {% block projectshow %}{% endblock %}
