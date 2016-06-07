@@ -419,6 +419,11 @@ def more_projects():
 def singledisplay(project_id):
     pm = project_manager.ProjectManager()
     projects = pm.find_project_by_id(project_id)
+    rm = recommend.recommendDesigner()
+    flag = request.args.get('flag')
+    if(flag == '1' and session.get('username')):
+        print 'dasjgasdlfkiu'
+        rm.updatePoi(project_id,session.get('username'))
     print projects['team']
     return render_template('projectdisplay.html', project=projects)
 
@@ -565,7 +570,6 @@ def message_page():
         print page_count, message_count
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
-        print response['messages']
         return response_json
 
 

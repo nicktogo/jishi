@@ -66,9 +66,9 @@ class recommendDesigner():
             }
         })
 
-    def updatePoi(self,p_id,u_id):
+    def updatePoi(self,p_id,username):
         user = self._users.find_one({
-            '_id': ObjectId(u_id)
+            'username': username
         })
         project = self._projects.find_one({
             '_id': ObjectId(p_id)
@@ -76,24 +76,26 @@ class recommendDesigner():
         u_poi = np.array(user['Poi'])
         p_poi = np.array(project['Poi'])
         u_npoi = (u_poi + p_poi) * 0.5
+        print list(u_npoi)
         p_npoi = (0.1 * u_poi + p_poi)/1.1
-        self._user.update({
-            '_id',ObjectId(u_id)
+        print list(p_npoi)
+        self._users.update_one({
+            'username':username
         },{
             '$set':{
-                'Poi': u_npoi
+                'Poi': list(u_npoi)
             }
         }
         )
-        self._projects.update({
-            '_id',ObjectId(p_id)
+        self._projects.update_one({
+            '_id':ObjectId(p_id)
         },{
             '$set':{
-                'Poi': p_npoi
+                'Poi': list(p_npoi)
             }
         })
 
-
+1
 if __name__ == '__main__':
     rm = recommendDesigner()
-    rm.recomendSta('5148478576')
+    rm.updatePoi('5755021123470e08e40cf21c','3183691573')

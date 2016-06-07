@@ -17,9 +17,8 @@
 </script>
 {% endblock %}
 {% block body %}
-
 {% if reprojects != Null%}
-<div class="panel panel-default">
+<div class="panel panel-default" style="margin-top:-50px">
   <div class="panel-heading">推荐项目</div>
   <div class="panel-body">
     <div class="user_content column" style="text-align: center">
@@ -80,7 +79,7 @@
                 <h5 class="text-left">{{project.name}}</h5>
                 <div class="text-right">
                     {% if project.status == 0 %}
-                    <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id']) }}">招募中</a>
+                    <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id'], flag=1) }}">招募中</a>
                     {% endif %}
                     {% if project.status == 1 %}
                     <a class="label label-info" href="{{ url_for('singledisplay', project_id=project['_id']) }}">开发中</a>
