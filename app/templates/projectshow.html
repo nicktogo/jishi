@@ -17,6 +17,49 @@
 </script>
 {% endblock %}
 {% block body %}
+
+{% if reprojects != Null%}
+<div class="panel panel-default">
+  <div class="panel-heading">推荐项目</div>
+  <div class="panel-body">
+    <div class="user_content column" style="text-align: center">
+    <div class="row">
+        {% for reproject in reprojects %}
+        <div class="column">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" style="box-shadow: 1px 1px 1px #888888;">
+                <a href="{{ url_for('singledisplay', project_id=reproject['_id']) }}">
+                <img src="{{url_for('static', filename='img/'+get_type_img(reproject.type)[0])}}" style="width:100%;height: 179px">
+                </a>
+                <h5 class="text-left">{{reproject.name}}</h5>
+                <div class="text-right">
+                    {% if reproject.status == 0 %}
+                    <a class="label label-success" href="{{ url_for('singledisplay', project_id=reproject['_id']) }}">招募中</a>
+                    {% endif %}
+                    {% if reproject.status == 1 %}
+                    <a class="label label-info" href="{{ url_for('singledisplay', project_id=reproject['_id']) }}">开发中</a>
+                    {% endif %}
+                    {% if reproject.status == 2 %}
+                    <a class="label label-danger" href="{{ url_for('singledisplay', project_id=reproject['_id']) }}">已结束</a>
+                    {% endif %}
+                </div>
+                <div style="width: 100%;height:1px;background-color: #b7b7b7;margin-top: 5px"></div>
+                <div class="caption">
+
+                </div>
+                <div class="row">
+                  <h6 class="col-md-6 text-left" style="color: #b7b7b7">{{get_type(reproject.type)}}</h6>
+                  <h6 class="col-md-6 text-right" style="color: #b7b7b7">已有{{ reproject.currentPeople }}人</h6>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+  </div>
+</div>
+{%endif%}
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
           <form id="search_project" method="post" action="{{url_for('project_search')}}">
@@ -25,7 +68,6 @@
           </form>
   </div>
 </div>
-
 <div class="user_content column" style="text-align: center">
     <div class="row">
         {% for project in projects %}

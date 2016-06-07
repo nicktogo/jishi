@@ -10,6 +10,7 @@ from datetime import datetime
 import os
 from flask import g
 from module import jweibo
+from module import recommend
 
 from module import auth, project_manager, forms, message, comment
 
@@ -204,6 +205,7 @@ def end_project():
     project_manager.ProjectManager().finish_project(project_id)
     return redirect(url_for('showprojectdetail', project_id=project_id))
 
+
 @app.route('/user/userattendproject', methods=['POST', 'GET'])
 def userattendproject():
     # render template without data
@@ -370,6 +372,10 @@ def alldisplay():
     page = max(1, page)
     projects = pm.find_all_project(page=page)
     pages = pm.project_count()
+    if session.get('username'):
+        rm = recommend.recommendDesigner()
+        recommendprojects = rm.recomendSta(session.get('username'))
+        return render_template('projectshow.html', projects=projects, page=page, pages=range(pages),reprojects=recommendprojects)
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
 
@@ -543,6 +549,7 @@ def message_page():
         print page_count, message_count
         response['page_count'] = page_count
         response_json = json.dumps(response, default=json_util.default)
+        print response['messages']
         return response_json
 
 
