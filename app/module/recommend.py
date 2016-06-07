@@ -75,7 +75,7 @@ class recommendDesigner():
         })
         u_poi = np.array(user['Poi'])
         p_poi = np.array(project['Poi'])
-        u_npoi = (u_poi + p_poi) * 0.5
+        u_npoi = (u_poi + 0.5 * p_poi) / 1.5
         print list(u_npoi)
         p_npoi = (0.1 * u_poi + p_poi)/1.1
         print list(p_npoi)

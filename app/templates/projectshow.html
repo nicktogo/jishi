@@ -17,10 +17,66 @@
 </script>
 {% endblock %}
 {% block body %}
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+          <form id="search_project" method="post" action="{{url_for('project_search')}}">
+              <input name="input" type="text" class="form-control" placeholder="选择你心仪的项目、项目所有者...">
+              <button class="btn btn-success" type="submit" hidden="hidden">Go!</button>
+          </form>
+  </div>
+</div>
+<div class="user_content column" style="text-align: center">
+    <div class="row">
+        {% for project in projects %}
+        <div class="column">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" style="box-shadow: 1px 1px 1px #888888;">
+                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}">
+                <img src="{{url_for('static', filename='img/'+get_type_img(project.type)[0])}}" style="width:100%;height: 179px">
+                </a>
+                <h5 class="text-left">{{project.name}}</h5>
+                <div class="text-right">
+                    {% if project.status == 0 %}
+                    <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id'], flag=1) }}">招募中</a>
+                    {% endif %}
+                    {% if project.status == 1 %}
+                    <a class="label label-info" href="{{ url_for('singledisplay', project_id=project['_id'], flag=1) }}">开发中</a>
+                    {% endif %}
+                    {% if project.status == 2 %}
+                    <a class="label label-danger" href="{{ url_for('singledisplay', project_id=project['_id'], flag=1) }}">已结束</a>
+                    {% endif %}
+                </div>
+                <div style="width: 100%;height:1px;background-color: #b7b7b7;margin-top: 5px"></div>
+                <div class="caption">
+
+                </div>
+                <div class="row">
+                  <h6 class="col-md-6 text-left" style="color: #b7b7b7">{{get_type(project.type)}}</h6>
+                  <h6 class="col-md-6 text-right" style="color: #b7b7b7">已有{{ project.currentPeople }}人</h6>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    <ul class="pager">
+        <li><a class="withripple" href="{{url_for('alldisplay', page=page-1)}}">前一页</a></li>
+        {% for p in pages %}
+            {% if p + 1 == page %}
+            <li><a class="withripple" href="#" style="color:black">{{p + 1}}</a></li>
+            {% else %}
+            <li><a class="withripple" href="{{url_for('alldisplay', page=p+1)}}" >{{p + 1}}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a class="withripple" href="{{url_for('alldisplay', page=page+1)}}">下一页</a></li>
+    </ul>
+
+    </div>
 {% if reprojects != Null%}
-<div class="panel panel-default" style="margin-top:-50px">
-  <div class="panel-heading">推荐项目</div>
-  <div class="panel-body">
+<div class="panel panel-default" style="background:transparent">
+  <div class="panel-heading"><h4>推荐项目</h4></div>
+  <div class="panel-body" style="background:transparent">
     <div class="user_content column" style="text-align: center">
     <div class="row">
         {% for reproject in reprojects %}
@@ -59,59 +115,4 @@
   </div>
 </div>
 {%endif%}
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-          <form id="search_project" method="post" action="{{url_for('project_search')}}">
-              <input name="input" type="text" class="form-control" placeholder="选择你心仪的项目、项目所有者...">
-              <button class="btn btn-success" type="submit" hidden="hidden">Go!</button>
-          </form>
-  </div>
-</div>
-<div class="user_content column" style="text-align: center">
-    <div class="row">
-        {% for project in projects %}
-        <div class="column">
-          <div class="col-sm-6 col-md-4">
-            <div class="thumbnail" style="box-shadow: 1px 1px 1px #888888;">
-                <a href="{{ url_for('singledisplay', project_id=project['_id']) }}">
-                <img src="{{url_for('static', filename='img/'+get_type_img(project.type)[0])}}" style="width:100%;height: 179px">
-                </a>
-                <h5 class="text-left">{{project.name}}</h5>
-                <div class="text-right">
-                    {% if project.status == 0 %}
-                    <a class="label label-success" href="{{ url_for('singledisplay', project_id=project['_id'], flag=1) }}">招募中</a>
-                    {% endif %}
-                    {% if project.status == 1 %}
-                    <a class="label label-info" href="{{ url_for('singledisplay', project_id=project['_id']) }}">开发中</a>
-                    {% endif %}
-                    {% if project.status == 2 %}
-                    <a class="label label-danger" href="{{ url_for('singledisplay', project_id=project['_id']) }}">已结束</a>
-                    {% endif %}
-                </div>
-                <div style="width: 100%;height:1px;background-color: #b7b7b7;margin-top: 5px"></div>
-                <div class="caption">
-
-                </div>
-                <div class="row">
-                  <h6 class="col-md-6 text-left" style="color: #b7b7b7">{{get_type(project.type)}}</h6>
-                  <h6 class="col-md-6 text-right" style="color: #b7b7b7">已有{{ project.currentPeople }}人</h6>
-                </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-    </div>
-    <ul class="pager">
-        <li><a class="withripple" href="{{url_for('alldisplay', page=page-1)}}">前一页</a></li>
-        {% for p in pages %}
-            {% if p + 1 == page %}
-            <li><a class="withripple" href="#" style="color:black">{{p + 1}}</a></li>
-            {% else %}
-            <li><a class="withripple" href="{{url_for('alldisplay', page=p+1)}}" >{{p + 1}}</a></li>
-            {% endif %}
-        {% endfor %}
-        <li><a class="withripple" href="{{url_for('alldisplay', page=page+1)}}">下一页</a></li>
-    </ul>
-    </div>
-
 {% endblock %}

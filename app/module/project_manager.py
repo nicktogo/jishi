@@ -202,8 +202,8 @@ class ProjectManager:
     def project_search(self, input, page=1):
         limit = 9
         offset = (page - 1) * limit
-        projects = list(self._projects.find(
-             {'name': {'$regex': input}}
+        projects = list(self._projects.find({
+             '$or':[{'name': {'$regex': input}},{'description':{'$regex':input}}]}
         ).skip(offset).limit(limit).sort([('created_time', pymongo.DESCENDING)]))
         return projects
 
