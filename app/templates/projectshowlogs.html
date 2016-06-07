@@ -1,0 +1,59 @@
+{% extends "navbar.html" %}
+{% block body %}
+<head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="../css/main.min.pro.css">
+</head>
+<body>
+<div id='wx_logo' style='margin:0 auto;display:none;'>
+    <img src='https://dn-coding-net-production-pp.qbox.me/7fc51c39-3f7e-4068-b608-1e88f5d05818.png'/>
+</div>
+<div class="main-container">
+    <header id="mart-header" class=" ">
+
+    </header>
+    <div class="view-container  ">
+        <div id="mart-reward-detail">
+            <div class="content">
+                <section class="reward-title">
+                    <h3>{{log.project.name}}</h3>
+                </section>
+
+                <section class="reward-content">
+                    <div class="description typo">
+                        {% for timeline in log['timelines'] %}
+                            {% if timeline['type'] == 0 %}
+                                <h4><span class="logShow" style="width:20px;height:20px;border-radius: 50%;background-color: #32be77;display: inline-block;margin-top:10px;margin-right: 20px"></span><span>{{get_p_time(timeline['created_time'])}}<span><img src="{{timeline['creator']['profile_image_url']}}" style="width:50px;border-radius: 50%;border: transparent">{{timeline['creator']['name']}}</span>创建了该项目</span></h4>
+                            {% endif %}
+                            {% if timeline['type'] == 1 %}
+                                <h6 style="margin-left: 30px"><span class="logShow" style="width:15px;height:15px;border-radius: 50%;background-color:red;display: inline-block;margin-top:10px;margin-right: 20px"></span><span>{{get_p_time(timeline['created_time'])}}<span><img src="{{timeline['applier']['profile_image_url']}}" style="width:50px;border-radius: 50%;border: transparent">{{timeline['applier']['name']}}</span>加入了了该项目</span></h6>
+                            {% endif %}
+                            {% if timeline['type'] == 2 %}
+                                    <h6  style="margin-left: 30px"><span class="logShow" style="width:15px;height:15px;border-radius: 50%;background-color:red;display: inline-block;margin-top:10px;margin-right: 20px"></span><span>{{get_p_time(timeline['created_time'])}}<span><img src="{{timeline['applier']['profile_image_url']}}" style="width:50px;border-radius: 50%;border: transparent">{{timeline['applier']['name']}}</span>退出了该项目</span></h6>
+                            {% endif %}
+                            {% if timeline['type'] == 3 %}
+                                    <h4><span class="logShow" style="width:20px;height:20px;border-radius: 50%;background-color: #32be77;display: inline-block;margin-top:10px;margin-right: 20px"></span><span>{{get_p_time(timeline['created_time'])}}项目启动</span></h4>
+                            {% endif %}
+                            {% if timeline['type'] == 4 %}
+                                    <h4><span class="logShow" style="width:20px;height:20px;border-radius: 50%;background-color: #32be77;display: inline-block;margin-top:10px;margin-right: 20px"></span><span>{{get_p_time(timeline['created_time'])}}项目结束</span></h4>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('.logShow').animate({'width':'21px','height':'21px'},1000,function () {
+            $('.logShow').animate({'width':'20px','height':'20px'},1000,function () {
+
+            })
+        })
+    })
+</script>
+
+</body>
+{% endblock %}

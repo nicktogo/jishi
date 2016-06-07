@@ -9,7 +9,7 @@ import random
 from datetime import datetime
 import os
 from flask import g
-from module import jweibo
+from module import jweibo, jlog
 
 from module import auth, project_manager, forms, message, comment
 
@@ -278,9 +278,12 @@ def showprojectdetail():
         _username = _comment['username']
         _user = auth.find_user_by_username(_username)
         _comment['user'] = _user
-    print project['_id']
-    print comments
-    return render_template('showprojectdetail.html', project=project, comments=comments)
+
+    def get_p_time(time):
+        time = str(time)
+        return time[:len(time) - 7]
+
+    return render_template('showprojectdetail.html', project=project, comments=comments, get_p_time=get_p_time)
 
 @app.route('/project/edit',methods=['GET','POST'])
 def project_edit():
@@ -372,6 +375,18 @@ def alldisplay():
     pages = pm.project_count()
     return render_template('projectshow.html', projects=projects, page=page, pages=range(pages))
 
+
+@app.route('/project/showlogs', methods=['GET'])
+def show_project_logs():
+    log = jlog.get_log_by_project_id(request.args.get('project_id'))
+    pm = project_manager.ProjectManager()
+    log['project'] = pm.find_project_by_id(log['project_id'])
+
+    def get_p_time(time):
+        time = str(time)
+        return time[:len(time) - 7]
+
+    return render_template("projectshowlogs.html", log=log, get_p_time=get_p_time)
 
 @app.route('/project/search', methods=['GET','POST'])
 def project_search():
