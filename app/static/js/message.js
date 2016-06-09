@@ -20,8 +20,6 @@ function getPage(e) {
         success: function (data) {
             var newTbodyHtml = '';
             $(data.messages).each(function () {
-                alert(this.project_id)
-                alert(this.user.name);
                 newTbodyHtml += '<tr>';
                 newTbodyHtml += '<td data-title="项目名称">' + '<a href="/project/' + this.project_id + '"' + ' target="_blank"> ';
                 newTbodyHtml += this.projectname;

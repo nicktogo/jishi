@@ -514,8 +514,6 @@ def permit_apply():
     return 'login'
 
 
-
-
 @app.route('/message/test', methods=['GET', 'POST'])
 def message_test():
     username = session.get('username')
