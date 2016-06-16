@@ -453,9 +453,10 @@ def create_project():
         project['team'] = [session['username']]
         project['applier'] = []
         project['maxPeople'] = int(request.form.get('maxPeople'))
-
+        rm = recommend.recommendDesigner()
         pm = project_manager.ProjectManager()
-        pm.create_project(project)
+        project_id = pm.create_project(project)
+        rm.createPoi(project_id)
         return redirect(url_for('alldisplay'))
 
 
