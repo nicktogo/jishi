@@ -25,13 +25,13 @@
                                     <div class="row">
                                         <div class="col-md-3 col-lg-3 " align="center">
                                             {% if session.user %}
-                                            <img alt="User Pic"
-                                                 src= {{user.avatar_large}}
-                                                 class="img-circle img-responsive">
+                                                <img alt="User Pic"
+                                                     src={{ user.avatar_large }}
+                                                             class="img-circle img-responsive">
                                             {% else %}
-                                                 <img alt="User Pic"
-                                                 src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
-                                                 class="img-circle img-responsive">
+                                                <img alt="User Pic"
+                                                     src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+                                                     class="img-circle img-responsive">
                                             {% endif %}
                                         </div>
                                         <div class=" col-md-9 col-lg-9 ">
@@ -44,10 +44,10 @@
                                                 </tr>
                                                 <tr>
                                                     <td>{{ user.name }}</td>
-                                                    {% if user.gender == 'm'%}
-                                                    <td>男</td>
+                                                    {% if user.gender == 'm' %}
+                                                        <td>男</td>
                                                     {% else %}
-                                                    <td>女</td>
+                                                        <td>女</td>
                                                     {% endif %}
                                                 </tr>
                                                 <tr>
@@ -69,22 +69,24 @@
                                                 <tr>
                                                     <td class="tbhead">感兴趣的方面:</td>
                                                     <td>
-                                                    {% for interest in user.interest%}
-                                                    <p>{{get_type(interest)}}</p>
-                                                    {% endfor %}
+                                                        {% for interest in user.interest %}
+                                                            <p>{{ get_type(interest) }}</p>
+                                                        {% endfor %}
                                                     </td>
-                                                    </tr>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    <div class="text-right">
-                                        <a href="{{ url_for('userinfoedit') }}"><span class="glyphicon glyphicon-edit" style="font-size:18px"></span></a>
+                                {% if session.get('username') == user.username %}
+                                    <div class="panel-footer">
+                                        <div class="text-right">
+                                            <a href="{{ url_for('userinfoedit') }}"><span
+                                                    class="glyphicon glyphicon-edit" style="font-size:18px"></span></a>
+                                        </div>
                                     </div>
-                                </div>
-
+                                {% endif %}
                             </div>
                         </div>
                     </div>
