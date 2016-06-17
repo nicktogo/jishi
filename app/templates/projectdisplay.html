@@ -1,24 +1,24 @@
 {% extends "navbar.html" %}
 {% block body %}
-<link rel="stylesheet" href="../css/main.min.pro.css">
-<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .modal{
-        background-color: transparent;
-    }
-</style>
-<body>
+    <link rel="stylesheet" href="../css/main.min.pro.css">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .modal {
+            background-color: transparent;
+        }
+    </style>
+    <body>
     <div class="main-container">
         <header id="mart-header" class=" "></header>
-        <div class="view-container  " >
+        <div class="view-container  ">
             <div id="case_detail" class="onepcssgrid-1000 onerow">
                 <div class="case_content">
                     <div class="name"><strong>{{ project.name }}</strong></div>
                     <div style="margin-top: 10px">
-                        <span class="type">{{get_type(project.type)}}&nbsp;</span>
+                        <span class="type">{{ get_type(project.type) }}&nbsp;</span>
                     </div>
                     <div style="float: right;margin-right: 10px">
-                        <a href="{{url_for('showprojectdetail', project_id=project._id)}}">项目详情</a>
+                        <a href="{{ url_for('showprojectdetail', project_id=project._id) }}">项目详情</a>
                     </div>
                     <div class="delimiter"></div>
                     <div class="intro">
@@ -29,112 +29,130 @@
                     <div class="show clearfix" style="background-color: rgba(204,217,232,0.3)">
                         <div class="case-image">
                             {% for img in get_type_img(project.type) %}
-                                <img src="{{url_for('static', filename='img/'+img)}}" style="float: none;width:600px;height: 337.5px">
+                                <img src="{{ url_for('static', filename='img/'+img) }}"
+                                     style="float: none;width:600px;height: 337.5px">
                             {% endfor %}
                         </div>
                     </div>
                     <div class="ceo">
                     </div>
-                    <input id="project_id" type="hidden" value="{{project._id}}"/>
-                    <button  id="share" class="sub-button mart-button btn-with-shadow" onclick="readyShare()" style="margin-top: 20px;background:#32be77;float: right;margin-right: 20px" type="submit">分享</button>
+                    <input id="project_id" type="hidden" value="{{ project._id }}"/>
+                    <button id="share" class="sub-button mart-button btn-with-shadow" onclick="readyShare()"
+                            style="margin-top: 20px;background:#32be77;float: right;margin-right: 20px" type="submit">分享
+                    </button>
                     {% if project.status == 0 %}
-                    {% if session.get('username') != project.creator %}
-                        {% if session.get('username') in project['team'] %}
-                        <button disabled="applyBtn" class="btn btn-danger" onclick="" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">已在项目中</button>
-                        {% else %}
-                        <button id="applyBtn" class="sub-button mart-button btn-with-shadow" onclick="apply(this)" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">申请加入该项目</button>
+                        {% if session.get('username') != project.creator %}
+                            {% if session.get('username') in project['team'] %}
+                                <button disabled="applyBtn" class="btn btn-danger" onclick=""
+                                        style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">
+                                    已在项目中
+                                </button>
+                            {% else %}
+                                <button id="applyBtn" class="sub-button mart-button btn-with-shadow"
+                                        onclick="apply(this)"
+                                        style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">
+                                    申请加入该项目
+                                </button>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
                     {% endif %}
 
                     {% if project.status == 1 %}
-                    <button disabled="applyBtn" class="btn btn-danger" onclick="" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">项目已开始</button>
+                        <button disabled="applyBtn" class="btn btn-danger" onclick=""
+                                style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">项目已开始
+                        </button>
                     {% endif %}
 
                     {% if project.status == 2 %}
-                    <button disabled="applyBtn" class="btn btn-danger" onclick="" style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">项目已结束</button>
+                        <button disabled="applyBtn" class="btn btn-danger" onclick=""
+                                style="float: right;margin-top: 20px;margin-bottom: 20px;margin-right: 20px">项目已结束
+                        </button>
                     {% endif %}
                     <div style="height: 100px">&nbsp</div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-<div class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">微博分享<img src="{{url_for('static',filename='img/weiboicon.png')}}" style="height: 25px;margin-top: -5px"></h4>
-      </div>
-      <div class="modal-body">
-        <input class="form-control" style="width:100%;" id="shareContent" value="济事项目分享,小伙伴们快来加入吧">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" style="background-color: white" data-dismiss="modal" onclick="shareProject()">分享</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<script>
+    </body>
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">微博分享<img src="{{ url_for('static',filename='img/weiboicon.png') }}"
+                                                     style="height: 25px;margin-top: -5px"></h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" style="width:100%;" id="shareContent" value="济事项目分享,小伙伴们快来加入吧">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" style="background-color: white" data-dismiss="modal"
+                            onclick="shareProject()">分享
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
 
-    function readyShare() {
-        $('.modal').modal('show');
-    }
-    function apply(btn){
-        var project_id = $("#project_id").val();
-        var data = {'project_id':project_id};
-        $.ajax({
-            url: "/project/apply",
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-                $.amaran({'message':'申请成功'});
-            },
-            error: function (data) {
-                console.log(data)
-            }
-        });
-    }
+        function readyShare() {
+            $('.modal').modal('show');
+        }
+        function apply(btn) {
+            var project_id = $("#project_id").val();
+            var data = {'project_id': project_id};
+            $.ajax({
+                url: "/project/apply",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $.amaran({'message': '申请成功'});
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            });
+        }
 
-    function shareProject() {
-        var project_id = $("#project_id").val();
-        var shareContent = $("#shareContent").val();
-        var data = {'project_id':project_id, 'shareContent': shareContent};
-        $.ajax({
-            url: "/project/share",
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-                $.amaran({'message':'分享成功'});
-            },
-            error: function (data) {
-                console.log(data)
-            }
-        });
-    }
+        function shareProject() {
+            var project_id = $("#project_id").val();
+            var shareContent = $("#shareContent").val();
+            var data = {'project_id': project_id, 'shareContent': shareContent};
+            $.ajax({
+                url: "/project/share",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $.amaran({'message': '分享成功'});
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            });
+        }
 
-    function quit(btn) {
-        var project_id = $("#project_id").val();
-        var data = {'project_id':project_id};
-        $.ajax({
-            url: '/project/quit',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-                $.amaran({'message':'退出成功'});
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    }
-</script>
+        function quit(btn) {
+            var project_id = $("#project_id").val();
+            var data = {'project_id': project_id};
+            $.ajax({
+                url: '/project/quit',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $.amaran({'message': '退出成功'});
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    </script>
 {% endblock %}
